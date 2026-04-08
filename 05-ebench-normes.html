@@ -1,0 +1,736 @@
+﻿<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Normes — E-Bench 2026</title>
+<meta name="description" content="E-Bench 2026 — Banc public intelligent, autonome en énergie solaire. Recharge USB-C, capteurs environnementaux, interface tactile. Projet STI2D Hauts-de-France."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<style>
+:root{--transition-theme:background 0.4s ease,color 0.4s ease,border-color 0.4s ease,box-shadow 0.4s ease;--bar-duration:1.2s;}
+[data-theme="dark"]{--bg:#080C14;--bg-2:#0D1220;--bg-card:#111827;--bg-glass:rgba(17,24,39,0.7);--border:rgba(255,255,255,0.07);--border-glow:rgba(0,212,160,0.35);--text:#F0F4FF;--text-sub:#8899B4;--text-muted:#4A5568;--primary:#00D4A0;--primary-dim:rgba(0,212,160,0.12);--blue:#3B82F6;--blue-dim:rgba(59,130,246,0.12);--amber:#F59E0B;--amber-dim:rgba(245,158,11,0.12);--red:#EF4444;--nav-bg:rgba(8,12,20,0.85);--code-bg:#060A10;--shadow:0 0 0 1px rgba(0,212,160,0.08),0 20px 60px rgba(0,0,0,0.5);--glow:0 0 40px rgba(0,212,160,0.15);}
+[data-theme="light"]{--bg:#F5F0E8;--bg-2:#FAF6F0;--bg-card:#FFFCF7;--bg-glass:rgba(250,246,240,0.8);--border:rgba(0,0,0,0.08);--border-glow:rgba(0,168,126,0.4);--text:#0A0F1E;--text-sub:#4A5568;--text-muted:#9CA3AF;--primary:#00A87E;--primary-dim:rgba(0,168,126,0.1);--blue:#2563EB;--blue-dim:rgba(37,99,235,0.1);--amber:#D97706;--amber-dim:rgba(217,119,6,0.1);--red:#DC2626;--nav-bg:rgba(245,240,232,0.9);--code-bg:#1A1F2E;--shadow:0 0 0 1px rgba(0,0,0,0.06),0 12px 40px rgba(0,0,0,0.08);--glow:0 0 40px rgba(0,168,126,0.1);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:var(--transition-theme);line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;}
+
+/* NAVBAR */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1rem,4vw,3rem);height:64px;background:var(--nav-bg);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(--border);transition:var(--transition-theme),height 0.3s;}
+#nav.compact{height:56px;box-shadow:var(--shadow);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.04em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:0.3rem;}
+.nav-logo em{font-style:normal;color:var(--primary);}
+.nav-links{display:flex;align-items:center;gap:clamp(0.8rem,2vw,2rem);list-style:none;}
+.nav-links a{font-size:0.78rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--text);text-decoration:none;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--primary);transform:scaleX(0);transform-origin:left;transition:transform 0.25s ease;}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.theme-btn{width:44px;height:24px;background:var(--border);border:1px solid var(--border-glow);border-radius:50px;cursor:pointer;position:relative;transition:var(--transition-theme);flex-shrink:0;}
+.theme-btn::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--primary);transition:transform 0.35s cubic-bezier(.34,1.56,.64,1),background 0.3s;}
+[data-theme="light"] .theme-btn::after{transform:translateX(20px);}
+.theme-icon{position:absolute;top:50%;transform:translateY(-50%);font-size:0.6rem;transition:opacity 0.3s;pointer-events:none;}
+.theme-icon.moon{left:5px;}
+.theme-icon.sun{right:4px;}
+[data-theme="dark"] .theme-icon.sun{opacity:0;}
+[data-theme="dark"] .theme-icon.moon{opacity:1;}
+[data-theme="light"] .theme-icon.sun{opacity:1;}
+[data-theme="light"] .theme-icon.moon{opacity:0;}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--bg-card);border-bottom:1px solid var(--border);padding:1.5rem;flex-direction:column;gap:1rem;z-index:999;transition:var(--transition-theme);}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--text);text-decoration:none;font-weight:500;font-size:0.95rem;padding:0.5rem 0;border-bottom:1px solid var(--border);}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding:100px clamp(1rem,5vw,5%) 80px;position:relative;overflow:hidden;}
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(80px);opacity:0.12;animation:float 8s ease-in-out infinite;}
+.orb-1{width:500px;height:500px;background:var(--primary);top:-100px;right:-100px;}
+.orb-2{width:300px;height:300px;background:var(--blue);bottom:0;left:-50px;animation-delay:-4s;}
+@keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-30px) scale(1.05);}}
+.hero-left{position:relative;z-index:2;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--primary);margin-bottom:1.5rem;animation:slideUp 0.6s 0.1s ease both;}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--primary);}
+.hero-title{font-family:'Bebas Neue','Impact','Arial Black',sans-serif;font-size:clamp(3.5rem,8vw,7rem);line-height:0.92;letter-spacing:0.02em;color:var(--text);margin-bottom:1.5rem;animation:slideUp 0.6s 0.2s ease both;}
+.hero-title .green{color:var(--primary);}
+.hero-desc{font-size:1rem;color:var(--text-sub);max-width:480px;line-height:1.75;margin-bottom:2.5rem;animation:slideUp 0.6s 0.3s ease both;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:slideUp 0.6s 0.4s ease both;}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.85rem 1.8rem;background:var(--primary);color:#000;font-weight:700;font-size:0.88rem;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;border-radius:4px;transition:all 0.25s;position:relative;overflow:hidden;}
+.btn-primary::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);transform:translateX(-100%);transition:transform 0.4s ease;}
+.btn-primary:hover::after{transform:translateX(0);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,160,0.4);}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;padding:0.85rem 1.8rem;border:1px solid var(--border);color:var(--text);font-weight:600;font-size:0.88rem;letter-spacing:0.05em;text-transform:uppercase;text-decoration:none;border-radius:4px;background:transparent;transition:all 0.25s;}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px);}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;flex-wrap:wrap;animation:slideUp 0.6s 0.5s ease both;}
+.stat{display:flex;flex-direction:column;padding-left:1rem;border-left:2px solid var(--primary);}
+.stat-val{font-family:'Bebas Neue','Impact','Arial Black',sans-serif;font-size:2rem;line-height:1;color:var(--text);}
+.stat-lbl{font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-sub);margin-top:0.2rem;}
+.hero-right{position:relative;z-index:2;animation:fadeInRight 1s 0.5s ease both;}
+.bench-visual{width:100%;max-width:520px;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:2.5rem;box-shadow:var(--shadow),var(--glow);position:relative;overflow:hidden;transition:var(--transition-theme);}
+.bench-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--primary),transparent);}
+.bench-svg-wrap{width:100%;display:flex;justify-content:center;margin-bottom:1.5rem;}
+.bench-indicators{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:1rem;}
+.bench-ind{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:0.7rem;text-align:center;transition:var(--transition-theme);}
+.bench-ind-val{font-family:'JetBrains Mono',monospace;font-size:clamp(0.9rem, 6vw, 1rem);font-weight:500;color:var(--primary);transition:color 0.3s ease,transform 0.2s ease;}
+.bench-ind-val.updated{transform:scale(1.15);color:#fff;}
+.bench-ind-lbl{font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.2rem;}
+.solar-bar-wrap{margin-top:1rem;}
+.solar-bar-label{display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.35rem;}
+.solar-bar-track{height:6px;background:var(--bg);border-radius:50px;overflow:hidden;}
+.solar-bar-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--primary),#00ffcc);transition:width 1s cubic-bezier(0.34,1.1,0.64,1);width:0%;}
+.live-dot{display:inline-block;width:6px;height:6px;background:var(--primary);border-radius:50%;margin-right:0.4rem;animation:livepulse 1.8s ease infinite;}
+@keyframes livepulse{0%,100%{box-shadow:0 0 0 0 rgba(0,212,160,0.6);}50%{box-shadow:0 0 0 5px rgba(0,212,160,0);}}
+@keyframes slideUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeInRight{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+
+/* SECTIONS COMMUNES */
+section{padding:clamp(60px,8vw,120px) clamp(1rem,5vw,5%);position:relative;}
+.section-tag{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--primary);margin-bottom:0.8rem;}
+.section-tag::before{content:'';width:16px;height:1px;background:var(--primary);}
+h2{font-family:'Bebas Neue','Impact','Arial Black',sans-serif;font-size:clamp(2.5rem,4.5vw,3.8rem);line-height:1;letter-spacing:0.03em;color:var(--text);margin-bottom:1rem;}
+.section-sub{font-size:1rem;color:var(--text-sub);max-width:540px;line-height:1.75;margin-bottom:3.5rem;}
+.reveal{opacity:1;transform:none;transition:opacity 0.7s ease,transform 0.7s ease;}
+.js-reveal .reveal{opacity:0;transform:translateY(32px);}
+.reveal.visible{opacity:1!important;transform:translateY(0)!important;}
+.reveal-delay-1{transition-delay:0.1s;}.reveal-delay-2{transition-delay:0.2s;}.reveal-delay-3{transition-delay:0.3s;}.reveal-delay-4{transition-delay:0.4s;}
+
+/* FEATURES */
+#features{background:var(--bg-2);transition:var(--transition-theme);}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
+.feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:all 0.35s,var(--transition-theme);position:relative;overflow:hidden;cursor:default;}
+.feature-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,var(--primary-dim),transparent 70%);opacity:0;transition:opacity 0.4s;}
+.feature-card:hover{border-color:var(--border-glow);transform:translateY(-6px);box-shadow:var(--glow);}
+.feature-card:hover::after{opacity:1;}
+.feature-card.blue::after{background:radial-gradient(circle at 50% 0%,var(--blue-dim),transparent 70%);}
+.feature-card.amber::after{background:radial-gradient(circle at 50% 0%,var(--amber-dim),transparent 70%);}
+.feature-card.blue:hover{border-color:rgba(59,130,246,0.35);box-shadow:0 0 40px rgba(59,130,246,0.12);}
+.feature-card.amber:hover{border-color:rgba(245,158,11,0.35);box-shadow:0 0 40px rgba(245,158,11,0.12);}
+.feature-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.2rem;background:var(--primary-dim);transition:var(--transition-theme);}
+.feature-card.blue .feature-icon{background:var(--blue-dim);}
+.feature-card.amber .feature-icon{background:var(--amber-dim);}
+.feature-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.6rem;}
+.feature-card p{font-size:0.88rem;color:var(--text-sub);line-height:1.7;}
+.feature-specs{margin-top:1.2rem;display:flex;flex-direction:column;gap:0.4rem;}
+.spec-item{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text-sub);}
+.spec-item::before{content:'';width:5px;height:5px;background:var(--primary);border-radius:50%;flex-shrink:0;}
+.feature-card.blue .spec-item::before{background:var(--blue);}
+.feature-card.amber .spec-item::before{background:var(--amber);}
+
+/* DESIGN */
+#design{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;transition:var(--transition-theme);}
+.design-card-main{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem;box-shadow:var(--shadow);transition:var(--transition-theme);}
+.design-card-main img{width:100%;border-radius:8px;object-fit:cover;aspect-ratio:4/3;}
+.design-badge-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:1rem;}
+.dbadge{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:0.75rem;font-weight:600;color:var(--text-sub);transition:var(--transition-theme);}
+.dbadge span{font-size:0.9rem;}
+.design-text p{color:var(--text-sub);font-size:0.95rem;line-height:1.8;margin-bottom:1.2rem;}
+.material-list{list-style:none;margin-top:1.5rem;display:flex;flex-direction:column;gap:0.6rem;}
+.material-list li{display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;font-weight:500;color:var(--text);padding:0.6rem 0.8rem;border:1px solid var(--border);border-radius:6px;background:var(--bg-card);transition:all 0.2s,var(--transition-theme);}
+.material-list li:hover{border-color:var(--border-glow);transform:translateX(4px);}
+
+/* LOGICIEL */
+#code{background:var(--bg-2);transition:var(--transition-theme);}
+.code-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start;margin-top:3rem;}
+.flow-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:2rem;box-shadow:var(--shadow);}
+.flow-title{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.5rem;}
+.code-right{display:flex;flex-direction:column;gap:2rem;}
+.tech-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem;}
+.tech-tag{display:inline-flex;align-items:center;gap:0.35rem;padding:0.35rem 0.75rem;border:1px solid var(--border);border-radius:50px;font-size:0.73rem;font-weight:600;letter-spacing:0.04em;color:var(--text-sub);background:var(--bg-card);transition:all 0.2s,var(--transition-theme);cursor:default;}
+.tech-tag:hover{border-color:var(--primary);color:var(--primary);}
+.tech-tag.active{background:var(--primary-dim);border-color:var(--primary);color:var(--primary);}
+.code-feature-list{display:flex;flex-direction:column;gap:0.8rem;}
+.code-feat{display:flex;align-items:flex-start;gap:0.8rem;padding:1rem;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);transition:all 0.2s,var(--transition-theme);}
+.code-feat:hover{border-color:var(--border-glow);}
+.feat-icon{font-size:1.2rem;margin-top:0.1rem;flex-shrink:0;}
+.feat-title{font-size:0.85rem;font-weight:600;color:var(--text);}
+.feat-desc{font-size:0.78rem;color:var(--text-sub);margin-top:0.15rem;line-height:1.5;}
+
+/* ÉNERGIE */
+#energy{transition:var(--transition-theme);}
+.energy-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;margin-top:3rem;}
+.metrics-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+.metric-box{flex:1;min-width:100px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;transition:all 0.2s,var(--transition-theme);cursor:default;}
+.metric-box:hover{border-color:var(--border-glow);box-shadow:var(--glow);}
+.metric-val{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;line-height:1;color:var(--primary);}
+.metric-unit{font-size:0.65rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.1rem;}
+.energy-desc{color:var(--text-sub);font-size:0.92rem;line-height:1.8;}
+.chart-box{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:2rem;box-shadow:var(--shadow);transition:var(--transition-theme);}
+.chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
+.chart-title{font-weight:600;font-size:0.88rem;color:var(--text);}
+.chart-tabs{display:flex;gap:0.4rem;}
+.chart-tab{padding:0.25rem 0.75rem;border-radius:50px;font-size:0.7rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);color:var(--text-sub);background:transparent;transition:all 0.2s;font-family:inherit;}
+.chart-tab.active{background:var(--primary);border-color:var(--primary);color:#000;}
+.bar-chart{display:flex;flex-direction:column;gap:1rem;}
+.bar-row{display:grid;grid-template-columns:90px 1fr 80px;align-items:center;gap:0.8rem;}
+.bar-lbl{font-size:0.75rem;color:var(--text-sub);font-weight:500;}
+.bar-track{height:10px;border-radius:50px;background:var(--bg);overflow:hidden;}
+.bar-fill{height:100%;border-radius:50px;width:0%;transition:width var(--bar-duration) cubic-bezier(0.34,1.1,0.64,1);}
+.bar-fill.prod{background:linear-gradient(90deg,var(--primary),#00ffcc);}
+.bar-fill.cons{background:linear-gradient(90deg,var(--blue),#60a5fa);}
+.bar-fill.stock{background:linear-gradient(90deg,var(--amber),#fcd34d);}
+.bar-val{font-family:'JetBrains Mono',monospace;font-size:0.73rem;color:var(--text-sub);text-align:right;transition:opacity 0.3s ease;}
+.bar-val.fading{opacity:0;}
+.chart-legend{display:flex;gap:1.2rem;margin-top:1.5rem;flex-wrap:wrap;}
+.legend-dot{width:8px;height:8px;border-radius:50%;}
+.legend-item{display:flex;align-items:center;gap:0.4rem;font-size:0.72rem;color:var(--text-sub);}
+
+/* COMPÉTITION */
+#competition{transition:var(--transition-theme);}
+.competition-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:center;margin-top:3rem;}
+.medal-card{background:var(--bg-card);border:1px solid var(--border-glow);border-radius:16px;padding:3rem 2rem;text-align:center;box-shadow:var(--glow);position:relative;overflow:hidden;}
+.medal-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,var(--primary-dim),transparent 60%);pointer-events:none;}
+.medal-emoji{font-size:4rem;display:block;margin-bottom:0.5rem;}
+.medal-rank{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--primary);line-height:1;}
+.medal-rank sup{font-size:2.5rem;vertical-align:super;}
+.medal-label{font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin:0.3rem 0 1rem;}
+.medal-event{font-size:1rem;font-weight:600;color:var(--text);}
+.medal-sub{font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem;}
+.competition-feats{display:flex;flex-direction:column;gap:0.8rem;}
+.competition-feat{display:flex;align-items:flex-start;gap:0.8rem;padding:1rem;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);transition:all 0.2s,var(--transition-theme);}
+.competition-feat:hover{border-color:var(--border-glow);}
+
+/* ÉQUIPE */
+#team{background:var(--bg-2);transition:var(--transition-theme);}
+.team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:3rem;}
+.team-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem 1rem;text-align:center;transition:all 0.35s,var(--transition-theme);position:relative;overflow:hidden;}
+.team-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,var(--primary-dim),transparent 70%);opacity:0;transition:opacity 0.4s;}
+.team-card:hover{border-color:var(--border-glow);transform:translateY(-6px);box-shadow:var(--glow);}
+.team-card:hover::after{opacity:1;}
+.team-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 1rem;background:var(--primary-dim);border:2px solid var(--border-glow);}
+.team-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.05em;color:var(--text);}
+.team-role{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--primary);margin:0.3rem 0 1rem;}
+.team-skills{display:flex;flex-direction:column;gap:0.35rem;}
+.team-skill{font-size:0.72rem;color:var(--text-sub);background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0.25rem 0.5rem;}
+.team-badge{text-align:center;margin-top:2.5rem;}
+.team-badge-pill{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.5rem;background:var(--primary-dim);border:1px solid var(--primary);border-radius:50px;font-size:0.8rem;font-weight:600;color:var(--primary);}
+
+/* LIMITES */
+#limits{transition:var(--transition-theme);}
+.limits-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
+.limit-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;}
+.limit-card-title{font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.limit-item{border-radius:6px;padding:0.75rem 1rem;margin-bottom:0.6rem;font-size:0.8rem;line-height:1.5;}
+.limit-item.bad{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#FCA5A5;}
+.limit-item.good{background:rgba(0,212,160,0.08);border:1px solid rgba(0,212,160,0.2);color:var(--primary);}
+.limit-item strong{display:block;margin-bottom:0.2rem;}
+
+/* GALERIE */
+#gallery{background:var(--bg-2);transition:var(--transition-theme);}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3rem;}
+.gallery-item:last-child:nth-child(3n+1){grid-column:2/3;}
+.gallery-item{position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--border);aspect-ratio:4/3;max-height:220px;cursor:pointer;transition:all 0.35s;background:var(--bg-card);}
+.gallery-item:hover{transform:translateY(-5px);box-shadow:var(--glow);border-color:var(--border-glow);}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;}
+.gallery-item:hover img{transform:scale(1.05);}
+.gallery-caption{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 50%);display:flex;align-items:flex-end;padding:1rem;opacity:0;transition:opacity 0.3s;}
+.gallery-item:hover .gallery-caption{opacity:1;}
+.gallery-caption span{font-size:0.78rem;font-weight:600;color:#fff;line-height:1.4;}
+
+/* CTA */
+#cta{background:var(--bg-card);border-top:1px solid var(--border);text-align:center;padding:80px clamp(1rem,5vw,5%);transition:var(--transition-theme);position:relative;overflow:hidden;}
+#cta::before{content:'';position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,var(--primary-dim),transparent 70%);pointer-events:none;}
+#cta h2{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1rem;}
+#cta p{color:var(--text-sub);max-width:500px;margin:0 auto 2.5rem;}
+.cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:2.5rem clamp(1rem,5vw,5%);transition:var(--transition-theme);}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--text);text-decoration:none;letter-spacing:0.04em;}
+.footer-logo em{font-style:normal;color:var(--primary);}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-links a{font-size:0.8rem;color:var(--text-sub);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--primary);}
+.footer-social{display:flex;gap:0.8rem;}
+.social-btn{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);color:var(--text-sub);text-decoration:none;font-size:0.9rem;transition:all 0.2s;}
+.social-btn:hover{border-color:var(--primary);color:var(--primary);}
+.footer-bottom{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;font-size:0.75rem;color:var(--text-muted);}
+
+/* THEME CLAIR — SVG organigramme */
+[data-theme="light"] .flow-wrap{background:#f0ebe0;}
+[data-theme="light"] .flow-wrap svg .ft{fill:#0A0F1E !important;}
+[data-theme="light"] .flow-wrap svg .fs{fill:#374151 !important;}
+[data-theme="light"] .flow-wrap svg .fl{fill:#6B7280 !important;}
+[data-theme="light"] .flow-wrap svg .flow-box{fill:#e8e0d0 !important;}
+[data-theme="light"] .flow-wrap svg .flow-att{fill:rgba(0,168,126,0.12) !important;}
+[data-theme="light"] .flow-wrap svg .flow-eco{fill:rgba(220,38,38,0.1) !important;}
+
+/* THEME CLAIR — bench SVG hero */
+[data-theme="light"] .bench-visual{background:#f0ebe0;}
+[data-theme="light"] .bench-panel-rect{fill:#e8e0d0 !important;stroke:#d4c8b8 !important;}
+[data-theme="light"] .bench-seat{fill:#faf6f0 !important;stroke:#d4c8b8 !important;}
+[data-theme="light"] .bench-leg{fill:#faf6f0 !important;stroke:#d4c8b8 !important;}
+[data-theme="light"] .bench-solar-text{fill:#2563EB !important;}
+
+/* BOUTON RETOUR EN HAUT */
+#backToTop{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:var(--primary);color:#000;border:none;border-radius:50%;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 20px rgba(0,212,160,0.3);z-index:900;opacity:0;visibility:hidden;transition:opacity 0.3s,visibility 0.3s,transform 0.3s;transform:translateY(10px);}
+#backToTop.visible{opacity:1;visibility:visible;transform:translateY(0);}
+#backToTop:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(0,212,160,0.5);}
+
+/* NORMES */
+#normes{background:var(--bg-2);transition:var(--transition-theme);}
+.normes-intro{font-size:0.95rem;color:var(--text-sub);line-height:1.8;max-width:700px;margin-bottom:3rem;}
+.normes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem;}
+.norme-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1.8rem;transition:all 0.35s,var(--transition-theme);position:relative;overflow:hidden;}
+.norme-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),#00ffcc);border-radius:12px 12px 0 0;}
+.norme-card.blue::before{background:linear-gradient(90deg,var(--blue),#60a5fa);}
+.norme-card.amber::before{background:linear-gradient(90deg,var(--amber),#fcd34d);}
+.norme-card.red::before{background:linear-gradient(90deg,var(--red),#f87171);}
+.norme-card:hover{border-color:var(--border-glow);transform:translateY(-4px);box-shadow:var(--glow);}
+.norme-card.blue:hover{border-color:rgba(59,130,246,0.35);box-shadow:0 0 40px rgba(59,130,246,0.12);}
+.norme-card.amber:hover{border-color:rgba(245,158,11,0.35);box-shadow:0 0 40px rgba(245,158,11,0.12);}
+.norme-card.red:hover{border-color:rgba(239,68,68,0.35);box-shadow:0 0 40px rgba(239,68,68,0.12);}
+.norme-ref{display:inline-flex;align-items:center;gap:0.4rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;color:var(--primary);background:var(--primary-dim);border:1px solid rgba(0,212,160,0.2);border-radius:4px;padding:0.25rem 0.6rem;margin-bottom:1rem;}
+.norme-card.blue .norme-ref{color:var(--blue);background:var(--blue-dim);border-color:rgba(59,130,246,0.2);}
+.norme-card.amber .norme-ref{color:var(--amber);background:var(--amber-dim);border-color:rgba(245,158,11,0.2);}
+.norme-card.red .norme-ref{color:var(--red);background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.2);}
+.norme-card h3{font-family:'Bebas Neue','Impact','Arial Black',sans-serif;font-size:1.25rem;letter-spacing:0.04em;color:var(--text);margin-bottom:0.6rem;}
+.norme-card p{font-size:0.83rem;color:var(--text-sub);line-height:1.7;margin-bottom:1rem;}
+.norme-badge{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.72rem;font-weight:700;padding:0.3rem 0.7rem;border-radius:50px;}
+.norme-badge.conforme{background:rgba(0,212,160,0.12);border:1px solid rgba(0,212,160,0.3);color:var(--primary);}
+.norme-badge.partiel{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);color:var(--amber);}
+.norme-badge.etude{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);color:var(--blue);}
+.normes-table-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:2.5rem;transition:var(--transition-theme);}
+.normes-table-head{display:grid;grid-template-columns:2fr 2fr 1.2fr 1fr;padding:0.8rem 1.5rem;background:var(--primary-dim);border-bottom:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--primary);}
+.normes-table-row{display:grid;grid-template-columns:2fr 2fr 1.2fr 1fr;padding:1rem 1.5rem;border-bottom:1px solid var(--border);align-items:center;transition:background 0.2s;}
+.normes-table-row:last-child{border-bottom:none;}
+.normes-table-row:hover{background:var(--primary-dim);}
+.normes-table-row span{font-size:0.82rem;color:var(--text-sub);}
+.normes-table-row span:first-child{font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:600;color:var(--text);}
+.normes-note{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem 1.5rem;background:rgba(0,212,160,0.06);border:1px solid rgba(0,212,160,0.2);border-radius:8px;font-size:0.83rem;color:var(--text-sub);line-height:1.6;}
+.normes-note strong{color:var(--primary);display:block;margin-bottom:0.2rem;}
+
+
+/* NORMES — NIVEAUX DE PRIORITÉ */
+.norme-priority-header{display:flex;align-items:center;gap:0.8rem;padding:0.8rem 1.2rem;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;margin-bottom:1.5rem;margin-top:2.5rem;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-sub);transition:var(--transition-theme);}
+.norme-priority-header.red{border-left:3px solid var(--red);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.04);color:var(--red);}
+.norme-priority-header.amber{border-left:3px solid var(--amber);border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.04);color:var(--amber);}
+.norme-priority-header.blue{border-left:3px solid var(--blue);border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.04);color:var(--blue);}
+.norme-priority-dot{width:10px;height:10px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.norme-priority-count{margin-left:auto;font-size:0.7rem;opacity:0.75;background:currentColor;color:var(--bg);padding:0.15rem 0.5rem;border-radius:50px;}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.team-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:1024px){
+  #hero{grid-template-columns:1fr;padding-top:100px;}
+  .hero-right{display:none;}
+  .features-grid{grid-template-columns:repeat(2,1fr);}
+  #design,.code-grid,.energy-grid,.competition-grid{grid-template-columns:1fr;gap:3rem;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .limits-grid{grid-template-columns:1fr;}
+  .normes-grid{grid-template-columns:repeat(2,1fr);}
+  .normes-table-head,.normes-table-row{grid-template-columns:1.5fr 2fr 1.2fr;}
+  .normes-table-head span:last-child,.normes-table-row span:last-child{display:none;}
+}
+@media(max-width:640px){
+  .nav-links{display:none;}.hamburger{display:flex;}
+  .features-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);gap:0.8rem;}
+  .hero-stats{gap:1.5rem;}
+  .bar-row{grid-template-columns:70px 1fr 60px;}
+  h2{font-size:clamp(2rem,8vw,3rem);}
+  .hero-title{font-size:clamp(3rem,14vw,5rem);}
+  .section-sub{margin-bottom:2rem;}
+  .team-grid{grid-template-columns:repeat(2,1fr);}
+  .normes-grid{grid-template-columns:1fr;}
+  .normes-table-head,.normes-table-row{grid-template-columns:1.5fr 1fr;}
+  .normes-table-head span:nth-child(2),.normes-table-row span:nth-child(2){display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="02-ebench-2026.html" class="nav-logo">E<em>-</em>Bench <em>2026</em></a>
+  <ul class="nav-links">
+    <li><a href="02-ebench-2026.html">← Retour au site</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeToggle" aria-label="Basculer le thème">
+      <i class="fa-solid fa-moon theme-icon moon" aria-hidden="true"></i>
+      <i class="fa-solid fa-sun theme-icon sun" aria-hidden="true"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- NORMES -->
+<section id="normes" style="padding-top:100px;">
+  <div class="section-tag reveal">Conformité &amp; Réglementation</div>
+  <h2 class="reveal">Normes Applicables<br>au Projet</h2>
+  <p class="normes-intro reveal">E-Bench 2026 est un mobilier urbain électronique destiné à l'espace public. Il répond aux exigences réglementaires et normatives françaises et européennes couvrant la sécurité électrique DC/PV, l'étanchéité, la structure, l'accessibilité PMR, la protection des données et la compatibilité électromagnétique. <strong style="color:var(--primary)">18 normes directement applicables, classées par criticité — normes hors-périmètre et doublons écartés.</strong></p>
+
+  <!-- ─── CRITIQUE ─── -->
+  <div class="norme-priority-header red reveal">
+    <span class="norme-priority-dot"></span>
+    <span>CRITIQUE — Sécurité électrique, étanchéité, feu &amp; résistance structurelle</span>
+    <span class="norme-priority-count">12</span>
+  </div>
+  <div class="normes-grid">
+    <div class="norme-card red reveal reveal-delay-1">
+      <div class="norme-ref"><i class="fa-solid fa-bolt" aria-hidden="true"></i> NF C 15-100</div>
+      <h3>Installations Électriques BT</h3>
+      <p>Norme française de référence pour les installations basse tension. Régit le câblage, les protections différentielles, le dimensionnement des conducteurs et la mise à la terre du système photovoltaïque. Base obligatoire de tout le circuit électrique du banc.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span>
+    </div>
+    <div class="norme-card red reveal reveal-delay-2">
+      <div class="norme-ref"><i class="fa-solid fa-bolt" aria-hidden="true"></i> NF C 15-712-1</div>
+      <h3>Installations PV Hors-Réseau</h3>
+      <p>Complément français spécifique aux systèmes PV autonomes. Régit la protection DC côté panneau (fusibles, parafoudre DC), le dimensionnement des câbles DC et les prescriptions de sécurité pour systèmes hors-réseau — directement applicable à l'E-Bench.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme hors-réseau</span>
+    </div>
+    <div class="norme-card red reveal reveal-delay-3">
+      <div class="norme-ref"><i class="fa-solid fa-globe" aria-hidden="true"></i> EN 61730 / IEC 61730</div>
+      <h3>Sécurité des Modules PV</h3>
+      <p>Exigences de construction et de sécurité des modules photovoltaïques : contraintes électriques, thermiques et mécaniques. Le panneau monocristallin 500Wc est certifié conforme à cette norme par son fabricant.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Certifié fabricant</span>
+    </div>
+    <div class="norme-card red reveal reveal-delay-1">
+      <div class="norme-ref"><i class="fa-solid fa-sun" aria-hidden="true"></i> IEC 61215 / EN 61215</div>
+      <h3>Qualification Modules PV Cristallins</h3>
+      <p>Essais de qualification : UV, cycles thermiques −40/+85 °C, grêle et charges mécaniques. Garantit la durabilité du panneau 500Wc en conditions extérieures réelles sur la durée de vie du projet.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Qualifié fabricant</span>
+    </div>
+    <div class="norme-card red reveal reveal-delay-2">
+      <div class="norme-ref"><i class="fa-solid fa-bolt" aria-hidden="true"></i> IEC 62109-1 &amp; -2</div>
+      <h3>Sécurité Convertisseurs PV — MPPT</h3>
+      <p>Sécurité des convertisseurs pour systèmes photovoltaïques. Le contrôleur MPPT Victron SmartSolar 150|35 est certifié conforme : protection contre la surcharge, les courts-circuits et les inversions de polarité côté panneau et batterie.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Certifié Victron</span>
+    </div>
+    <div class="norme-card red reveal reveal-delay-3">
+      <div class="norme-ref"><i class="fa-solid fa-plug" aria-hidden="true"></i> IEC 62930 (HD 627)</div>
+      <h3>Câbles DC pour Installations PV</h3>
+      <p>Câbles unipolaires double isolation pour courant continu PV : section 6 mm², isolation résistante aux UV et à la chaleur jusqu'à 90 °C. Obligatoire pour tout raccordement panneau–MPPT exposé en extérieur.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Câbles PV conformes</span>
+    </div>
+    <div class="norme-card red reveal reveal-delay-1">
+      <div class="norme-ref"><i class="fa-solid fa-sun" aria-hidden="true"></i> IEC 62852</div>
+      <h3>Connecteurs MC4 — Systèmes PV</h3>
+      <p>Connecteurs MC4 du câblage panneau–MPPT : résistance à la corrosion, aux UV et aux hautes tensions DC jusqu'à 1 500 V. Seuls connecteurs normalisés autorisés pour ce type d'installation en courant continu.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme MC4</span>
+    </div>
+    <div class="norme-card red reveal reveal-delay-2">
+      <div class="norme-ref"><i class="fa-solid fa-cloud-rain" aria-hidden="true"></i> IEC 60529 — IP65</div>
+      <h3>Protection contre les Intempéries</h3>
+      <p>Indice de protection IP65 du compartiment électronique : protection totale contre la poussière et résistance aux jets d'eau directionnels. Indispensable pour tout équipement électronique installé en espace public extérieur.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> IP65 certifié</span>
+    </div>
+    <div class="norme-card red reveal reveal-delay-3">
+      <div class="norme-ref"><i class="fa-solid fa-plug" aria-hidden="true"></i> EN 50262</div>
+      <h3>Presse-Étoupes — Étanchéité Câblages</h3>
+      <p>Presse-étoupes pour passage de câbles à travers les parois du boîtier électrique (câble DC panneau, USB-C, PIR). Les presse-étoupes certifiés IP68 maintiennent l'indice d'étanchéité global du compartiment IP65.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Presse-étoupes IP68</span>
+    </div>
+
+    <div class="norme-card red reveal reveal-delay-2">
+      <div class="norme-ref"><i class="fa-solid fa-battery-full" aria-hidden="true"></i> IEC 60896-21/22</div>
+      <h3>Batteries Stationnaires Plomb-GEL (VRLA)</h3>
+      <p>Batteries plomb-acide stationnaires VRLA : essais de capacité, sécurité contre le dégagement de gaz et durée de vie en cycles. La batterie GEL 100 Ah du banc est certifiée conforme par son fabricant.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Certifié fabricant GEL</span>
+    </div>
+
+
+    <div class="norme-card red reveal reveal-delay-2">
+      <div class="norme-ref"><i class="fa-solid fa-fire" aria-hidden="true"></i> EN 13501-1</div>
+      <h3>Réaction au Feu des Matériaux</h3>
+      <p>Classification de réaction au feu des matériaux. Le bois massif FSC traité de la structure est classé D-s2,d0 — adapté à l'espace public extérieur, sans propagation rapide de flamme ni production de gouttelettes enflammées.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Classe D-s2,d0</span>
+    </div>
+    <div class="norme-card red reveal reveal-delay-3">
+      <div class="norme-ref"><i class="fa-solid fa-chair" aria-hidden="true"></i> NF EN 581-1 / 581-3</div>
+      <h3>Sièges d'Extérieur — Résistance &amp; Stabilité</h3>
+      <p>Résistance structurelle des sièges à usage extérieur : charges statiques (150 kg/usager), résistance aux UV et aux cycles gel-dégel, absence d'arêtes vives. Norme de sécurité directement applicable à la structure assise du banc.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span>
+    </div>
+  </div>
+
+  <!-- ─── ÉLEVÉE ─── -->
+  <div class="norme-priority-header amber reveal">
+    <span class="norme-priority-dot"></span>
+    <span>ÉLEVÉE — CEM, accessibilité PMR, foudre &amp; structure bois</span>
+    <span class="norme-priority-count">4</span>
+  </div>
+  <div class="normes-grid">
+    <div class="norme-card amber reveal reveal-delay-1">
+      <div class="norme-ref"><i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> EN 55032 / CISPR 32</div>
+      <h3>Compatibilité Électromagnétique</h3>
+      <p>Émissions électromagnétiques des équipements multimédias. Le Raspberry Pi 3B et ses périphériques respectent les limites de classe B — indispensable pour un usage en espace public sans interférence avec d'autres équipements électroniques environnants.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Classe B</span>
+    </div>
+
+    <div class="norme-card amber reveal reveal-delay-3">
+      <div class="norme-ref"><i class="fa-solid fa-wheelchair" aria-hidden="true"></i> EN 17210 / Décret 2017-431</div>
+      <h3>Accessibilité PMR — Mobilier Urbain</h3>
+      <p>Accessibilité du mobilier urbain pour les personnes à mobilité réduite. Les prises USB-C sont à hauteur réglementaire (0,90–1,30 m), l'écran incliné est lisible depuis un fauteuil roulant et l'espace de circulation autour du banc est dégagé.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span>
+    </div>
+
+    <div class="norme-card amber reveal reveal-delay-2">
+      <div class="norme-ref"><i class="fa-solid fa-cloud-bolt" aria-hidden="true"></i> IEC 61643-11</div>
+      <h3>Parafoudres — Protection Surtensions DC</h3>
+      <p>Dispositifs de protection contre les surtensions (DPS). En espace public extérieur, un parafoudre DC côté panneau protège le contrôleur MPPT Victron et la batterie GEL contre les surtensions atmosphériques et de commutation.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Protection DPS DC</span>
+    </div>
+
+    <div class="norme-card amber reveal reveal-delay-1">
+      <div class="norme-ref"><i class="fa-solid fa-tree" aria-hidden="true"></i> EN 335 / EN 460</div>
+      <h3>Classes d'Emploi du Bois en Extérieur</h3>
+      <p>Classes d'emploi du bois selon l'exposition aux agents biologiques. La structure exposée aux intempéries sans contact avec le sol relève de la classe 3 — bois FSC traité avec produit de préservation homologué pour une durabilité optimale.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Classe 3 — traité</span>
+    </div>
+
+
+
+  </div>
+
+  <!-- ─── MOYENNE ─── -->
+  <div class="norme-priority-header blue reveal">
+    <span class="norme-priority-dot"></span>
+    <span>MOYENNE — Interopérabilité, anticorrosion &amp; matériaux</span>
+    <span class="norme-priority-count">2</span>
+  </div>
+  <div class="normes-grid">
+
+
+
+    <div class="norme-card blue reveal reveal-delay-2">
+      <div class="norme-ref"><i class="fa-solid fa-water" aria-hidden="true"></i> EN ISO 12944</div>
+      <h3>Protection Anticorrosion des Structures</h3>
+      <p>Protection anticorrosion des structures métalliques par systèmes de peinture. Les pièces métalliques (visserie, cornières) sont traitées en catégorie C3 — environnement urbain exposé, résistant aux intempéries et au sel de déneigement hivernal.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Traitement C3</span>
+    </div>
+
+
+
+
+
+
+    <div class="norme-card blue reveal reveal-delay-3">
+      <div class="norme-ref"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> EN ISO 3506-1</div>
+      <h3>Visserie Inox en Milieu Extérieur</h3>
+      <p>Propriétés mécaniques des fixations en acier inoxydable. Toute la visserie exposée aux intempéries (panneau solaire, rails, boîtier) est en inox A4-70 (316L) — résistance maximale à la corrosion marine et au sel de déneigement hivernal des Hauts-de-France.</p>
+      <span class="norme-badge conforme"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Inox A4-70 (316L)</span>
+    </div>
+    </div>
+
+
+
+
+
+  <!-- ─── TABLEAU DE SYNTHÈSE ─── -->
+  <div class="reveal">
+    <div class="section-tag" style="margin-bottom:1.2rem;">Tableau de Synthèse — 18 Normes</div>
+    <div class="normes-table-wrap">
+      <div class="normes-table-head">
+        <span>Référence</span>
+        <span>Domaine</span>
+        <span>Statut</span>
+        <span>Priorité</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>NF C 15-100</span><span>Électricité BT — câblage &amp; protections</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>NF C 15-712-1</span><span>Installations PV hors-réseau — protection DC</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>EN 61730 / IEC 61730</span><span>Sécurité modules photovoltaïques</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Certifié</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>IEC 61215 / EN 61215</span><span>Qualification modules PV cristallins</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Qualifié</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>IEC 62109-1 &amp; -2</span><span>Sécurité convertisseurs PV — MPPT Victron</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>IEC 62930 (HD 627)</span><span>Câbles DC double isolation UV — raccordement PV</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>IEC 62852</span><span>Connecteurs MC4 — installations PV DC</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>IEC 60529 — IP65</span><span>Protection poussière &amp; eau — boîtier électronique</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> IP65</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>EN 50262</span><span>Presse-étoupes câble-passages — étanchéité IP68</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> IP68</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>IEC 60896-21/22</span><span>Batterie GEL 12V stationnaire VRLA</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Certifié</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+
+
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>EN 13501-1</span><span>Réaction au feu — bois de structure FSC</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Classe D</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--red);">
+        <span>NF EN 581-1 / 581-3</span><span>Sièges extérieur — résistance &amp; stabilité</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span></span>
+        <span style="color:var(--red);font-weight:700;font-size:0.82rem;">Critique</span>
+      </div>
+      <div class="normes-table-row" style="border-left:3px solid var(--amber);">
+        <span>EN 55032 / CISPR 32</span><span>Compatibilité électromagnétique classe B</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Classe B</span></span>
+        <span style="color:var(--amber);font-weight:700;font-size:0.82rem;">Élevée</span>
+      </div>
+
+      <div class="normes-table-row" style="border-left:3px solid var(--amber);">
+        <span>EN 17210 / Décret 2017-431</span><span>Accessibilité PMR — mobilier urbain</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Conforme</span></span>
+        <span style="color:var(--amber);font-weight:700;font-size:0.82rem;">Élevée</span>
+      </div>
+
+      <div class="normes-table-row" style="border-left:3px solid var(--amber);">
+        <span>IEC 61643-11</span><span>Parafoudres DC — protection surtensions</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> DPS DC</span></span>
+        <span style="color:var(--amber);font-weight:700;font-size:0.82rem;">Élevée</span>
+      </div>
+
+      <div class="normes-table-row" style="border-left:3px solid var(--amber);">
+        <span>EN 335 / EN 460</span><span>Classe d'emploi 3 — bois traité extérieur</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Classe 3</span></span>
+        <span style="color:var(--amber);font-weight:700;font-size:0.82rem;">Élevée</span>
+      </div>
+
+
+
+
+
+
+      <div class="normes-table-row" style="border-left:3px solid var(--blue);">
+        <span>EN ISO 12944</span><span>Anticorrosion — pièces métalliques C3</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> C3</span></span>
+        <span style="color:var(--blue);font-weight:700;font-size:0.82rem;">Moyenne</span>
+      </div>
+
+
+
+
+
+
+      <div class="normes-table-row" style="border-left:3px solid var(--blue);">
+        <span>EN ISO 3506-1</span><span>Visserie inox A4-70 (316L) — milieu extérieur</span>
+        <span><span class="norme-badge conforme" style="font-size:0.68rem;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> A4-70</span></span>
+        <span style="color:var(--blue);font-weight:700;font-size:0.82rem;">Moyenne</span>
+      </div>
+
+
+    </div>
+    <div class="normes-note">
+      <span style="font-size:1.4rem;flex-shrink:0;"><i class="fa-solid fa-circle-check" aria-hidden="true"></i></span>
+      <div>
+        <strong>Bilan de conformité — 18 normes &amp; réglementations directement applicables</strong>
+        Après tri rigoureux, 18 normes directement applicables au projet E-Bench 2026 ont été retenues : <strong style="color:var(--red)">12 Critiques</strong> (sécurité électrique DC/PV, IP65, feu, structure), <strong style="color:var(--amber)">4 Élevées</strong> (CEM, accessibilité PMR, parafoudre, matériaux bois), <strong style="color:var(--blue)">2 Moyennes</strong> (anticorrosion, visserie inox). Chaque norme est directement vérifiable sur le prototype ou couverte par la certification des composants achetés.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-logo">E<em>-</em>Bench <em>2026</em></a>
+    <nav class="footer-links">
+      <a href="index.html#page-technologies">Technologies</a>
+      <a href="index.html#page-conception">Conception</a>
+      <a href="index.html#page-logiciel">Logiciel</a>
+      <a href="index.html#page-energie">Énergie</a>
+      <a href="index.html#page-olympiades">Olympiades</a>
+      <a href="index.html#page-equipe">Équipe</a>
+      <a href="#normes">Normes</a>
+    </nav>
+    <div class="footer-social">
+      <a href="#" class="social-btn" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+      <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+      <a href="https://www.instagram.com/e_bench_osi_doullens/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram — @e_bench_osi_doullens"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 E-Bench 2026 — Projet STI2D, Hauts-de-France, France</span>
+    <span>Les Ingénieux · Première STI2D</span>
+  </div>
+</footer>
+
+<!-- BOUTON RETOUR EN HAUT -->
+<button id="backToTop" aria-label="Retour en haut" style="position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:var(--primary);color:#000;border:none;border-radius:50%;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 20px rgba(0,212,160,0.3);z-index:900;opacity:0;visibility:hidden;transition:opacity 0.3s,visibility 0.3s,transform 0.3s;transform:translateY(10px);">↑</button>
+
+
+<script>
+'use strict';
+
+// THÈME
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeToggle');
+function setTheme(theme) {
+  html.setAttribute('data-theme', theme);
+  localStorage.setItem('ebench-theme', theme);
+}
+const savedTheme = localStorage.getItem('ebench-theme');
+if (savedTheme === 'light' || savedTheme === 'dark') setTheme(savedTheme);
+themeBtn.addEventListener('click', () => {
+  setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+// NAVBAR COMPACT
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('compact', window.scrollY > 30);
+}, { passive: true });
+
+// SCROLL REVEAL
+document.body.classList.add('js-reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0, rootMargin: '0px 0px -20px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+setTimeout(() => {
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+}, 900);
+</script>
+
+<script>
+const backToTopBtn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
