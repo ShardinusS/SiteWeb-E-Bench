@@ -5,12 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>E-Bench 2026 — Analyse Énergétique MATLAB</title>
 <meta name="description" content="Analyse énergétique MATLAB : course solaire, consommation, bilan annuel, batterie, inclinaison, courbe I-V et simulation 7 jours — Somme (50°N)">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ebench.github.io/04-ebench-matlab-analysis.html">
+<meta property="og:title" content="E-Bench 2026 — Analyse Énergétique MATLAB">
+<meta property="og:description" content="Analyse MATLAB : production solaire, consommation, batterie, inclinaison optimale — E-Bench Somme 50°N.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ebench.github.io/04-ebench-matlab-analysis.html">
+<meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='13' width='28' height='3.5' rx='1.75' fill='%2300D4A0'/%3E%3Crect x='2' y='17.5' width='28' height='3.5' rx='1.75' fill='%2300D4A0' opacity='.65'/%3E%3Crect x='5' y='4' width='22' height='7' rx='1.5' fill='%233B82F6' opacity='.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js" defer></script>
 <style>
 [data-theme="dark"]{--bg:#080C14;--bg-2:#0D1220;--bg-card:#111827;--text:#F0F4FF;--text-sub:#8899B4;--text-muted:#6B7A94;--primary:#00D4A0;--blue:#3B82F6;--amber:#F59E0B;--red:#EF4444;--border:rgba(255,255,255,.07);--border-glow:rgba(0,212,160,.35);--nav-bg:rgba(8,12,20,.85);--shadow:0 0 0 1px rgba(0,212,160,.08),0 20px 60px rgba(0,0,0,.5);--glow:0 0 40px rgba(0,212,160,.15);--plotbg:#0D1220;--plotgrid:rgba(255,255,255,.06);--plottext:#8899B4}
 [data-theme="light"]{--bg:#F5F0E8;--bg-2:#FAF6F0;--bg-card:#FFFCF7;--text:#0A0F1E;--text-sub:#4A5568;--text-muted:#6B7280;--primary:#00A87E;--blue:#2563EB;--amber:#D97706;--red:#DC2626;--border:rgba(0,0,0,.08);--border-glow:rgba(0,168,126,.35);--nav-bg:rgba(245,240,232,.85);--shadow:0 0 0 1px rgba(0,168,126,.08),0 20px 60px rgba(0,0,0,.08);--glow:0 0 40px rgba(0,168,126,.08);--plotbg:#FAF6F0;--plotgrid:rgba(0,0,0,.06);--plottext:#4A5568}

@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="E-Bench 2026 : banc public intelligent 100% autonome en énergie solaire. Projet STI2D récompensé 3e aux Olympiades des Sciences de l'Ingénieur — Hauts-de-France.">
+  <meta name="description" content="E-Bench 2026 : banc public intelligent 100% autonome en énergie solaire. Projet STI2D — 3e aux Olympiades des Sciences de l'Ingénieur, Hauts-de-France.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ebench.github.io/index.html">
+  <meta property="og:title" content="E-Bench 2026 — Le Mobilier Urbain Réinventé">
+  <meta property="og:description" content="Banc public intelligent 100% autonome en énergie solaire. 3e aux Olympiades des Sciences de l'Ingénieur — Hauts-de-France.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ebench.github.io/index.html">
+  <meta property="og:image" content="https://ebench.github.io/assets/img/components.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <title>E-Bench 2026 — Le Mobilier Urbain Réinventé</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='13' width='28' height='3.5' rx='1.75' fill='%2300D4A0'/%3E%3Crect x='2' y='17.5' width='28' height='3.5' rx='1.75' fill='%2300D4A0' opacity='.65'/%3E%3Crect x='5' y='4' width='22' height='7' rx='1.5' fill='%233B82F6' opacity='.4'/%3E%3Crect x='6' y='21' width='2.5' height='8' rx='1.25' fill='%23F0F4FF' opacity='.3'/%3E%3Crect x='15' y='21' width='2.5' height='8' rx='1.25' fill='%23F0F4FF' opacity='.3'/%3E%3Crect x='23.5' y='21' width='2.5' height='8' rx='1.25' fill='%23F0F4FF' opacity='.3'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1475,7 +1483,7 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
   'use strict';
 
   /* ── Config ── */
-  var PAGES = ['accueil','equipe','olympiades','conception','technologies','logiciel','energie','normes','galerie','planning','matlab','2025'];
+  var PAGES = ['accueil','equipe','olympiades','conception','technologies','logiciel','energie','normes','galerie','planning','matlab'];
   var tabs = document.querySelectorAll('.tab-bar .tab');
 
   /* ── Navigation ── */
@@ -1594,20 +1602,44 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
     btn.querySelector('i').className = expanded ? 'fa-solid fa-compress' : 'fa-solid fa-expand';
   };
 
-  /* ── Modal Normes ── */
+  /* ── Modal Normes with focus trap ── */
   window.openNormes = function() {
-    document.getElementById('modalNormes').classList.add('open');
+    var modal = document.getElementById('modalNormes');
+    modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+    // Focus the close button inside the modal
+    var closeBtn = modal.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
   };
   window.closeNormes = function() {
     document.getElementById('modalNormes').classList.remove('open');
     document.body.style.overflow = '';
   };
 
-  /* ── Escape key closes modals ── */
+  /* ── Escape key closes modals + focus trap ── */
   document.addEventListener('keydown', function(e) {
+    var modal = document.getElementById('modalNormes');
     if (e.key === 'Escape') {
       closeNormes();
+      return;
+    }
+    // Focus trap: if modal is open, trap Tab inside
+    if (e.key === 'Tab' && modal.classList.contains('open')) {
+      var focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     }
   });
 
@@ -1718,6 +1750,9 @@ function showMPage(idx){
     document.querySelectorAll('#page-matlab .mlab-nav-item').forEach(function(b,i){b.classList.toggle('active', i===idx);});
     if(!rendered[idx]){renderers[idx]();rendered[idx]=true;}
     setTimeout(function(){window.dispatchEvent(new Event('resize'));},120);
+  }).catch(function(e){
+    console.error('Plotly load failed:', e);
+    if(mlabContent){mlabContent.style.opacity='1';}
   });
 }
 window.showMPage=showMPage;

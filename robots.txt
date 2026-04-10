@@ -1,0 +1,9 @@
+# robots.txt pour E-Bench 2026
+# https://ebench.github.io/
+
+User-agent: *
+Allow: /
+Allow: /assets/
+
+# Sitemap
+Sitemap: https://ebench.github.io/sitemap.xml
