@@ -17,123 +17,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="assets/css/theme.css">
   <style>
-    /* ============================================================
-       THEME VARIABLES
-       ============================================================ */
-    [data-theme="dark"]{
-      --bg:#080C14;--bg-2:#0D1220;--bg-card:#111827;
-      --text:#F0F4FF;--text-sub:#8899B4;--text-muted:#6B7A94;
-      --primary:#00D4A0;--blue:#3B82F6;--amber:#F59E0B;--red:#EF4444;
-      --border:rgba(255,255,255,.07);--border-glow:color-mix(in srgb, var(--primary) 35%, transparent);
-      --nav-bg:rgba(8,12,20,.85);
-      --shadow:0 0 0 1px color-mix(in srgb, var(--primary) 8%, transparent),0 20px 60px rgba(0,0,0,.5);
-      --glow:0 0 40px color-mix(in srgb, var(--primary) 15%, transparent);
-    }
-    [data-theme="light"]{
-      --bg:#F5F0E8;--bg-2:#FAF6F0;--bg-card:#FFFCF7;
-      --text:#0A0F1E;--text-sub:#4A5568;--text-muted:#6B7280;
-      --primary:#00A87E;--blue:#2563EB;--amber:#D97706;--red:#DC2626;
-      --border:rgba(0,0,0,.08);--border-glow:color-mix(in srgb, var(--primary) 35%, transparent);
-      --nav-bg:rgba(245,240,232,.85);
-      --shadow:0 0 0 1px color-mix(in srgb, var(--primary) 8%, transparent),0 20px 60px rgba(0,0,0,.08);
-      --glow:0 0 40px color-mix(in srgb, var(--primary) 15%, transparent);
-    }
-    html[data-theme="dark"], html[data-theme="light"] {
-      --primary-02: color-mix(in srgb, var(--primary) 2%, transparent);
-      --primary-04: color-mix(in srgb, var(--primary) 4%, transparent);
-      --primary-06: color-mix(in srgb, var(--primary) 6%, transparent);
-      --primary-08: color-mix(in srgb, var(--primary) 8%, transparent);
-      --primary-10: color-mix(in srgb, var(--primary) 10%, transparent);
-      --primary-12: color-mix(in srgb, var(--primary) 12%, transparent);
-      --primary-15: color-mix(in srgb, var(--primary) 15%, transparent);
-      --primary-20: color-mix(in srgb, var(--primary) 20%, transparent);
-      --primary-25: color-mix(in srgb, var(--primary) 25%, transparent);
-      --primary-30: color-mix(in srgb, var(--primary) 30%, transparent);
-      --primary-35: color-mix(in srgb, var(--primary) 35%, transparent);
-    }
-
-    /* ============================================================
-       RESET & BASE
-       ============================================================ */
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-    body{font-family:'Space Grotesk',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .4s ease,color .4s ease}
-    body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.025;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-    a{color:var(--primary);text-decoration:none}
-    img{max-width:100%;display:block}
-    h1,h2,h3{font-family:'Bebas Neue',cursive;font-weight:400;letter-spacing:.04em}
-    .mono{font-family:'JetBrains Mono',monospace}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-    /* ============================================================
-       LAYOUT
-       ============================================================ */
-    .container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-    .section{padding:80px 0}
-    .page{display:none;padding-top:100px;min-height:100vh}
-    .page.active{display:block;animation:fadeIn .35s ease forwards}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .section-tag{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--primary);background:var(--primary-08);padding:6px 14px;border-radius:100px;border:1px solid var(--primary-15);margin-bottom:16px}
-    .section-title{font-size:3rem;line-height:1.05;margin-bottom:12px}
-    .section-sub{color:var(--text-sub);font-size:1.05rem;max-width:640px;margin-bottom:40px}
-
-    /* ============================================================
-       TOPBAR
-       ============================================================ */
-    .topbar{position:fixed;top:0;left:0;right:0;height:56px;z-index:100;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;transition:background .4s,border-color .4s}
-    .logo{display:flex;align-items:center;gap:10px;font-family:'Bebas Neue',cursive;font-size:1.55rem;letter-spacing:.06em;color:var(--text);cursor:pointer;user-select:none;background:none;border:none;padding:0;font:inherit;text-align:left}
-    .logo span{color:var(--primary)}
-    .logo-icon{width:30px;height:30px;flex-shrink:0}
-    .topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px}
-    .theme-toggle{width:44px;height:24px;border-radius:12px;background:var(--bg-2);border:1px solid var(--border);cursor:pointer;position:relative;transition:background .3s,border-color .3s;flex-shrink:0}
-    .theme-toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:var(--primary);top:2px;left:2px;transition:transform .3s ease}
-    [data-theme="light"] .theme-toggle::after{transform:translateX(20px)}
-    .toggle-icons{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 5px;font-size:9px;pointer-events:none;color:var(--text-muted)}
-
-    /* ============================================================
-       TAB BAR
-       ============================================================ */
-    .tab-bar{position:fixed;top:56px;left:0;right:0;height:44px;z-index:99;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:stretch;overflow-x:auto;scrollbar-width:none;transition:background .4s,border-color .4s}
-    .tab-bar::-webkit-scrollbar{display:none}
-    .tab{flex-shrink:0;padding:0 18px;display:flex;align-items:center;gap:7px;font-size:.8rem;font-weight:500;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:color .25s,border-color .25s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:'Space Grotesk',sans-serif}
-    .tab:hover{color:var(--text-sub)}
-    .tab[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--primary)}
-    .tab i{font-size:.72rem;width:14px;text-align:center}
-    .tab:focus-visible{outline:2px solid var(--primary);outline-offset:-2px;border-radius:4px}
-
-    /* ============================================================
-       BUTTONS
-       ============================================================ */
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:12px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;border:none;font-family:'Space Grotesk',sans-serif}
-    .btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
-    .btn-primary{background:var(--primary);color:#000;box-shadow:0 0 20px var(--primary-20)}
-    .btn-primary:hover{box-shadow:0 0 32px var(--primary-35);transform:translateY(-2px)}
-    .btn-ghost{background:transparent;color:var(--text-sub);border:1px solid var(--border)}
-    .btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
-
-    /* ============================================================
-       CARDS
-       ============================================================ */
-    .card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:32px;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s,background .4s,border-color .4s;position:relative}
-    .card::before{content:'';position:absolute;inset:-8px;border-radius:24px;box-shadow:var(--glow);opacity:0;transition:opacity .3s;pointer-events:none}
-    .card:hover::before{opacity:1}
-    .card:hover{transform:translateY(-4px)}
-
-    /* ============================================================
-       REVEAL
-       ============================================================ */
-    .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    .reveal-delay-1{transition-delay:.1s}
-    .reveal-delay-2{transition-delay:.2s}
-    .reveal-delay-3{transition-delay:.3s}
+    /* ════════════════════════════════════════════
+       PAGE-SPECIFIC STYLES (extends theme.css)
+       ════════════════════════════════════════════ */
+    /* Note: theme.css provides variables, reset, buttons, cards, reveal, layout */
 
     /* ============================================================
        HERO
        ============================================================ */
-    .hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;min-height:calc(100vh - 100px);padding:60px 0}
+    .hero{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;min-height:calc(100vh - 72px);padding:60px 0}
     .hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px;font-size:.8rem;font-weight:500;color:var(--primary);text-transform:uppercase;letter-spacing:.1em}
     .hero-eyebrow::before{content:'';width:24px;height:2px;background:var(--primary);border-radius:1px}
     .hero h1{font-size:clamp(2.8rem, 8vw, 6.5rem);line-height:.92;margin-bottom:24px;letter-spacing:.02em}
@@ -539,44 +434,93 @@
 </head>
 <body>
 
-<!-- TOPBAR -->
-<nav class="topbar" role="navigation" aria-label="Barre de navigation principale">
-  <button type="button" class="logo" onclick="showPage('accueil')" aria-label="Accueil E-Bench 2026">
-    <svg class="logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <rect x="5" y="3" width="22" height="7" rx="1.5" fill="currentColor" opacity=".2" stroke="currentColor" stroke-width=".5"/>
-      <line x1="11" y1="3" x2="11" y2="10" stroke="currentColor" stroke-width=".3" opacity=".15"/>
-      <line x1="16" y1="3" x2="16" y2="10" stroke="currentColor" stroke-width=".3" opacity=".15"/>
-      <line x1="21" y1="3" x2="21" y2="10" stroke="currentColor" stroke-width=".3" opacity=".15"/>
-      <rect x="14" y="10" width="4" height="3" rx=".5" fill="currentColor" opacity=".15"/>
-      <rect x="2" y="13" width="28" height="3.5" rx="1.75" fill="var(--primary)"/>
-      <rect x="2" y="17.5" width="28" height="3.5" rx="1.75" fill="var(--primary)" opacity=".65"/>
-      <rect x="6" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/>
-      <rect x="15" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/>
-      <rect x="23.5" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/>
-    </svg>
-    E-Bench <span>2026</span>
-  </button>
-  <div class="topbar-right">
-    
-    <button class="theme-toggle" onclick="toggleTheme()" role="switch" aria-pressed="false" aria-label="Basculer entre thème sombre et clair" id="themeBtn">
-      <span class="toggle-icons" aria-hidden="true"><i class="fa-solid fa-moon"></i><i class="fa-solid fa-sun"></i></span>
+<!-- ════════════════════════════════════════
+     NAVIGATION — SIMPLIFIED & REFACTORED
+     ════════════════════════════════════════ -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Barre de navigation principale">
+  <div class="navbar-inner">
+    <button type="button" class="logo" onclick="showPage('accueil')" aria-label="Accueil E-Bench 2026">
+      <svg class="logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="5" y="3" width="22" height="7" rx="1.5" fill="currentColor" opacity=".2" stroke="currentColor" stroke-width=".5"/>
+        <line x1="11" y1="3" x2="11" y2="10" stroke="currentColor" stroke-width=".3" opacity=".15"/>
+        <line x1="16" y1="3" x2="16" y2="10" stroke="currentColor" stroke-width=".3" opacity=".15"/>
+        <line x1="21" y1="3" x2="21" y2="10" stroke="currentColor" stroke-width=".3" opacity=".15"/>
+        <rect x="14" y="10" width="4" height="3" rx=".5" fill="currentColor" opacity=".15"/>
+        <rect x="2" y="13" width="28" height="3.5" rx="1.75" fill="var(--primary)"/>
+        <rect x="2" y="17.5" width="28" height="3.5" rx="1.75" fill="var(--primary)" opacity=".65"/>
+        <rect x="6" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/>
+        <rect x="15" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/>
+        <rect x="23.5" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/>
+      </svg>
+      E-Bench <span>2026</span>
     </button>
+
+    <!-- Desktop nav links (max 5 visible + dropdowns) -->
+    <ul class="nav-links" id="navLinks">
+      <li><button class="nav-link active" data-page="accueil" onclick="showPage('accueil')"><i class="fa-solid fa-house" aria-hidden="true"></i> Accueil</button></li>
+
+      <!-- Dropdown: Le Projet -->
+      <li class="nav-dropdown" id="dropdownProjet">
+        <button class="nav-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Projet</button>
+        <div class="nav-dropdown-menu" role="menu">
+          <button class="nav-dropdown-item" data-page="equipe" onclick="showPage('equipe'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-users" aria-hidden="true"></i> Équipe</button>
+          <button class="nav-dropdown-item" data-page="olympiades" onclick="showPage('olympiades'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-trophy" aria-hidden="true"></i> Olympiades</button>
+          <button class="nav-dropdown-item" data-page="planning" onclick="showPage('planning'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Planning</button>
+        </div>
+      </li>
+
+      <!-- Dropdown: Technique -->
+      <li class="nav-dropdown" id="dropdownTech">
+        <button class="nav-link nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-gear" aria-hidden="true"></i> Technique</button>
+        <div class="nav-dropdown-menu" role="menu">
+          <button class="nav-dropdown-item" data-page="conception" onclick="showPage('conception'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-compass-drafting" aria-hidden="true"></i> Conception</button>
+          <button class="nav-dropdown-item" data-page="technologies" onclick="showPage('technologies'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Technologies</button>
+          <button class="nav-dropdown-item" data-page="logiciel" onclick="showPage('logiciel'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Logiciel</button>
+          <button class="nav-dropdown-item" data-page="energie" onclick="showPage('energie'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-sun" aria-hidden="true"></i> Énergie</button>
+        </div>
+      </li>
+
+      <li><button class="nav-link" data-page="normes" onclick="showPage('normes')"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Normes</button></li>
+      <li><button class="nav-link" data-page="galerie" onclick="showPage('galerie')"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</button></li>
+    </ul>
+
+    <!-- Right controls -->
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" role="switch" aria-pressed="false" aria-label="Basculer entre thème sombre et clair" id="themeBtn">
+        <span class="toggle-icons" aria-hidden="true"><i class="fa-solid fa-moon"></i><i class="fa-solid fa-sun"></i></span>
+      </button>
+
+      <!-- Hamburger (mobile only) -->
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
-<!-- TAB BAR -->
-<div class="tab-bar" id="tabBar" role="tablist" aria-label="Navigation principale">
-  <button class="tab" role="tab" id="tab-accueil" aria-selected="true" aria-controls="page-accueil" onclick="showPage('accueil')"><i class="fa-solid fa-house" aria-hidden="true"></i> Accueil</button>
-  <button class="tab" role="tab" id="tab-equipe" aria-selected="false" aria-controls="page-equipe" onclick="showPage('equipe')"><i class="fa-solid fa-users" aria-hidden="true"></i> Équipe</button>
-  <button class="tab" role="tab" id="tab-olympiades" aria-selected="false" aria-controls="page-olympiades" onclick="showPage('olympiades')"><i class="fa-solid fa-trophy" aria-hidden="true"></i> Olympiades</button>
-  <button class="tab" role="tab" id="tab-conception" aria-selected="false" aria-controls="page-conception" onclick="showPage('conception')"><i class="fa-solid fa-compass-drafting" aria-hidden="true"></i> Conception</button>
-  <button class="tab" role="tab" id="tab-technologies" aria-selected="false" aria-controls="page-technologies" onclick="showPage('technologies')"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Technologies</button>
-  <button class="tab" role="tab" id="tab-logiciel" aria-selected="false" aria-controls="page-logiciel" onclick="showPage('logiciel')"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Logiciel</button>
-  <button class="tab" role="tab" id="tab-energie" aria-selected="false" aria-controls="page-energie" onclick="showPage('energie')"><i class="fa-solid fa-sun" aria-hidden="true"></i> Énergie</button>
-  <button class="tab" role="tab" id="tab-normes" aria-selected="false" aria-controls="page-normes" onclick="showPage('normes')"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Normes</button>
-  <button class="tab" role="tab" id="tab-galerie" aria-selected="false" aria-controls="page-galerie" onclick="showPage('galerie')"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</button>
-  <button class="tab" role="tab" id="tab-planning" aria-selected="false" aria-controls="page-planning" onclick="showPage('planning')"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Planning</button>
-  <button class="tab" role="tab" id="tab-matlab" aria-selected="false" aria-controls="page-matlab" onclick="showPage('matlab')"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Analyse MATLAB</button>
+<!-- Mobile menu overlay -->
+<div class="mobile-menu-overlay" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-section-title">Principal</div>
+    <button class="mobile-nav-link active" data-page="accueil" onclick="showPage('accueil'); closeMobileMenu();"><i class="fa-solid fa-house" aria-hidden="true"></i> Accueil</button>
+    <button class="mobile-nav-link" data-page="galerie" onclick="showPage('galerie'); closeMobileMenu();"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</button>
+    <button class="mobile-nav-link" data-page="normes" onclick="showPage('normes'); closeMobileMenu();"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Normes</button>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-section-title">Le Projet</div>
+    <button class="mobile-nav-link" data-page="equipe" onclick="showPage('equipe'); closeMobileMenu();"><i class="fa-solid fa-users" aria-hidden="true"></i> Équipe</button>
+    <button class="mobile-nav-link" data-page="olympiades" onclick="showPage('olympiades'); closeMobileMenu();"><i class="fa-solid fa-trophy" aria-hidden="true"></i> Olympiades</button>
+    <button class="mobile-nav-link" data-page="planning" onclick="showPage('planning'); closeMobileMenu();"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Planning</button>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-section-title">Technique</div>
+    <button class="mobile-nav-link" data-page="conception" onclick="showPage('conception'); closeMobileMenu();"><i class="fa-solid fa-compass-drafting" aria-hidden="true"></i> Conception</button>
+    <button class="mobile-nav-link" data-page="technologies" onclick="showPage('technologies'); closeMobileMenu();"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Technologies</button>
+    <button class="mobile-nav-link" data-page="logiciel" onclick="showPage('logiciel'); closeMobileMenu();"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Logiciel</button>
+    <button class="mobile-nav-link" data-page="energie" onclick="showPage('energie'); closeMobileMenu();"><i class="fa-solid fa-sun" aria-hidden="true"></i> Énergie</button>
+  </div>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -1484,7 +1428,6 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
 
   /* ── Config ── */
   var PAGES = ['accueil','equipe','olympiades','conception','technologies','logiciel','energie','normes','galerie','planning','matlab'];
-  var tabs = document.querySelectorAll('.tab-bar .tab');
 
   /* ── Navigation ── */
   var solarInterval = null;
@@ -1494,11 +1437,26 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
       solarInterval = null;
     }
   }
+
   var _currentPage = null;
+
+  /**
+   * Update active state on desktop nav links and mobile nav links
+   */
+  function updateNavHighlights(pageId) {
+    // Desktop nav links
+    document.querySelectorAll('.nav-link[data-page], .nav-dropdown-item[data-page]').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-page') === pageId);
+    });
+    // Mobile nav links
+    document.querySelectorAll('.mobile-nav-link[data-page]').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-page') === pageId);
+    });
+  }
+
   function showPage(id, skipHistory) {
     if (skipHistory === undefined) skipHistory = false;
 
-    // ── Guard: skip if already on this page ──
     if (_currentPage === id && document.getElementById('page-' + id).classList.contains('active')) {
       return;
     }
@@ -1514,14 +1472,13 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
     void target.offsetWidth;
     target.classList.add('active');
 
-    // ── Reveal elements: show immediately, let observer handle newly-entered ones ──
+    // Reveal elements
     var reveals = target.querySelectorAll('.reveal');
     reveals.forEach(function(r) { r.classList.add('visible'); });
 
-    tabs.forEach(function(t, i) {
-      var isActive = PAGES[i] === id;
-      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
+    // Update nav highlights
+    updateNavHighlights(id);
+
     if (!skipHistory) {
       history.pushState(null, '', '#' + id);
     }
@@ -1551,6 +1508,88 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
   if (!window.location.hash && initialPage === 'accueil') {
     history.replaceState(null, '', '#accueil');
   }
+
+  /* ── Dropdown menus ── */
+  function closeAllDropdowns() {
+    document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+      dd.classList.remove('open');
+      var toggle = dd.querySelector('.nav-dropdown-toggle');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    });
+  }
+  window.closeAllDropdowns = closeAllDropdowns;
+
+  // Toggle dropdown on click
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var parent = btn.closest('.nav-dropdown');
+      var isOpen = parent.classList.contains('open');
+      closeAllDropdowns();
+      if (!isOpen) {
+        parent.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav-dropdown')) {
+      closeAllDropdowns();
+    }
+  });
+
+  /* ── Mobile menu ── */
+  function toggleMobileMenu() {
+    var menu = document.getElementById('mobileMenu');
+    var btn = document.getElementById('hamburgerBtn');
+    var isOpen = menu.classList.contains('open');
+    if (isOpen) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  }
+  window.toggleMobileMenu = toggleMobileMenu;
+
+  function openMobileMenu() {
+    var menu = document.getElementById('mobileMenu');
+    var btn = document.getElementById('hamburgerBtn');
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden', 'false');
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Fermer le menu');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileMenu() {
+    var menu = document.getElementById('mobileMenu');
+    var btn = document.getElementById('hamburgerBtn');
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Ouvrir le menu');
+    document.body.style.overflow = '';
+  }
+  window.closeMobileMenu = closeMobileMenu;
+
+  // Close mobile menu on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeMobileMenu();
+      closeAllDropdowns();
+    }
+  });
+
+  // Close mobile menu on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      closeMobileMenu();
+    }
+  });
 
   /* ── Theme ── */
   function setTheme(t) {
@@ -1607,7 +1646,6 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
     var modal = document.getElementById('modalNormes');
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-    // Focus the close button inside the modal
     var closeBtn = modal.querySelector('.modal-close');
     if (closeBtn) closeBtn.focus();
   };
@@ -1616,32 +1654,36 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
     document.body.style.overflow = '';
   };
 
-  /* ── Escape key closes modals + focus trap ── */
+  /* ── Escape key closes modals ── */
   document.addEventListener('keydown', function(e) {
-    var modal = document.getElementById('modalNormes');
     if (e.key === 'Escape') {
       closeNormes();
+      closeMobileMenu();
+      closeAllDropdowns();
       return;
     }
-    // Focus trap: if modal is open, trap Tab inside
+    // Focus trap for normes modal
+    var modal = document.getElementById('modalNormes');
     if (e.key === 'Tab' && modal.classList.contains('open')) {
       var focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
       if (focusable.length === 0) return;
       var first = focusable[0];
       var last = focusable[focusable.length - 1];
       if (e.shiftKey) {
-        if (document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        }
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
       } else {
-        if (document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     }
   });
+
+  /* ── Navbar scroll effect ── */
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function() {
+    if (navbar) {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    }
+  }, { passive: true });
 
   /* ── Back to top ── */
   var btt = document.getElementById('btt');
@@ -1708,24 +1750,6 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
   } else {
     document.querySelectorAll('.reveal').forEach(function(el) {
       el.classList.add('visible');
-    });
-  }
-
-  /* ── Tab bar: keyboard navigation ── */
-  var tabBar = document.getElementById('tabBar');
-  if (tabBar) {
-    tabBar.addEventListener('keydown', function(e) {
-      var tabButtons = Array.prototype.slice.call(this.querySelectorAll('.tab'));
-      var idx = tabButtons.indexOf(document.activeElement);
-      if (idx === -1) return;
-      var next;
-      if (e.key === 'ArrowRight') next = (idx + 1) % tabButtons.length;
-      else if (e.key === 'ArrowLeft') next = (idx - 1 + tabButtons.length) % tabButtons.length;
-      if (next !== undefined) {
-        e.preventDefault();
-        tabButtons[next].focus();
-        tabButtons[next].click();
-      }
     });
   }
 

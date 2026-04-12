@@ -1,37 +1,58 @@
 # E-Bench 2026
 
-Banc public intelligent 100% autonome en énergie solaire. Projet STI2D — **Les Ingénieux**.
+Banc public intelligent 100 % autonome en énergie solaire. Projet STI2D — **Les Ingénieux**.
 
-##  GitHub Pages
+3e aux Olympiades des Sciences de l'Ingénieur — Région Hauts-de-France 2026.
 
-This site is hosted on GitHub Pages. After pushing, access it at:
+## 🚀 Démarrage rapide
+
+Ouvrez simplement `index.html` dans un navigateur moderne (Chrome, Firefox, Edge, Safari).
+
+Aucune dépendance à installer — le site est 100 % statique.
+
+## 🌐 GitHub Pages
+
+Ce site est hébergé sur GitHub Pages :
 `https://[your-username].github.io/[repository-name]/`
 
 ### Configuration
 
-1. Go to your repo **Settings** → **Pages**
-2. Set source to the branch where `01-ebench-main.html` is located
-3. If the file isn't named `index.html`, set the custom domain or rename it
-
-> **Tip:** Rename `01-ebench-main.html` to `index.html` for GitHub Pages to serve it as the default page.
+1. Allez dans **Settings** → **Pages** de votre repository
+2. Définissez la source sur la branche `main` (dossier `/root`)
+3. Le fichier `index.html` sera servi automatiquement
 
 ## 📁 Structure
 
 ```
-├── 01-ebench-main.html    # Main site (home)
-├── 02-ebench-2026.html    # 2026 edition
-├── 03-ebench-2025.html    # 2025 edition
-├── 04-ebench-matlab-analysis.html
-├── 05-ebench-normes.html
+├── index.html                     ← Page principale (SPA avec navigation par onglets)
+├── 02-ebench-2026.html            ← Page dédiée édition 2026
+├── 03-ebench-2025.html            ← Archive édition 2025
+├── 04-ebench-matlab-analysis.html ← Analyse énergétique MATLAB interactive
+├── 05-ebench-normes.html          ← Page normes et conformité
 ├── README.md
+├── robots.txt
+├── sitemap.xml
+├── .gitignore
 ├── assets/
 │   ├── css/
-│   ├── img/
+│   │   └── theme.css              ← Variables CSS et styles partagés
 │   ├── js/
-│   └── svg/
+│   │   ├── theme-toggle.js        ← Gestion du thème clair/sombre
+│   │   └── reveal.js              ← Animations au scroll
+│   ├── img/                       ← Images (webp, jpg)
+│   └── svg/                       ← Schémas SVG
 └── docs/
 ```
 
-## 📄 License
+## 🛠 Technologies
+
+- **HTML5** — Structure sémantique
+- **CSS3** — Variables CSS, Grid, Flexbox, animations
+- **JavaScript vanilla** — IIFE, IntersectionObserver
+- **Plotly.js** — Graphiques interactifs (page MATLAB)
+- **Font Awesome 6** — Icônes
+- **Google Fonts** — Bebas Neue, Space Grotesk, JetBrains Mono
+
+## 📄 Licence
 
 Projet éducatif — Lycée [Nom], Première STI2D.
