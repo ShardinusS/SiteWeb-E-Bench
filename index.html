@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="E-Bench 2026 : banc public intelligent 100% autonome en énergie solaire. Projet STI2D — 3e aux Olympiades des Sciences de l'Ingénieur, Hauts-de-France.">
+  <meta name="description" content="E-Bench — banc public intelligent 100% autonome en énergie solaire. Projet STI2D — 3e aux Olympiades des Sciences de l'Ingénieur 2024-2025, Lycée polyvalent de l'Authie.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://ebench.github.io/index.html">
-  <meta property="og:title" content="E-Bench 2026 — Le Mobilier Urbain Réinventé">
-  <meta property="og:description" content="Banc public intelligent 100% autonome en énergie solaire. 3e aux Olympiades des Sciences de l'Ingénieur — Hauts-de-France.">
+  <meta property="og:title" content="E-Bench — Le Mobilier Urbain Réinventé">
+  <meta property="og:description" content="Banc public intelligent 100% autonome en énergie solaire. 3e aux Olympiades des Sciences de l'Ingénieur 2024-2025 — Lycée polyvalent de l'Authie.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ebench.github.io/index.html">
   <meta property="og:image" content="https://ebench.github.io/assets/img/components.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <title>E-Bench 2026 — Le Mobilier Urbain Réinventé</title>
+  <title>E-Bench — Le Mobilier Urbain Réinventé</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='13' width='28' height='3.5' rx='1.75' fill='%2300D4A0'/%3E%3Crect x='2' y='17.5' width='28' height='3.5' rx='1.75' fill='%2300D4A0' opacity='.65'/%3E%3Crect x='5' y='4' width='22' height='7' rx='1.5' fill='%233B82F6' opacity='.4'/%3E%3Crect x='6' y='21' width='2.5' height='8' rx='1.25' fill='%23F0F4FF' opacity='.3'/%3E%3Crect x='15' y='21' width='2.5' height='8' rx='1.25' fill='%23F0F4FF' opacity='.3'/%3E%3Crect x='23.5' y='21' width='2.5' height='8' rx='1.25' fill='%23F0F4FF' opacity='.3'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -330,6 +330,16 @@
     .nm-item.nmi-high i{color:var(--amber)}
     .nm-item.nmi-medium i{color:var(--blue)}
 
+    /* Mentions légales modal */
+    .legal-content{max-width:700px;margin:0 auto}
+    .legal-section{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+    .legal-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .legal-section h4{font-size:1.1rem;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+    .legal-section p{font-size:.9rem;color:var(--text-sub);line-height:1.7;margin-bottom:10px}
+    .legal-section p:last-child{margin-bottom:0}
+    .legal-section a{color:var(--primary);text-decoration:underline;text-underline-offset:3px}
+    .legal-section a:hover{color:var(--primary);opacity:.8}
+
     /* ============================================================
        RESPONSIVE
        ============================================================ */
@@ -463,7 +473,7 @@
      ════════════════════════════════════════ -->
 <nav class="navbar" id="navbar" role="navigation" aria-label="Barre de navigation principale">
   <div class="navbar-inner">
-    <button type="button" class="logo" onclick="showPage('accueil')" aria-label="Accueil E-Bench 2026">
+    <button type="button" class="logo" onclick="showPage('accueil')" aria-label="Accueil E-Bench">
       <svg class="logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect x="5" y="3" width="22" height="7" rx="1.5" fill="currentColor" opacity=".2" stroke="currentColor" stroke-width=".5"/>
         <line x1="11" y1="3" x2="11" y2="10" stroke="currentColor" stroke-width=".3" opacity=".15"/>
@@ -476,7 +486,7 @@
         <rect x="15" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/>
         <rect x="23.5" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/>
       </svg>
-      E-Bench <span>2026</span>
+      E-Bench
     </button>
 
     <!-- Desktop nav links (max 5 visible + dropdowns) -->
@@ -558,7 +568,7 @@
     <div class="orb orb-2" aria-hidden="true"></div>
     <div class="hero">
       <div class="hero-left reveal">
-        <div class="hero-eyebrow">Projet Innovation 2026 — Hauts-de-France</div>
+        <div class="hero-eyebrow">Projet Innovation — Lycée polyvalent de l'Authie</div>
         <h1>Le Mobilier<br>Urbain<br><em>Réinventé</em></h1>
         <p class="hero-desc">Un banc public intelligent, 100&nbsp;% autonome en énergie solaire. Recharge USB-C et USB-A, capteurs de présence, interface tactile.</p>
         <div class="hero-btns">
@@ -701,7 +711,7 @@
         <div class="feat"><div class="feat-icon"><i class="fa-solid fa-school" aria-hidden="true"></i></div><div class="feat-text"><h4>Concours national STI2D</h4><p>Récompense les meilleurs projets d'ingénierie réalisés par des élèves de Première STI2D à travers toute la France.</p></div></div>
         <div class="feat"><div class="feat-icon"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></div><div class="feat-text"><h4>Problématique réelle, réponse concrète</h4><p>Création d'un banc urbain 100&nbsp;% autonome en énergie, avec un budget adapté aux contraintes d'un lycée.</p></div></div>
         <div class="feat"><div class="feat-icon"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i></div><div class="feat-text"><h4>Projet de 9 semaines</h4><p>Du 3 mars à début mai 2025 — 250h collectif (50h/personne). Conception CAO, développement Python, réalisation bois et présentation orale.</p></div></div>
-        <div class="feat"><div class="feat-icon"><i class="fa-solid fa-coins" aria-hidden="true"></i></div><div class="feat-text"><h4>Budget maîtrisé &lt; 500€</h4><p>Raspberry Pi fourni par le lycée. Tous les autres composants ont été sélectionnés pour leur rapport qualité/prix optimal.</p></div></div>
+        <div class="feat"><div class="feat-icon"><i class="fa-solid fa-coins" aria-hidden="true"></i></div><div class="feat-text"><h4>Budget maîtrisé &lt; 900€</h4><p>Panneau solaire 500Wc, batterie GEL 100Ah, régulateur MPPT et composants électroniques. Raspberry Pi fourni par le lycée.</p></div></div>
       </div>
     </div>
   </div></div>
@@ -715,7 +725,7 @@
     <div class="design-grid">
       <div class="reveal">
         <div class="design-image">
-          <img src="assets/img/components.jpg" alt="Composants matériels du banc E-Bench 2026" loading="lazy" onerror="this.outerHTML='<div class=design-img-placeholder><i class=\'fa-solid fa-cube\' aria-hidden=\'true\'></i></div>'">
+          <img src="assets/img/components.jpg" alt="Composants matériels du banc E-Bench" loading="lazy" onerror="this.outerHTML='<div class=design-img-placeholder><i class=\'fa-solid fa-cube\' aria-hidden=\'true\'></i></div>'">
           <div class="design-badges">
             <div class="design-badge"><i class="fa-solid fa-tree" aria-hidden="true"></i> Pin classe 3 — scierie locale</div>
             <div class="design-badge"><i class="fa-solid fa-gear" aria-hidden="true"></i> SolidWorks</div>
@@ -856,7 +866,7 @@
     <!-- Câblage -->
     <div class="cabling-section reveal">
       <h2 class="section-title" style="margin-bottom:8px">Schéma de Câblage <span style="color:var(--primary)">Complet</span></h2>
-      <p style="color:var(--text-sub);margin-bottom:20px">Architecture électrique complète du prototype E-Bench 2026.</p>
+      <p style="color:var(--text-sub);margin-bottom:20px">Architecture électrique complète du prototype E-Bench.</p>
       <div class="cabling-legend">
         <span><span class="legend-circle" style="background:#EF4444"></span> +12V DC</span>
         <span><span class="legend-circle" style="background:#3B82F6"></span> GND / 0V</span>
@@ -865,7 +875,7 @@
         <span><span class="legend-circle" style="background:#06B6D4"></span> HDMI / Données</span>
       </div>
       <div class="cabling-box" id="cablingBox">
-        <svg viewBox="0 0 680 860" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;padding:20px" role="img" aria-label="Schéma de câblage complet du système E-Bench 2026">
+        <svg viewBox="0 0 680 860" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;padding:20px" role="img" aria-label="Schéma de câblage complet du système E-Bench">
           <rect x="190" y="20" width="300" height="70" rx="10" fill="#2a2210" stroke="#F59E0B" stroke-width="1.5"/>
           <text x="340" y="50" text-anchor="middle" fill="#FBBF24" font-size="13" font-family="Bebas Neue,cursive">PANNEAU SOLAIRE 500Wc</text>
           <text x="340" y="72" text-anchor="middle" fill="#D4A00A" font-size="9" font-family="JetBrains Mono,monospace">Voc 48V · Isc 13A · Monocristallin</text>
@@ -1014,7 +1024,7 @@
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Conformité</div>
     <h2 class="section-title reveal">18 Normes <span style="color:var(--primary)">Applicables</span></h2>
-    <p class="normes-intro reveal">Le projet E-Bench 2026 respecte 18 réglementations françaises et européennes couvrant la sécurité électrique DC/PV, l'étanchéité IP65, l'accessibilité PMR, la compatibilité électromagnétique (CEM) et la résistance structurelle.</p>
+    <p class="normes-intro reveal">Le projet E-Bench respecte 18 réglementations françaises et européennes couvrant la sécurité électrique DC/PV, l'étanchéité IP65, l'accessibilité PMR, la compatibilité électromagnétique (CEM) et la résistance structurelle.</p>
     <div class="normes-badges reveal">
       <div class="norme-badge nb-red"><div class="nb-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div><div class="nb-count">12</div><div class="nb-label">Critiques — Sécurité électrique & structure</div></div>
       <div class="norme-badge nb-amber"><div class="nb-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div><div class="nb-count">4</div><div class="nb-label">Élevées — CEM, PMR, parafoudre, matériaux bois</div></div>
@@ -1411,12 +1421,15 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
     <div class="footer-brand">
       <div class="footer-logo">
         <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="5" y="4" width="22" height="7" rx="1.5" fill="currentColor" opacity=".2"/><rect x="14" y="10" width="4" height="3" rx=".5" fill="currentColor" opacity=".15"/><rect x="2" y="13" width="28" height="3.5" rx="1.75" fill="var(--primary)"/><rect x="2" y="17.5" width="28" height="3.5" rx="1.75" fill="var(--primary)" opacity=".65"/><rect x="6" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/><rect x="15" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/><rect x="23.5" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/></svg>
-        E-Bench <span>2026</span>
+        E-Bench
       </div>
-      <p class="footer-tagline">Banc public intelligent, 100% autonome en énergie solaire. Projet STI2D récompensé aux Olympiades des Sciences de l'Ingénieur — Hauts-de-France.</p>
+      <p class="footer-tagline">Banc public intelligent, 100% autonome en énergie solaire. Projet STI2D — 3e aux Olympiades des Sciences de l'Ingénieur 2024-2025, Lycée polyvalent de l'Authie.</p>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Les Ingénieux — STI2D Hauts-de-France</span>
+      <span class="footer-copy">© 2025 Les Ingénieux — Lycée polyvalent de l'Authie, Hauts-de-France</span>
+      <div class="footer-legal">
+        <a href="#mentions" onclick="openLegalModal(); return false;" class="legal-link">Mentions légales</a>
+      </div>
       <a href="https://www.instagram.com/e_bench_osi_doullens/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Suivez-nous sur Instagram" aria-label="Instagram — @e_bench_osi_doullens"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
     </div>
   </div>
@@ -1433,6 +1446,69 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
   <div class="lightbox-content" onclick="event.stopPropagation()">
     <img id="lightboxImg" src="" alt="">
     <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
+<!-- MODAL MENTIONS LÉGALES -->
+<div class="modal-overlay" id="modalLegal" role="dialog" aria-modal="true" aria-labelledby="modalLegalTitle" onclick="if(event.target===this)closeLegalModal()">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="modalLegalTitle"><i class="fa-solid fa-scale-balanced" style="color:var(--primary)" aria-hidden="true"></i> Mentions Légales</h3>
+      <button class="modal-close" onclick="closeLegalModal()" aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="legal-content">
+        <section class="legal-section">
+          <h4><i class="fa-solid fa-building-columns" style="color:var(--primary)" aria-hidden="true"></i> Éditeur du site</h4>
+          <p><strong>Lycée polyvalent de l'Authie</strong><br>
+          Rue du Lycée<br>
+          80600 Doullens, Hauts-de-France, France<br>
+          Téléphone : +33 3 22 77 11 22<br>
+          Email : contact@lycee-authie.fr</p>
+          <p><strong>Directeur de publication :</strong> Monsieur le Proviseur du Lycée de l'Authie</p>
+        </section>
+
+        <section class="legal-section">
+          <h4><i class="fa-solid fa-users" style="color:var(--primary)" aria-hidden="true"></i> Équipe projet E-Bench</h4>
+          <p>Projet réalisé par les élèves de STI2D du Lycée polyvalent de l'Authie dans le cadre des Olympiades des Sciences de l'Ingénieur 2024-2025.</p>
+          <p><strong>Enseignants encadrants :</strong> Équipe pédagogique STI2D</p>
+        </section>
+
+        <section class="legal-section">
+          <h4><i class="fa-solid fa-server" style="color:var(--primary)" aria-hidden="true"></i> Hébergement</h4>
+          <p>Ce site est hébergé par GitHub Pages (GitHub, Inc.)<br>
+          88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis</p>
+        </section>
+
+        <section class="legal-section">
+          <h4><i class="fa-solid fa-palette" style="color:var(--primary)" aria-hidden="true"></i> Propriété intellectuelle</h4>
+          <p>Tous les contenus de ce site (textes, images, schémas, modèles 3D, code source) sont la propriété exclusive du Lycée polyvalent de l'Authie et de l'équipe projet E-Bench, sauf mention contraire.</p>
+          <p>Les marques et logos mentionnés appartiennent à leurs propriétaires respectifs.</p>
+          <p><strong>Licence :</strong> Ce projet est partagé à des fins éducatives. Toute reproduction ou utilisation commerciale nécessite une autorisation préalable.</p>
+        </section>
+
+        <section class="legal-section">
+          <h4><i class="fa-solid fa-shield-halved" style="color:var(--primary)" aria-hidden="true"></i> Protection des données</h4>
+          <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de modification et de suppression des données vous concernant.</p>
+          <p>Ce site ne collecte aucune donnée personnelle. Les cookies utilisés sont strictement techniques et nécessaires au fonctionnement du site.</p>
+          <p>Pour toute demande relative aux données personnelles, contactez le Délégué à la Protection des Données (DPD) de l'Académie d'Amiens.</p>
+        </section>
+
+        <section class="legal-section">
+          <h4><i class="fa-solid fa-envelope" style="color:var(--primary)" aria-hidden="true"></i> Contact</h4>
+          <p>Pour toute question concernant ce site ou le projet E-Bench :</p>
+          <p>Email : ebench.projet@lycee-authie.fr<br>
+          Instagram : <a href="https://www.instagram.com/e_bench_osi_doullens/" target="_blank" rel="noopener noreferrer">@e_bench_osi_doullens</a></p>
+        </section>
+
+        <section class="legal-section">
+          <h4><i class="fa-solid fa-circle-info" style="color:var(--primary)" aria-hidden="true"></i> Informations complémentaires</h4>
+          <p><strong>Technologies utilisées :</strong> HTML5, CSS3, JavaScript, Plotly.js, Font Awesome</p>
+          <p><strong>Accessibilité :</strong> Ce site respecte les recommandations WCAG 2.1 niveau AA pour l'accessibilité web.</p>
+          <p><strong>Dernière mise à jour :</strong> Janvier 2025</p>
+        </section>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1701,6 +1777,19 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
     btn.querySelector('i').className = expanded ? 'fa-solid fa-compress' : 'fa-solid fa-expand';
   };
 
+  /* ── Modal Mentions Légales with focus trap ── */
+  window.openLegalModal = function() {
+    var modal = document.getElementById('modalLegal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var closeBtn = modal.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
+  };
+  window.closeLegalModal = function() {
+    document.getElementById('modalLegal').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
   /* ── Modal Normes with focus trap ── */
   window.openNormes = function() {
     var modal = document.getElementById('modalNormes');
@@ -1717,10 +1806,26 @@ delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos
   /* ── Escape key closes modals ── */
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
+      closeLegalModal();
       closeNormes();
       closeMobileMenu();
       closeAllDropdowns();
       return;
+    }
+    // Focus trap for legal modal
+    var legalModal = document.getElementById('modalLegal');
+    if (e.key === 'Tab' && legalModal.classList.contains('open')) {
+      var focusable = legalModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
     // Focus trap for normes modal
     var modal = document.getElementById('modalNormes');
