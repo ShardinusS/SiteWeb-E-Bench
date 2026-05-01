@@ -1308,104 +1308,49 @@
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Analyse MATLAB</div>
     <h2 class="section-title reveal">Analyse Énergétique <span style="color:var(--primary)">MATLAB</span></h2>
-    <p class="section-sub reveal">Modélisation mathématique complète : course solaire, consommation, bilan annuel, batterie, inclinaison, courbe I-V et simulation 7 jours — Somme (50°N)</p>
+    <p class="section-sub reveal">Modélisation mathématique complète : bilan annuel, batterie, courbe I-V/MPPT et simulation 7 jours — Somme (50°N)</p>
     <div class="mlab-layout">
       <nav class="mlab-sidenav reveal" aria-label="Sections MATLAB">
-        <button class="mlab-nav-item active" onclick="showMPage(0)"><span class="mlab-nav-num">01</span><i class="fa-solid fa-sun" aria-hidden="true"></i> Course Solaire</button>
-        <button class="mlab-nav-item" onclick="showMPage(1)"><span class="mlab-nav-num">02</span><i class="fa-solid fa-bolt" aria-hidden="true"></i> Consommation</button>
-        <button class="mlab-nav-item" onclick="showMPage(2)"><span class="mlab-nav-num">03</span><i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Bilan Annuel</button>
-        <button class="mlab-nav-item" onclick="showMPage(3)"><span class="mlab-nav-num">04</span><i class="fa-solid fa-battery-full" aria-hidden="true"></i> Batterie</button>
-        <button class="mlab-nav-item" onclick="showMPage(4)"><span class="mlab-nav-num">05</span><i class="fa-solid fa-sliders" aria-hidden="true"></i> Inclinaison</button>
-        <button class="mlab-nav-item" onclick="showMPage(5)"><span class="mlab-nav-num">06</span><i class="fa-solid fa-wave-square" aria-hidden="true"></i> Courbe I-V / MPPT</button>
-        <button class="mlab-nav-item" onclick="showMPage(6)"><span class="mlab-nav-num">07</span><i class="fa-solid fa-calendar-week" aria-hidden="true"></i> Simulation 7 Jours</button>
+        <button class="mlab-nav-item active" onclick="showMPage(0)"><span class="mlab-nav-num">01</span><i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Bilan Annuel</button>
+        <button class="mlab-nav-item" onclick="showMPage(1)"><span class="mlab-nav-num">02</span><i class="fa-solid fa-battery-full" aria-hidden="true"></i> Batterie</button>
+        <button class="mlab-nav-item" onclick="showMPage(2)"><span class="mlab-nav-num">03</span><i class="fa-solid fa-wave-square" aria-hidden="true"></i> Courbe I-V / MPPT</button>
+        <button class="mlab-nav-item" onclick="showMPage(3)"><span class="mlab-nav-num">04</span><i class="fa-solid fa-calendar-week" aria-hidden="true"></i> Simulation 7 Jours</button>
       </nav>
       <div class="mlab-content">
         
 
 <!-- PAGE 01 -->
 <div class="mpage active" id="mp-0">
-  <div class="page-header"><h2>01 — Course <span>Solaire</span></h2><p>Trajectoire du soleil, heures de lever/coucher, durée d'ensoleillement — latitude 50°N (Somme)</p></div>
-  <div class="summary-grid" id="sum-0"></div>
-  <div class="mcard"><h3><i class="fa-solid fa-chart-line"></i> Élévation solaire au cours de la journée</h3><div id="ch-elev" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-compass"></i> Diagramme solaire (Azimut vs Élévation)</h3><div id="ch-solar-diag" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-calendar-days"></i> Durée d'ensoleillement annuelle</h3><div id="ch-sunshine" class="chart-container"></div></div>
-  <button class="code-toggle" onclick="toggleCode('code-01')"><i class="fa-solid fa-code"></i> Code MATLAB source</button>
-  <pre class="code-block" id="code-01"><span class="cm">%% 01_Course_Solaire_E_Bench.m</span>
-<span class="cm">% Analyse de la course solaire à la latitude de la Somme (50°N)</span>
-<span class="kw">lat</span> = <span class="nb">50.0</span>;  <span class="cm">% Latitude Somme</span>
-<span class="kw">dt</span> = <span class="nb">0.05</span>;   <span class="cm">% Pas de temps (heures)</span>
-<span class="kw">hours</span> = <span class="nb">0</span>:dt:<span class="nb">24</span>;
-<span class="kw">days_of_year</span> = [<span class="nb">80, 172, 266, 355</span>];  <span class="cm">% Printemps, Été, Automne, Hiver</span>
-<span class="kw\">for</span> simulation_day = days_of_year  <span class="cm">% Boucle sur les 4 jours</span>
-  <span class="cm">% Déclinaison solaire (Spencer)</span>
-  B = <span class="nb">2</span>*pi*(simulation_day - <span class="nb">1</span>)/<span class="nb">365</span>;
-  delta = (<span class="nb">0.006918</span> - <span class="nb">0.399912</span>*cos(B) + <span class="nb">0.070257</span>*sin(B) - ...
-          <span class="nb">0.006758</span>*cos(<span class="nb">2</span>*B) + <span class="nb">0.000907</span>*sin(<span class="nb">2</span>*B) - ...
-          <span class="nb">0.002697</span>*cos(<span class="nb">3</span>*B) + <span class="nb">0.00148</span>*sin(<span class="nb">3</span>*B)) * <span class="nb">180</span>/pi;
-  <span class="cm">% ... suite du calcul (voir rapport PDF)</span>
-<span class="kw\">end</span></pre>
+  <div class="page-header"><h2>01 — Bilan Énergétique <span>Annuel</span></h2><p>Production vs consommation mois par mois — Panneau 500Wc, inclinaison 37°</p></div>
+  <div class="summary-grid" id="sum-2"></div>
+  <div class="mcard"><h3><i class="fa-solid fa-chart-column"></i> Production vs Consommation mensuelle</h3><div id="ch-bilan-monthly" class="chart-container"></div></div>
+  <div class="mcard"><h3><i class="fa-solid fa-scale-balanced"></i> Bilan net mensuel</h3><div id="ch-bilan-net" class="chart-container"></div></div>
 </div>
 
 <!-- PAGE 02 -->
 <div class="mpage" id="mp-1">
-  <div class="page-header"><h2>02 — Profil de <span>Consommation</span></h2><p>Décomposition par composant, modes jour/nuit/veille du banc E-Bench</p></div>
-  <div class="summary-grid" id="sum-1"></div>
-  <div class="mcard"><h3><i class="fa-solid fa-layer-group"></i> Profil journalier empilé</h3><div id="ch-conso-stack" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-chart-pie"></i> Répartition énergétique</h3><div id="ch-conso-pie" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-gauge-high"></i> Puissance par mode</h3><div id="ch-conso-modes" class="chart-container"></div></div>
+  <div class="page-header"><h2>02 — Dimensionnement <span>Batterie</span></h2><p>Autonomie, scénarios de décharge, cycles — Ultracell UCG100-12</p></div>
+  <div class="summary-grid" id="sum-3"></div>
+  <div class="mcard"><h3><i class="fa-solid fa-battery-three-quarters"></i> Autonomie vs Puissance</h3><div id="ch-bat-auto" class="chart-container"></div></div>
+  <div class="mcard"><h3><i class="fa-solid fa-chart-area"></i> Décharge 72h sans soleil</h3><div id="ch-bat-dchg" class="chart-container"></div></div>
 </div>
 
 <!-- PAGE 03 -->
 <div class="mpage" id="mp-2">
-  <div class="page-header"><h2>03 — Bilan Énergétique <span>Annuel</span></h2><p>Production vs consommation mois par mois — Panneau 500Wc, inclinaison 37°</p></div>
-  <div class="summary-grid" id="sum-2"></div>
-  <div class="mcard"><h3><i class="fa-solid fa-chart-column"></i> Production vs Consommation mensuelle</h3><div id="ch-bilan-monthly" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-scale-balanced"></i> Bilan net mensuel</h3><div id="ch-bilan-net" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-cloud-sun"></i> Facteurs météo Picardie</h3><div id="ch-meteo" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-table"></i> Tableau récapitulatif</h3><div id="bilan-table"></div></div>
-</div>
-
-<!-- PAGE 04 -->
-<div class="mpage" id="mp-3">
-  <div class="page-header"><h2>04 — Dimensionnement <span>Batterie</span></h2><p>Autonomie, scénarios de décharge, cycles — Ultracell UCG100-12</p></div>
-  <div class="summary-grid" id="sum-3"></div>
-  <div class="mcard"><h3><i class="fa-solid fa-battery-three-quarters"></i> Autonomie vs Puissance</h3><div id="ch-bat-auto" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-chart-area"></i> Décharge 72h sans soleil</h3><div id="ch-bat-dchg" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-rotate"></i> Durée de vie (Cycles vs DoD)</h3><div id="ch-bat-cycles" class="chart-container"></div></div>
-</div>
-
-<!-- PAGE 05 -->
-<div class="mpage" id="mp-4">
-  <div class="page-header"><h2>05 — Inclinaison <span>Optimale</span></h2><p>Production en fonction de l'angle pour différentes saisons</p></div>
-  <div class="summary-grid" id="sum-4"></div>
-  <div class="mcard"><h3><i class="fa-solid fa-mountain-sun"></i> Production vs Inclinaison (3 saisons)</h3><div id="ch-tilt-season" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-chart-line"></i> Production annuelle vs Inclinaison</h3><div id="ch-tilt-annual" class="chart-container"></div></div>
-</div>
-
-<!-- PAGE 06 -->
-<div class="mpage" id="mp-5">
-  <div class="page-header"><h2>06 — Courbe I-V / <span>MPPT vs PWM</span></h2><p>Caractéristique I-V du panneau TrinaSolar 500W — Comparaison régulateurs</p></div>
+  <div class="page-header"><h2>03 — Courbe I-V / <span>MPPT vs PWM</span></h2><p>Caractéristique I-V du panneau TrinaSolar 500W — Comparaison régulateurs</p></div>
   <div class="summary-grid" id="sum-5"></div>
   <div class="mcard"><h3><i class="fa-solid fa-wave-square"></i> Caractéristique I-V</h3><div id="ch-iv" class="chart-container"></div></div>
   <div class="mcard"><h3><i class="fa-solid fa-bolt"></i> Caractéristique P-V</h3><div id="ch-pv" class="chart-container"></div></div>
   <div class="mcard"><h3><i class="fa-solid fa-code-compare"></i> MPPT vs PWM — Journée d'été</h3><div id="ch-mppt-pwm" class="chart-container"></div></div>
 </div>
 
-<!-- PAGE 07 -->
-<div class="mpage" id="mp-6">
-  <div class="page-header"><h2>07 — Simulation <span>7 Jours</span></h2><p>Semaine de juin avec météo variable — Scénario réaliste Picardie</p></div>
+<!-- PAGE 04 -->
+<div class="mpage" id="mp-3">
+  <div class="page-header"><h2>04 — Simulation <span>7 Jours</span></h2><p>Semaine de juin avec météo variable — Scénario réaliste Picardie</p></div>
   <div class="summary-grid" id="sum-6"></div>
   <div class="mcard"><h3><i class="fa-solid fa-solar-panel"></i> Production PV vs Consommation</h3><div id="ch-sim-power" class="chart-container"></div></div>
   <div class="mcard"><h3><i class="fa-solid fa-battery-half"></i> État de charge (SOC)</h3><div id="ch-sim-soc" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-chart-column"></i> Bilan journalier</h3><div id="ch-sim-daily" class="chart-container"></div></div>
-  <div class="mcard"><h3><i class="fa-solid fa-table"></i> Tableau récapitulatif</h3><div id="sim-table"></div></div>
 </div>
-
-
-      </div>
-    </div>
-  </div></div>
-</section>
 
 <!-- FOOTER (après toutes les pages) -->
 <footer class="footer" role="contentinfo">
@@ -1824,7 +1769,7 @@
 function loadPlotly(){return new Promise(function(resolve){if(window.Plotly){resolve();return;}var s=document.createElement('script');s.src='https://cdn.plot.ly/plotly-2.27.0.min.js';s.onload=function(){resolve();};document.head.appendChild(s);});}
 
 /* ═══════════════ NAVIGATION ═══════════════ */
-const rendered = [false,false,false,false,false,false,false];
+const rendered = [false,false,false,false];
 function showMPage(idx){
   var mlabContent=document.querySelector('#page-matlab .mlab-content');
   if(mlabContent){mlabContent.style.opacity='0.55';mlabContent.style.transition='opacity .2s ease';}
@@ -2020,7 +1965,7 @@ document.getElementById('sum-6').innerHTML=sumBox('Prod. semaine',(tp/1000).toFi
 }
 
 /* ═══════════════ INIT ═══════════════ */
-const renderers=[render01,render02,render03,render04,render05,render06,render07];
+const renderers=[render03,render04,render06,render07];
 window._initMatlabPage=function(){showMPage(0);};
 (function(){var h=window.location.hash.replace('#','');if(h==='matlab'&&window._initMatlabPage)window._initMatlabPage();})();
 
