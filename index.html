@@ -1892,34 +1892,39 @@ document.getElementById('sum-0').innerHTML=sumBox('Max (été)',mx.toFixed(1),'h
 /* ═══════════════ SCRIPT 02: CONSOMMATION ═══════════════ */
 function render02(){
 const hrs=[];for(let h=0;h<=24;h+=1/60)hrs.push(h);
-const Pr_a=5,Pr_p=10,Pr_i=3,Pe=2.5,Pp=.5,Pu=10,Pd_a=1.5,Pd_v=.5;
+// Consommations réelles sans LEDs (valeurs mesurées)
+const Pr_a=5.0,Pr_p=5.5,Pr_i=5.0,Pe=5.0,Pp=0.2,Pu_c=51.1,Pu_a=13.6,Pd=0.3;
 const R=[],E=[],C=[],U=[],DC=[];
-for(const h of hrs){C.push(Pp);if(h<6){R.push(Pr_i);E.push(0);U.push(0);DC.push(Pd_v)}else if(h<8){R.push(Pr_a);E.push(Pe*.3);U.push(0);DC.push(Pd_a)}else if(h<12){R.push(Pr_a);E.push(Pe*.6);U.push(Pu*.4);DC.push(Pd_a)}else if(h<14){R.push(Pr_p);E.push(Pe);U.push(Pu);DC.push(Pd_a)}else if(h<18){R.push(Pr_a);E.push(Pe*.5);U.push(Pu*.3);DC.push(Pd_a)}else if(h<22){R.push(Pr_p);E.push(Pe*.7);U.push(Pu*.5);DC.push(Pd_a)}else{R.push(Pr_i);E.push(0);U.push(0);DC.push(Pd_v)}}
+for(const h of hrs){C.push(Pp);if(h<6){R.push(Pr_i);E.push(0);U.push(0);DC.push(Pd)}else if(h<8){R.push(Pr_a);E.push(Pe*.3);U.push(0);DC.push(Pd)}else if(h<12){R.push(Pr_a);E.push(Pe*.6);U.push(Pu_a*.2);DC.push(Pd)}else if(h<14){R.push(Pr_p);E.push(Pe);U.push(Pu_c);DC.push(Pd)}else if(h<18){R.push(Pr_a);E.push(Pe*.5);U.push(Pu_a*.3);DC.push(Pd)}else if(h<22){R.push(Pr_p);E.push(Pe*.7);U.push(Pu_c*.5);DC.push(Pd)}else{R.push(Pr_i);E.push(0);U.push(0);DC.push(Pd)}}
 const st=10,h_s=[],r_s=[],e_s=[],c_s=[],u_s=[],d_s=[];
 for(let i=0;i<hrs.length;i+=st){h_s.push(hrs[i]);r_s.push(R[i]);e_s.push(E[i]);c_s.push(C[i]);u_s.push(U[i]);d_s.push(DC[i])}
 const nm=['Raspberry Pi 3B','Écran LCD 7"','Capteur PIR','Ports USB','Pertes DC-DC'],cl=['#3399ee','#4dcc66','#e6b333','#b333cc','#808080'],ds=[r_s,e_s,c_s,u_s,d_s];
 Plotly.newPlot('ch-conso-stack',ds.map((d,i)=>({x:h_s,y:d,name:nm[i],stackgroup:'one',fillcolor:cl[i],line:{color:cl[i],width:0}})),plotLayout({title:'Profil de consommation journalier',xaxis:{title:'Heure',range:[0,24],dtick:2},yaxis:{title:'Puissance (W)'}}),pCfg);
 const En=[R,E,C,U,DC].map(p=>trapz(hrs,p)),Et=En.reduce((a,b)=>a+b,0);
 Plotly.newPlot('ch-conso-pie',[{values:En,labels:nm,type:'pie',marker:{colors:cl},textinfo:'label+percent',textfont:{size:10}}],plotLayout({title:`Répartition — Total: ${Et.toFixed(0)} Wh/jour`}),pCfg);
-const mN=['Veille','Réveil','Actif','Pic'],mP=[Pr_i+Pp+Pd_v,Pr_a+Pe*.3+Pp+Pd_a,Pr_a+Pe*.6+Pp+Pu*.4+Pd_a,Pr_p+Pe+Pp+Pu+Pd_a],mC=['#4d4db3','#66b3e6','#4dcc4d','#ff9900'];
-Plotly.newPlot('ch-conso-modes',[{x:mN,y:mP,type:'bar',marker:{color:mC},text:mP.map(v=>v.toFixed(1)+'W'),textposition:'outside'}],plotLayout({title:'Puissance par mode',yaxis:{title:'Puissance (W)'}}),pCfg);
+// Modes sans LEDs : Veille (nuit/absence), Actif (écran ON), Pic (USB-C pleine charge)
+const mN=['Veille','Actif','Pic USB-C'],mP=[Pr_i+Pp+Pd,Pr_a+Pe+Pp+Pd,Pr_p+Pe+Pp+Pu_c+Pd],mC=['#4d4db3','#4dcc4d','#ff9900'];
+Plotly.newPlot('ch-conso-modes',[{x:mN,y:mP,type:'bar',marker:{color:mC},text:mP.map(v=>v.toFixed(1)+'W'),textposition:'outside'}],plotLayout({title:'Puissance par mode (sans LEDs)',yaxis:{title:'Puissance (W)'}}),pCfg);
 const Pt=hrs.map((_,i)=>R[i]+E[i]+C[i]+U[i]+DC[i]);
-document.getElementById('sum-1').innerHTML=sumBox('Total/jour',Et.toFixed(0),'Wh','')+sumBox('Puiss. moyenne',(Et/24).toFixed(1),'W','')+sumBox('Pic max',Math.max(...Pt).toFixed(1),'W','red')+sumBox('Veille min',Math.min(...Pt).toFixed(1),'W','green');
+document.getElementById('sum-1').innerHTML=sumBox('Total/jour',Et.toFixed(0),'Wh','')+sumBox('Puiss. moyenne',(Et/24).toFixed(1),'W','green')+sumBox('Pic max',Math.max(...Pt).toFixed(1),'W','red')+sumBox('Veille min',Math.min(...Pt).toFixed(1),'W','blue');
 }
 
 /* ═══════════════ SCRIPT 03: BILAN ANNUEL ═══════════════ */
 function render03(){
-const lat=50,alt=.05,tilt=37,Pn=500,eta=.95,Pl=15;
+// Modèle simplifié pour projet STI2D - Hypothèses : rendement constant, pas de température
+const lat=50,alt=.05,tilt=37,Pn=500,eta=.80; // eta=0.80 inclut pertes MPPT+câbles+température
+// Consommation réelle sans LEDs : ~5W moyen = 0.116 kWh/jour
+const P_moy=5.2; // W (veille + actif pondéré)
 const jm=[15,46,74,105,135,166,196,227,258,288,319,349],jp=[31,28,31,30,31,30,31,31,30,31,30,31],fm=[.30,.35,.42,.48,.52,.55,.55,.52,.48,.38,.30,.25];
 const dt=.2,hrs=[];for(let h=0;h<=24;h+=dt)hrs.push(h);
 const Ec=[],Er=[],Em=[],Eb=[];
-for(let m=0;m<12;m++){const{powers}=pvPow(hrs,jm[m],lat,alt,tilt,Pn,eta);const ec=trapz(hrs,powers),er=ec*fm[m];Ec.push(ec);Er.push(er);const cm=Pl*24;Em.push(cm*jp[m]);Eb.push(er*jp[m]-cm*jp[m])}
+for(let m=0;m<12;m++){const{powers}=pvPow(hrs,jm[m],lat,alt,tilt,Pn,eta);const ec=trapz(hrs,powers),er=ec*fm[m];Ec.push(ec);Er.push(er);const cm=P_moy*24/1000;Em.push(cm*jp[m]);Eb.push(er*jp[m]-cm*jp[m])}
 const Ept=Er.map((e,i)=>e*jp[i]);
 Plotly.newPlot('ch-bilan-monthly',[{x:MO,y:Ept.map(e=>e/1000),name:'Production',type:'bar',marker:{color:'#00D4A0'}},{x:MO,y:Em.map(e=>e/1000),name:'Consommation',type:'bar',marker:{color:'#EF4444'}}],plotLayout({barmode:'group',title:'Production vs Consommation mensuelle',yaxis:{title:'Énergie (kWh)'}}),pCfg);
 Plotly.newPlot('ch-bilan-net',[{x:MO,y:Eb.map(e=>e/1000),type:'bar',marker:{color:Eb.map(e=>e>=0?'#00D4A0':'#EF4444')},text:Eb.map(e=>(e>=0?'+':'')+(e/1000).toFixed(1)),textposition:'outside'}],plotLayout({title:'Bilan net mensuel',yaxis:{title:'kWh'},shapes:[{type:'line',y0:0,y1:0,x0:-.5,x1:11.5,line:{color:'#8899B4',width:1}}]}),pCfg);
 Plotly.newPlot('ch-meteo',[{x:MO,y:fm.map(f=>f*100),type:'bar',marker:{color:'#3B82F6'},text:fm.map(f=>(f*100).toFixed(0)+'%'),textposition:'outside'}],plotLayout({title:'Facteur météo — Picardie/Somme',yaxis:{title:'%',range:[0,70]}}),pCfg);
 let html='<table class="data-table"><thead><tr><th>Mois</th><th>Prod clair</th><th>Prod réelle</th><th>Conso</th><th>Bilan</th></tr></thead><tbody>';
-for(let m=0;m<12;m++){const b=Eb[m]/1000;html+=`<tr><td>${MO[m]}</td><td>${(Ec[m]/1000).toFixed(2)} kWh/j</td><td>${(Er[m]/1000).toFixed(2)} kWh/j</td><td>${(Pl*24/1000).toFixed(2)} kWh/j</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(1)} kWh</td></tr>`}
+for(let m=0;m<12;m++){const b=Eb[m]/1000;html+=`<tr><td>${MO[m]}</td><td>${(Ec[m]/1000).toFixed(2)} kWh/j</td><td>${(Er[m]/1000).toFixed(2)} kWh/j</td><td>${(P_moy*24/1000).toFixed(2)} kWh/j</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(1)} kWh</td></tr>`}
 html+='</tbody></table>';document.getElementById('bilan-table').innerHTML=html;
 const tp=Ept.reduce((a,b)=>a+b,0)/1000,tc=Em.reduce((a,b)=>a+b,0)/1000;
 document.getElementById('sum-2').innerHTML=sumBox('Prod. annuelle',tp.toFixed(0),'kWh','green')+sumBox('Conso. annuelle',tc.toFixed(0),'kWh','orange')+sumBox('Bilan net',(tp-tc>=0?'+':'')+(tp-tc).toFixed(0),'kWh',tp>=tc?'green':'red')+sumBox('Mois déficit.',Eb.filter(e=>e<0).length,'','red');
@@ -1927,23 +1932,25 @@ document.getElementById('sum-2').innerHTML=sumBox('Prod. annuelle',tp.toFixed(0)
 
 /* ═══════════════ SCRIPT 04: BATTERIE ═══════════════ */
 function render04(){
-const C=100,V=12,Eb=C*V,D50=.5,D80=.8,eta=.85;
-const mP=[4,12,30,42],mN=['Veille','Jour','Soir','Pic'],mC=['#00D4A0','#3B82F6','#F59E0B','#EF4444'];
-const Pr=[];for(let p=1;p<=60;p++)Pr.push(p);
-const a50=Pr.map(p=>D50*Eb*eta/p),a80=Pr.map(p=>D80*Eb*eta/p);
+const C=100,V=12,Eb=C*V,D50=.5,D80=.8,eta_bat=.85;
+// Puissances réelles sans LEDs : Veille=5.2W, Actif=10.2W, Pic=61W
+const mP=[5.2,10.2,30,61],mN=['Veille','Actif','Pic modéré','Pic USB-C'],mC=['#00D4A0','#3B82F6','#F59E0B','#EF4444'];
+const Pr=[];for(let p=1;p<=70;p++)Pr.push(p);
+const a50=Pr.map(p=>D50*Eb*eta_bat/p),a80=Pr.map(p=>D80*Eb*eta_bat/p);
 const tr=[{x:Pr,y:a50,name:'DoD 50%',line:{color:'#3B82F6',width:2.5}},{x:Pr,y:a80,name:'DoD 80%',line:{color:'#EF4444',dash:'dash',width:2}}];
-mP.forEach((p,i)=>{const a=D50*Eb*eta/p;tr.push({x:[p],y:[a],mode:'markers+text',name:`${mN[i]} (${p}W)`,marker:{size:12,color:mC[i]},text:[a.toFixed(0)+'h'],textposition:'top center'})});
-Plotly.newPlot('ch-bat-auto',tr,plotLayout({title:'Autonomie batterie 100Ah/12V',xaxis:{title:'Puissance (W)',range:[0,60]},yaxis:{title:'Autonomie (h)',range:[0,160]}}),pCfg);
-const h72=[];for(let h=0;h<=72;h+=.1)h72.push(h);
-const ld=h72.map(h=>{const hm=h%24;if(hm<6)return 4;if(hm<8)return 6;if(hm<12)return 12;if(hm<14)return 18;if(hm<18)return 12;if(hm<22)return 30;return 4});
-const SOC=[100];for(let i=1;i<h72.length;i++){const e=ld[i-1]*.1/eta;SOC.push(Math.max(0,SOC[i-1]-e/Eb*100))}
+mP.forEach((p,i)=>{const a=D50*Eb*eta_bat/p;tr.push({x:[p],y:[a],mode:'markers+text',name:`${mN[i]} (${p}W)`,marker:{size:12,color:mC[i]},text:[a.toFixed(0)+'h'],textposition:'top center'})});
+Plotly.newPlot('ch-bat-auto',tr,plotLayout({title:'Autonomie batterie 100Ah/12V (600Wh utiles)',xaxis:{title:'Puissance (W)',range:[0,70]},yaxis:{title:'Autonomie (h)',range:[0,140]}}),pCfg);
+const h120=[];for(let h=0;h<=120;h+=.1)h120.push(h);
+// Profil réaliste banc public : nuit 5W, jour mixte 5-10W
+const ld=h120.map(h=>{const hm=h%24;if(hm<6)return 5.2;if(hm<8)return 8;if(hm<12)return 5.2;if(hm<14)return 10.2;if(hm<18)return 5.2;if(hm<22)return 10.2;return 5.2});
+const SOC=[100];for(let i=1;i<h120.length;i++){const e=ld[i-1]*.1/eta_bat;SOC.push(Math.max(0,SOC[i-1]-e/Eb*100))}
 const i50=SOC.findIndex(s=>s<=50),i20=SOC.findIndex(s=>s<=20),ann=[];
-if(i50>=0)ann.push({x:h72[i50],y:50,text:h72[i50].toFixed(1)+'h',showarrow:true,arrowhead:2,font:{color:'#F59E0B'}});
-if(i20>=0)ann.push({x:h72[i20],y:20,text:h72[i20].toFixed(1)+'h',showarrow:true,arrowhead:2,ay:-30,font:{color:'#EF4444'}});
-Plotly.newPlot('ch-bat-dchg',[{x:h72,y:SOC,line:{color:'#3B82F6',width:2}}],plotLayout({title:'Décharge 72h sans soleil',xaxis:{title:'Heures',range:[0,72],dtick:6},yaxis:{title:'SOC (%)',range:[0,105]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:72,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:72,line:{color:'#EF4444'}}],annotations:ann}),pCfg);
+if(i50>=0)ann.push({x:h120[i50],y:50,text:h120[i50].toFixed(0)+'h (~5j)',showarrow:true,arrowhead:2,font:{color:'#F59E0B'}});
+if(i20>=0)ann.push({x:h120[i20],y:20,text:h120[i20].toFixed(0)+'h',showarrow:true,arrowhead:2,ay:-30,font:{color:'#EF4444'}});
+Plotly.newPlot('ch-bat-dchg',[{x:h120,y:SOC,line:{color:'#3B82F6',width:2}}],plotLayout({title:'Décharge 5 jours sans soleil (usage réel)',xaxis:{title:'Heures',range:[0,120],dtick:12},yaxis:{title:'SOC (%)',range:[0,105]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:120,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:120,line:{color:'#EF4444'}}],annotations:ann}),pCfg);
 const Dv=[10,20,30,40,50,60,70,80,90,100],cy=[6000,3500,2500,1800,1200,800,550,400,300,200];
 Plotly.newPlot('ch-bat-cycles',[{x:Dv,y:cy,mode:'lines+markers',line:{color:'#3B82F6',width:2.5},marker:{size:8}}],plotLayout({title:'Cycles vs DoD (batterie GEL)',xaxis:{title:'DoD (%)',range:[0,105]},yaxis:{title:'Cycles',type:'log'},annotations:[{x:50,y:Math.log10(1200),text:'DoD 50% → ~1200 cycles ≈ 3.3 ans',showarrow:true,arrowhead:2,font:{color:'#EF4444'}}]}),pCfg);
-document.getElementById('sum-3').innerHTML=sumBox('Capacité','100 Ah / 12V','= 1200 Wh','')+sumBox('Utile (DoD50%)','600','Wh','green')+sumBox('Autonomie @5W',(D50*Eb*eta/5).toFixed(0),'h','orange')+sumBox('Durée de vie','~3.3','ans (DoD50%)','blue');
+document.getElementById('sum-3').innerHTML=sumBox('Capacité','100 Ah / 12V','= 1200 Wh','')+sumBox('Utile (DoD50%)','600','Wh','green')+sumBox('Autonomie @5W',(D50*Eb*eta_bat/5).toFixed(0),'h (~5j)','orange')+sumBox('Durée de vie','~3.3','ans (DoD50%)','blue');
 }
 
 /* ═══════════════ SCRIPT 05: INCLINAISON ═══════════════ */
@@ -1956,7 +1963,7 @@ for(const t of tilts)dT.forEach((d,s)=>{const{powers}=pvPow(hrs,d,lat,alt,t,Pn,e
 Plotly.newPlot('ch-tilt-season',dT.map((_,s)=>({x:tilts,y:Es[s],name:dN[s],line:{color:clr[s],width:2.5}})),plotLayout({title:'Production journalière vs Inclinaison',xaxis:{title:'Inclinaison (°)',range:[0,90]},yaxis:{title:'kWh/jour'},shapes:[{type:'line',x0:37,x1:37,y0:0,y1:5,line:{color:'#F59E0B',dash:'dash',width:2}}],annotations:[{x:37,y:.1,text:'E-Bench 37°',showarrow:false,font:{size:10,color:'#F59E0B'},yanchor:'top'}]}),pCfg);
 const jm=[15,46,74,105,135,166,196,227,258,288,319,349],jp=[31,28,31,30,31,30,31,31,30,31,30,31],fm=[.30,.35,.42,.48,.52,.55,.55,.52,.48,.38,.30,.25];
 const Ea=[];for(const t of tilts){let tot=0;for(let m=0;m<12;m++){const{powers}=pvPow(hrs,jm[m],lat,alt,t,Pn,eta);tot+=trapz(hrs,powers)*fm[m]*jp[m]}Ea.push(tot/1000)}
-const mx=Math.max(...Ea),io=Ea.indexOf(mx),i37=tilts.indexOf(36),E37=Ea[i37]||Ea[Math.round(37/2)];
+const mx=Math.max(...Ea),io=Ea.indexOf(mx),i37=tilts.indexOf(37),E37=Ea[i37]||Ea[Math.round(37/2)];
 Plotly.newPlot('ch-tilt-annual',[{x:tilts,y:Ea,line:{color:'#3B82F6',width:3}},{x:[tilts[io]],y:[mx],mode:'markers+text',marker:{size:14,color:'#EF4444',symbol:'star'},text:[`Opt: ${tilts[io]}° → ${mx.toFixed(0)} kWh`],textposition:'bottom right',name:'Optimum'},{x:[37],y:[E37],mode:'markers+text',marker:{size:12,color:'#00D4A0',symbol:'square'},text:[`E-Bench: ${E37.toFixed(0)} kWh`],textposition:'top left',name:'Choix'}],plotLayout({title:'Production annuelle vs Inclinaison',xaxis:{title:'Inclinaison (°)',range:[0,90]},yaxis:{title:'kWh/an'}}),pCfg);
 const perte=((1-E37/mx)*100);
 document.getElementById('sum-4').innerHTML=sumBox('Optimum',tilts[io],'°','green')+sumBox('Prod. optimale',mx.toFixed(0),'kWh/an','green')+sumBox('Choix E-Bench','37','°','')+sumBox('Écart',perte.toFixed(1),'%',perte>5?'orange':'green');
@@ -1982,17 +1989,19 @@ document.getElementById('sum-5').innerHTML=sumBox('Pmpp',Pmpp,'W','green')+sumBo
 
 /* ═══════════════ SCRIPT 07: SIMULATION 7 JOURS ═══════════════ */
 function render07(){
-const lat=50,alt=.05,tilt=37,Pn=500,eta=.95;
+// Modèle simplifié avec facteur météo - Hypothèse : variations basées sur données typiques Picardie
+const lat=50,alt=.05,tilt=37,Pn=500,eta=.80; // eta=0.80 inclut pertes réelles
 const Cb=100,Vb=12,Ebat=Cb*Vb,ec=.85,ed=.85,Smin=20,Smax=100,Pcm=Cb/5*Vb;
-const mf=[.85,.90,.60,.25,.15,.50,.95],mN=['Lun (Beau)','Mar (Beau)','Mer (Voilé)','Jeu (Couvert)','Ven (Pluie)','Sam (Variable)','Dim (Beau)'];
+// Facteurs météo réalistes pour une semaine type en juin (sans bruit artificiel)
+const mf=[.85,.90,.55,.30,.20,.45,.88],mN=['Lun (Beau)','Mar (Beau)','Mer (Nuageux)','Jeu (Couvert)','Ven (Pluie)','Sam (Variable)','Dim (Beau)'];
 const dS=170,dtH=.2,hD=[];for(let h=0;h<=24;h+=dtH)hD.push(h);const Nd=hD.length;
 const tA=[],pvA=[],ldA=[],scA=[];let SC=80;
 const Epd=[],Ecd=[],Sf=[];
 for(let d=0;d<7;d++){
 const sD=dS+d,mff=mf[d];
 const{powers}=pvPow(hD,sD,lat,alt,tilt,Pn,eta,mff);
-if(mff<.7)for(let i=0;i<powers.length;i++){powers[i]=Math.max(0,powers[i]*(1+.15*Math.sin(d*42+i*.3)*Math.cos(d*84+i*.17)))}
-const ld=hD.map(h=>{if(h<6)return 4;if(h<8)return 8;if(h<12)return 12;if(h<14)return 18;if(h<18)return 12;if(h<22)return 25;return 4});
+// Profil de consommation réaliste sans LEDs : 5W nuit, 8-10W jour avec présence
+const ld=hD.map(h=>{if(h<6)return 5.2;if(h<8)return 8;if(h<12)return 5.2;if(h<14)return 10.2;if(h<18)return 5.2;if(h<22)return 10.2;return 5.2});
 const sd=[SC];for(let i=1;i<Nd;i++){const ep=powers[i-1]*dtH,el=ld[i-1]*dtH;let ns;if(ep>=el){let tb=(ep-el)*ec;tb=Math.min(tb,Pcm*dtH);ns=Math.min(Smax,sd[i-1]+tb/Ebat*100)}else{ns=Math.max(Smin,sd[i-1]-(el-ep)/ed/Ebat*100)}sd.push(ns)}
 SC=sd[sd.length-1];
 const tO=d*24;for(let i=0;i<Nd;i++){tA.push(tO+hD[i]);pvA.push(powers[i]);ldA.push(ld[i]);scA.push(sd[i])}
