@@ -288,7 +288,7 @@ const ad=[];for(let d=1;d<=365;d++)ad.push(d);
 const dur=ad.map(d=>{const dl=solarDecl(d);let c=-tand(dl)*tand(lat);c=Math.max(-1,Math.min(1,c));return 2*acosd(c)/15});
 const mx=Math.max(...dur),mn=Math.min(...dur);
 Plotly.newPlot('ch-sunshine',[{x:ad,y:dur,fill:'tozeroy',fillcolor:'rgba(0,212,160,.15)',line:{color:'#00D4A0',width:2}}],plotLayout({title:"Durée d'ensoleillement théorique",xaxis:{title:"Jour de l'année",tickvals:[1,32,60,91,121,152,182,213,244,274,305,335],ticktext:MO},yaxis:{title:'Durée (h)',range:[6,18]},annotations:[{x:dur.indexOf(mx)+1,y:mx,text:`Max: ${mx.toFixed(1)}h`,showarrow:true,arrowhead:2},{x:dur.indexOf(mn)+1,y:mn,text:`Min: ${mn.toFixed(1)}h`,showarrow:true,arrowhead:2,ay:30}]}),pCfg);
-document.getElementById('sum-0').innerHTML=sumBox('Max (été)',mx.toFixed(1),'h','green')+sumBox('Min (hiver)',mn.toFixed(1),'h','orange')+sumBox('Latitude','50.0','°N','')+sumBox('Variation',`${(mx-mn).toFixed(1)}`,'h','blue');
+const sum0=document.getElementById('sum-0');if(sum0)sum0.innerHTML=sumBox('Max (été)',mx.toFixed(1),'h','green')+sumBox('Min (hiver)',mn.toFixed(1),'h','orange')+sumBox('Latitude','50.0','°N','')+sumBox('Variation',`${(mx-mn).toFixed(1)}`,'h','blue');
 }
 
 /* ═══════════════ SCRIPT 02: CONSOMMATION ═══════════════ */
@@ -306,7 +306,7 @@ Plotly.newPlot('ch-conso-pie',[{values:En,labels:nm,type:'pie',marker:{colors:cl
 const mN=['Veille','Réveil','Actif','Pic','Soir'],mP=[Pr_i+Pp+Pd_v,Pr_a+Pe*.3+Pp+Pd_a,Pr_a+Pe*.6+Pp+Pu*.4+Pd_a,Pr_p+Pe+Pp+Pu+Pd_a,Pr_p+Pe*.7+Pp+Pl+Pu*.5+Pd_a],mC=['#4d4db3','#66b3e6','#4dcc4d','#ff9900','#e63333'];
 Plotly.newPlot('ch-conso-modes',[{x:mN,y:mP,type:'bar',marker:{color:mC},text:mP.map(v=>v.toFixed(1)+'W'),textposition:'outside'}],plotLayout({title:'Puissance par mode',yaxis:{title:'Puissance (W)'}}),pCfg);
 const Pt=hrs.map((_,i)=>R[i]+E[i]+C[i]+L[i]+U[i]+DC[i]);
-document.getElementById('sum-1').innerHTML=sumBox('Total/jour',Et.toFixed(0),'Wh','')+sumBox('Puiss. moyenne',(Et/24).toFixed(1),'W','')+sumBox('Pic max',Math.max(...Pt).toFixed(1),'W','red')+sumBox('Veille min',Math.min(...Pt).toFixed(1),'W','green');
+const sum1=document.getElementById('sum-1');if(sum1)sum1.innerHTML=sumBox('Total/jour',Et.toFixed(0),'Wh','')+sumBox('Puiss. moyenne',(Et/24).toFixed(1),'W','')+sumBox('Pic max',Math.max(...Pt).toFixed(1),'W','red')+sumBox('Veille min',Math.min(...Pt).toFixed(1),'W','green');
 }
 
 /* ═══════════════ SCRIPT 03: BILAN ANNUEL ═══════════════ */
@@ -322,9 +322,9 @@ Plotly.newPlot('ch-bilan-net',[{x:MO,y:Eb.map(e=>e/1000),type:'bar',marker:{colo
 Plotly.newPlot('ch-meteo',[{x:MO,y:fm.map(f=>f*100),type:'bar',marker:{color:'#3B82F6'},text:fm.map(f=>(f*100).toFixed(0)+'%'),textposition:'outside'}],plotLayout({title:'Facteur météo — Picardie/Somme',yaxis:{title:'%',range:[0,70]}}),pCfg);
 let html='<table class="data-table"><thead><tr><th>Mois</th><th>Prod clair</th><th>Prod réelle</th><th>Conso</th><th>Bilan</th></tr></thead><tbody>';
 for(let m=0;m<12;m++){const b=Eb[m]/1000;html+=`<tr><td>${MO[m]}</td><td>${(Ec[m]/1000).toFixed(2)} kWh/j</td><td>${(Er[m]/1000).toFixed(2)} kWh/j</td><td>${(Pl*24/1000).toFixed(2)} kWh/j</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(1)} kWh</td></tr>`}
-html+='</tbody></table>';document.getElementById('bilan-table').innerHTML=html;
+html+='</tbody></table>';const bilanTable=document.getElementById('bilan-table');if(bilanTable)bilanTable.innerHTML=html;
 const tp=Ept.reduce((a,b)=>a+b,0)/1000,tc=Em.reduce((a,b)=>a+b,0)/1000;
-document.getElementById('sum-2').innerHTML=sumBox('Prod. annuelle',tp.toFixed(0),'kWh','green')+sumBox('Conso. annuelle',tc.toFixed(0),'kWh','orange')+sumBox('Bilan net',(tp-tc>=0?'+':'')+(tp-tc).toFixed(0),'kWh',tp>=tc?'green':'red')+sumBox('Mois déficit.',Eb.filter(e=>e<0).length,'','red');
+const sum2=document.getElementById('sum-2');if(sum2)sum2.innerHTML=sumBox('Prod. annuelle',tp.toFixed(0),'kWh','green')+sumBox('Conso. annuelle',tc.toFixed(0),'kWh','orange')+sumBox('Bilan net',(tp-tc>=0?'+':'')+(tp-tc).toFixed(0),'kWh',tp>=tc?'green':'red')+sumBox('Mois déficit.',Eb.filter(e=>e<0).length,'','red');
 }
 
 /* ═══════════════ SCRIPT 04: BATTERIE ═══════════════ */
@@ -345,7 +345,7 @@ if(i20>=0)ann.push({x:h72[i20],y:20,text:h72[i20].toFixed(1)+'h',showarrow:true,
 Plotly.newPlot('ch-bat-dchg',[{x:h72,y:SOC,line:{color:'#3B82F6',width:2}}],plotLayout({title:'Décharge 72h sans soleil',xaxis:{title:'Heures',range:[0,72],dtick:6},yaxis:{title:'SOC (%)',range:[0,105]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:72,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:72,line:{color:'#EF4444'}}],annotations:ann}),pCfg);
 const Dv=[10,20,30,40,50,60,70,80,90,100],cy=[6000,3500,2500,1800,1200,800,550,400,300,200];
 Plotly.newPlot('ch-bat-cycles',[{x:Dv,y:cy,mode:'lines+markers',line:{color:'#3B82F6',width:2.5},marker:{size:8}}],plotLayout({title:'Cycles vs DoD (batterie GEL)',xaxis:{title:'DoD (%)',range:[0,105]},yaxis:{title:'Cycles',type:'log'},annotations:[{x:50,y:Math.log10(1200),text:'DoD 50% → ~1200 cycles ≈ 3.3 ans',showarrow:true,arrowhead:2,font:{color:'#EF4444'}}]}),pCfg);
-document.getElementById('sum-3').innerHTML=sumBox('Capacité','100 Ah / 12V','= 1200 Wh','')+sumBox('Utile (DoD50%)','600','Wh','green')+sumBox('Autonomie @15W',(D50*Eb*eta/15).toFixed(0),'h','orange')+sumBox('Durée de vie','~3.3','ans (DoD50%)','blue');
+const sum3=document.getElementById('sum-3');if(sum3)sum3.innerHTML=sumBox('Capacité','100 Ah / 12V','= 1200 Wh','')+sumBox('Utile (DoD50%)','600','Wh','green')+sumBox('Autonomie @15W',(D50*Eb*eta/15).toFixed(0),'h','orange')+sumBox('Durée de vie','~3.3','ans (DoD50%)','blue');
 }
 
 /* ═══════════════ SCRIPT 05: INCLINAISON ═══════════════ */
@@ -361,7 +361,7 @@ const Ea=[];for(const t of tilts){let tot=0;for(let m=0;m<12;m++){const{powers}=
 const mx=Math.max(...Ea),io=Ea.indexOf(mx),i37=tilts.indexOf(36),E37=Ea[i37]||Ea[Math.round(37/2)];
 Plotly.newPlot('ch-tilt-annual',[{x:tilts,y:Ea,line:{color:'#3B82F6',width:3}},{x:[tilts[io]],y:[mx],mode:'markers+text',marker:{size:14,color:'#EF4444',symbol:'star'},text:[`Opt: ${tilts[io]}° → ${mx.toFixed(0)} kWh`],textposition:'bottom right',name:'Optimum'},{x:[37],y:[E37],mode:'markers+text',marker:{size:12,color:'#00D4A0',symbol:'square'},text:[`E-Bench: ${E37.toFixed(0)} kWh`],textposition:'top left',name:'Choix'}],plotLayout({title:'Production annuelle vs Inclinaison',xaxis:{title:'Inclinaison (°)',range:[0,90]},yaxis:{title:'kWh/an'}}),pCfg);
 const perte=((1-E37/mx)*100);
-document.getElementById('sum-4').innerHTML=sumBox('Optimum',tilts[io],'°','green')+sumBox('Prod. optimale',mx.toFixed(0),'kWh/an','green')+sumBox('Choix E-Bench','37','°','')+sumBox('Écart',perte.toFixed(1),'%',perte>5?'orange':'green');
+const sum4=document.getElementById('sum-4');if(sum4)sum4.innerHTML=sumBox('Optimum',tilts[io],'°','green')+sumBox('Prod. optimale',mx.toFixed(0),'kWh/an','green')+sumBox('Choix E-Bench','37','°','')+sumBox('Écart',perte.toFixed(1),'%',perte>5?'orange':'green');
 }
 
 /* ═══════════════ SCRIPT 06: COURBE I-V ═══════════════ */
@@ -380,7 +380,7 @@ const Vb=13.5,Pm=[],Pw=[];
 for(const G of irrs){if(G<10){Pm.push(0);Pw.push(0);continue}const Isc2=Isc*G/1000,Vo=Math.max(0,Voc+n*Vt*Math.log(Math.max(.001,G/1000)));const Vt2=linspace(0,Vo,200);let mx=0;for(const v of Vt2){mx=Math.max(mx,v*Math.max(0,Isc2*(1-Math.exp((v-Vo)/(n*Vt)))))}Pm.push(mx*ETA_SYSTEM);const Ip=Math.max(0,Isc2*(1-Math.exp((Vb-Vo)/(n*Vt))));Pw.push(Vb*Ip*ETA_SYSTEM)}
 const Em=trapz(hrs,Pm),Ew=trapz(hrs,Pw),gain=((Em-Ew)/Ew*100);
 Plotly.newPlot('ch-mppt-pwm',[{x:hrs,y:Pm,name:'MPPT (Victron)',line:{color:'#00D4A0',width:2.5}},{x:hrs,y:Pw,name:'PWM classique',line:{color:'#EF4444',dash:'dash',width:2}}],plotLayout({title:`MPPT vs PWM — Gain: +${gain.toFixed(0)}% (+${(Em-Ew).toFixed(0)} Wh)`,xaxis:{title:'Heure',range:[4,22]},yaxis:{title:'Puissance (W)'}}),pCfg);
-document.getElementById('sum-5').innerHTML=sumBox('Pmpp',Pmpp,'W','green')+sumBox('Vmpp / Impp',Vmpp+'V / '+Impp+'A','','')+sumBox('MPPT (été)',(Em/1000).toFixed(2),'kWh','green')+sumBox('Gain MPPT','+'+gain.toFixed(0),'%','green');
+const sum5=document.getElementById('sum-5');if(sum5)sum5.innerHTML=sumBox('Pmpp',Pmpp,'W','green')+sumBox('Vmpp / Impp',Vmpp+'V / '+Impp+'A','','')+sumBox('MPPT (été)',(Em/1000).toFixed(2),'kWh','green')+sumBox('Gain MPPT','+'+gain.toFixed(0),'%','green');
 }
 
 /* ═══════════════ SCRIPT 07: SIMULATION 7 JOURS ═══════════════ */
@@ -408,9 +408,9 @@ Plotly.newPlot('ch-sim-daily',[{x:jrs,y:Epd.map(e=>e/1000),name:'Production',typ
 let html='<table class="data-table"><thead><tr><th>Jour</th><th>Météo</th><th>Prod</th><th>Conso</th><th>Bilan</th><th>SOC fin</th></tr></thead><tbody>';
 const mt=['85%','90%','60%','25%','15%','50%','95%'];
 for(let d=0;d<7;d++){const b=Epd[d]-Ecd[d];html+=`<tr><td>${mN[d]}</td><td>${mt[d]}</td><td>${Epd[d].toFixed(0)} Wh</td><td>${Ecd[d].toFixed(0)} Wh</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(0)}</td><td>${Sf[d].toFixed(1)}%</td></tr>`}
-html+='</tbody></table>';document.getElementById('sim-table').innerHTML=html;
+html+='</tbody></table>';const simTable=document.getElementById('sim-table');if(simTable)simTable.innerHTML=html;
 const tp=Epd.reduce((a,b)=>a+b,0),tc=Ecd.reduce((a,b)=>a+b,0);
-document.getElementById('sum-6').innerHTML=sumBox('Prod. semaine',(tp/1000).toFixed(1),'kWh','green')+sumBox('Conso. semaine',(tc/1000).toFixed(1),'kWh','orange')+sumBox('SOC minimum',Math.min(...scA).toFixed(1),'%',Math.min(...scA)<30?'red':'orange')+sumBox('Bilan',((tp-tc)/1000>=0?'+':'')+((tp-tc)/1000).toFixed(1),'kWh',tp>=tc?'green':'red');
+const sum6=document.getElementById('sum-6');if(sum6)sum6.innerHTML=sumBox('Prod. semaine',(tp/1000).toFixed(1),'kWh','green')+sumBox('Conso. semaine',(tc/1000).toFixed(1),'kWh','orange')+sumBox('SOC minimum',Math.min(...scA).toFixed(1),'%',Math.min(...scA)<30?'red':'orange')+sumBox('Bilan',((tp-tc)/1000>=0?'+':'')+((tp-tc)/1000).toFixed(1),'kWh',tp>=tc?'green':'red');
 }
 
 /* ═══════════════ INIT ═══════════════ */
