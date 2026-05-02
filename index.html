@@ -1858,18 +1858,18 @@ document.getElementById('sum-1').innerHTML=sumBox('Total/jour',Et.toFixed(0),'Wh
 function render03(){
 // Modèle simplifié pour projet STI2D - Hypothèses : rendement constant, pas de température
 const lat=50,alt=.05,tilt=37,Pn=500,eta=.80; // eta=0.80 inclut pertes MPPT+câbles+température
-// Consommation réelle sans LEDs : ~5W moyen = 0.116 kWh/jour
-const P_moy=5.2; // W (veille + actif pondéré)
+// Consommation pire cas : 62W (pic max) + marge = 70W continu pour scénario défavorable
+const P_max=70; // W (consommation maximale - tous équipements au maximum)
 const jm=[15,46,74,105,135,166,196,227,258,288,319,349],jp=[31,28,31,30,31,30,31,31,30,31,30,31],fm=[.30,.35,.42,.48,.52,.55,.55,.52,.48,.38,.30,.25];
 const dt=.2,hrs=[];for(let h=0;h<=24;h+=dt)hrs.push(h);
 const Ec=[],Er=[],Em=[],Eb=[];
-for(let m=0;m<12;m++){const{powers}=pvPow(hrs,jm[m],lat,alt,tilt,Pn,eta);const ec=trapz(hrs,powers),er=ec*fm[m];Ec.push(ec);Er.push(er);const cm=P_moy*24;Em.push(cm*jp[m]);Eb.push(er*jp[m]-cm*jp[m])}
+for(let m=0;m<12;m++){const{powers}=pvPow(hrs,jm[m],lat,alt,tilt,Pn,eta);const ec=trapz(hrs,powers),er=ec*fm[m];Ec.push(ec);Er.push(er);const cm=P_max*24;Em.push(cm*jp[m]);Eb.push(er*jp[m]-cm*jp[m])}
 const Ept=Er.map((e,i)=>e*jp[i]);
 Plotly.newPlot('ch-bilan-monthly',[{x:MO,y:Ept.map(e=>e/1000),name:'Production',type:'bar',marker:{color:'#00D4A0'}},{x:MO,y:Em.map(e=>e/1000),name:'Consommation',type:'bar',marker:{color:'#EF4444'}}],plotLayout({barmode:'group',title:'Production vs Consommation mensuelle',yaxis:{title:'Énergie (kWh)'}}),pCfg);
 Plotly.newPlot('ch-bilan-net',[{x:MO,y:Eb.map(e=>e/1000),type:'bar',marker:{color:Eb.map(e=>e>=0?'#00D4A0':'#EF4444')},text:Eb.map(e=>(e>=0?'+':'')+(e/1000).toFixed(1)),textposition:'outside'}],plotLayout({title:'Bilan net mensuel',yaxis:{title:'kWh'},shapes:[{type:'line',y0:0,y1:0,x0:-.5,x1:11.5,line:{color:'#8899B4',width:1}}]}),pCfg);
 Plotly.newPlot('ch-meteo',[{x:MO,y:fm.map(f=>f*100),type:'bar',marker:{color:'#3B82F6'},text:fm.map(f=>(f*100).toFixed(0)+'%'),textposition:'outside'}],plotLayout({title:'Facteur météo — Picardie/Somme',yaxis:{title:'%',range:[0,70]}}),pCfg);
-let html='<table class="data-table"><thead><tr><th>Mois</th><th>Prod clair</th><th>Prod réelle</th><th>Conso</th><th>Bilan</th></tr></thead><tbody>';
-for(let m=0;m<12;m++){const b=Eb[m]/1000;html+=`<tr><td>${MO[m]}</td><td>${(Ec[m]/1000).toFixed(2)} kWh/j</td><td>${(Er[m]/1000).toFixed(2)} kWh/j</td><td>${(P_moy*24/1000).toFixed(2)} kWh/j</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(1)} kWh</td></tr>`}
+let html='<table class="data-table"><thead><tr><th>Mois</th><th>Prod clair</th><th>Prod réelle</th><th>Conso (pire cas)</th><th>Bilan</th></tr></thead><tbody>';
+for(let m=0;m<12;m++){const b=Eb[m]/1000;html+=`<tr><td>${MO[m]}</td><td>${(Ec[m]/1000).toFixed(2)} kWh/j</td><td>${(Er[m]/1000).toFixed(2)} kWh/j</td><td>${(P_max*24/1000).toFixed(2)} kWh/j</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(1)} kWh</td></tr>`}
 html+='</tbody></table>';document.getElementById('bilan-table').innerHTML=html;
 const tp=Ept.reduce((a,b)=>a+b,0)/1000,tc=Em.reduce((a,b)=>a+b,0)/1000;
 document.getElementById('sum-2').innerHTML=sumBox('Prod. annuelle',tp.toFixed(0),'kWh','green')+sumBox('Conso. annuelle',tc.toFixed(0),'kWh','orange')+sumBox('Bilan net',(tp-tc>=0?'+':'')+(tp-tc).toFixed(0),'kWh',tp>=tc?'green':'red')+sumBox('Mois déficit.',Eb.filter(e=>e<0).length,'','red');
