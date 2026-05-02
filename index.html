@@ -479,6 +479,14 @@
     }
     .mcard h3 {
       position: relative;
+      display: block;
+    }
+    .chart-container {
+      position: relative;
+    }
+    #btn-hypotheses {
+      pointer-events: auto !important;
+      z-index: 100 !important;
     }
 
     /* Modal hypothèses */
@@ -1424,7 +1432,7 @@
   <div class="page-header"><h2>01 — Bilan Énergétique <span>Annuel</span></h2><p>Production vs consommation mois par mois — Panneau 500Wc, inclinaison 37°</p></div>
   <div class="summary-grid" id="sum-2"></div>
   
-  <div class="mcard"><h3><i class="fa-solid fa-chart-column"></i> Production vs Consommation mensuelle <button class="info-btn" id="btn-hypotheses" title="Voir les hypothèses"><i class="fa-solid fa-circle-info"></i></button></h3><div id="ch-bilan-monthly" class="chart-container"></div></div>
+  <div class="mcard"><h3><i class="fa-solid fa-chart-column"></i> Production vs Consommation mensuelle<span style="position:absolute;right:10px;top:5px;"><button class="info-btn" id="btn-hypotheses" title="Voir les hypothèses"><i class="fa-solid fa-circle-info"></i></button></span></h3><div id="ch-bilan-monthly" class="chart-container"></div></div>
   <div class="mcard"><h3><i class="fa-solid fa-scale-balanced"></i> Bilan net mensuel</h3><div id="ch-bilan-net" class="chart-container"></div></div>
 </div>
 
@@ -1989,7 +1997,6 @@ for(let m=0;m<12;m++){const d=solarDecl(jm[m]),pw=[];for(const h of solHrs){cons
 const Ept=Er.map((e,i)=>e*jp[i]);
 Plotly.newPlot('ch-bilan-monthly',[{x:MO,y:Ept.map(e=>e/1000),name:'Production',type:'bar',marker:{color:'#00D4A0'}},{x:MO,y:Em.map(e=>e/1000),name:'Consommation (réaliste)',type:'bar',marker:{color:'#EF4444'}}],plotLayout({barmode:'group',title:'Production vs Consommation mensuelle',yaxis:{title:'Énergie (kWh)'}}),pCfg);
 Plotly.newPlot('ch-bilan-net',[{x:MO,y:Eb.map(e=>e/1000),type:'bar',marker:{color:Eb.map(e=>e>=0?'#00D4A0':'#EF4444')},text:Eb.map(e=>(e>=0?'+':'')+(e/1000).toFixed(1)),textposition:'outside'}],plotLayout({title:'Bilan net mensuel',yaxis:{title:'kWh'},shapes:[{type:'line',y0:0,y1:0,x0:-.5,x1:11.5,line:{color:'#8899B4',width:1}}]}),pCfg);
-Plotly.newPlot('ch-meteo',[{x:MO,y:fm.map(f=>f*100),type:'bar',marker:{color:'#3B82F6'},text:fm.map(f=>(f*100).toFixed(0)+'%'),textposition:'outside'}],plotLayout({title:'Facteur météo — Picardie/Somme',yaxis:{title:'%',range:[0,70]}}),pCfg);
 let html='<table class="data-table"><thead><tr><th>Mois</th><th>Prod clair</th><th>Prod réelle</th><th>Conso (réaliste)</th><th>Bilan</th></tr></thead><tbody>';
 for(let m=0;m<12;m++){const b=Eb[m]/1000;html+=`<tr><td>${MO[m]}</td><td>${(Ec[m]/1000).toFixed(2)} kWh/j</td><td>${(Er[m]/1000).toFixed(2)} kWh/j</td><td>${(P_moy*24/1000).toFixed(2)} kWh/j</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(1)} kWh</td></tr>`}
 html+='</tbody></table>';document.getElementById('bilan-table').innerHTML=html;
@@ -2016,7 +2023,7 @@ if(i50>=0)ann.push({x:h120[i50],y:50,text:h120[i50].toFixed(0)+'h (~5j)',showarr
 if(i20>=0)ann.push({x:h120[i20],y:20,text:h120[i20].toFixed(0)+'h',showarrow:true,arrowhead:2,ay:-30,font:{color:'#EF4444'}});
 Plotly.newPlot('ch-bat-dchg',[{x:h120,y:SOC,line:{color:'#3B82F6',width:2}}],plotLayout({title:'Décharge 5 jours sans soleil (usage réel)',xaxis:{title:'Heures',range:[0,120],dtick:12},yaxis:{title:'SOC (%)',range:[0,105]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:120,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:120,line:{color:'#EF4444'}}],annotations:ann}),pCfg);
 const Dv=[10,20,30,40,50,60,70,80,90,100],cy=[6000,3500,2500,1800,1200,800,550,400,300,200];
-Plotly.newPlot('ch-bat-cycles',[{x:Dv,y:cy,mode:'lines+markers',line:{color:'#3B82F6',width:2.5},marker:{size:8}}],plotLayout({title:'Cycles vs DoD (batterie GEL)',xaxis:{title:'DoD (%)',range:[0,105]},yaxis:{title:'Cycles',type:'log'},annotations:[{x:50,y:Math.log10(1200),text:'DoD 50% → ~1200 cycles ≈ 3.3 ans',showarrow:true,arrowhead:2,font:{color:'#EF4444'}}]}),pCfg);
+// Graphique ch-bat-cycles supprimé - données présentées dans le résumé textuel
 document.getElementById('sum-3').innerHTML=sumBox('Capacité','100 Ah / 12V','= 1200 Wh','')+sumBox('Utile (DoD50%)','600','Wh','green')+sumBox('Autonomie @5W',(D50*Eb*eta_bat/5).toFixed(0),'h (~5j)','orange')+sumBox('Durée de vie','~3.3','ans (DoD50%)','blue');
 }
 
@@ -2078,8 +2085,7 @@ Epd.push(trapz(hD,powers));Ecd.push(trapz(hD,ld));Sf.push(SC)}
 const td=tA.map(t=>t/24);
 Plotly.newPlot('ch-sim-power',[{x:td,y:pvA,name:'Production PV',fill:'tozeroy',fillcolor:'rgba(0,212,160,.2)',line:{color:'#00D4A0',width:1.5}},{x:td,y:ldA,name:'Consommation',line:{color:'#EF4444',width:2}}],plotLayout({title:'Production vs Consommation — Semaine de juin',xaxis:{title:'Jour',range:[0,7],tickvals:[.5,1.5,2.5,3.5,4.5,5.5,6.5],ticktext:mN.map(n=>n.split(' ')[0])},yaxis:{title:'Puissance (W)'}}),pCfg);
 Plotly.newPlot('ch-sim-soc',[{x:td,y:scA,line:{color:'#3B82F6',width:2.5}}],plotLayout({title:'État de charge batterie',xaxis:{title:'Jour',range:[0,7],tickvals:[.5,1.5,2.5,3.5,4.5,5.5,6.5],ticktext:mN.map(n=>n.split(' ')[0])},yaxis:{title:'SOC (%)',range:[0,105]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:7,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:7,line:{color:'#EF4444'}}]}),pCfg);
-const jrs=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
-Plotly.newPlot('ch-sim-daily',[{x:jrs,y:Epd.map(e=>e/1000),name:'Production',type:'bar',marker:{color:'#00D4A0'}},{x:jrs,y:Ecd.map(e=>e/1000),name:'Consommation',type:'bar',marker:{color:'#EF4444'}}],plotLayout({barmode:'group',title:'Bilan journalier',yaxis:{title:'kWh'}}),pCfg);
+// Graphique ch-sim-daily supprimé - données présentées dans le tableau et résumé
 let html='<table class="data-table"><thead><tr><th>Jour</th><th>Météo</th><th>Prod</th><th>Conso</th><th>Bilan</th><th>SOC fin</th></tr></thead><tbody>';
 const mt=['85%','90%','60%','25%','15%','50%','95%'];
 for(let d=0;d<7;d++){const b=Epd[d]-Ecd[d];html+=`<tr><td>${mN[d]}</td><td>${mt[d]}</td><td>${Epd[d].toFixed(0)} Wh</td><td>${Ecd[d].toFixed(0)} Wh</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(0)}</td><td>${Sf[d].toFixed(1)}%</td></tr>`}
@@ -2159,13 +2165,15 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Modal hypothèses de consommation
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   const btn = document.getElementById('btn-hypotheses');
   const overlay = document.getElementById('modal-hypotheses');
   const closeBtn = document.getElementById('modal-close');
   
   if (btn && overlay && closeBtn) {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
       overlay.classList.add('active');
     });
     
@@ -2179,7 +2187,7 @@ document.addEventListener('keydown', function(e) {
       }
     });
   }
-})();
+});
 
 })();
 
