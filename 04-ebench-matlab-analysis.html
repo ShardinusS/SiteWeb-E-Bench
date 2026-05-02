@@ -256,6 +256,7 @@ function solarDecl(day){const B=2*Math.PI*(day-1)/365;return(0.006918-0.399912*M
 function solarElev(lat,d,om){return asind(Math.max(0,sind(d)*sind(lat)+cosd(d)*cosd(lat)*cosd(om)))}
 function hottel(alpha,day,alt){const I0=1367,eps=1+0.033*Math.cos(2*Math.PI*day/365),Ion=I0*eps;const sA=Math.max(.001,sind(alpha));const a0=.4237-.00821*Math.pow(6-alt,2),a1=.5055+.00595*Math.pow(6.5-alt,2),k=.2711+.01858*Math.pow(2.5-alt,2);const tb=a0+a1*Math.exp(-k/sA);const Ibn=Ion*tb,Idh=.3*Ion*(1-tb)*sA,Igh=Ibn*sA+Idh;return{Ibn,Idh,Igh,Ion}}
 function pvPow(hrs,day,lat,alt,tilt,Pn,eta,mf){const d=solarDecl(day),pw=[],ir=[];for(const h of hrs){const om=15*(h-12),a=solarElev(lat,d,om);if(a<=0){pw.push(0);ir.push(0);continue}const{Ibn,Idh,Igh}=hottel(a,day,alt);const ct=Math.max(0,sind(d)*sind(lat-tilt)+cosd(d)*cosd(lat-tilt)*cosd(om));const It=(Ibn*ct+Idh*(1+cosd(tilt))/2+Igh*.2*(1-cosd(tilt))/2)*(mf||1);ir.push(It);pw.push(Math.min(Pn,It/1000*Pn*eta))}return{powers:pw,irrs:ir}}
+const ETA_SYSTEM=0.85;
 function trapz(x,y){let s=0;for(let i=1;i<x.length;i++)s+=(x[i]-x[i-1])*(y[i]+y[i-1])/2;return s}
 function linspace(a,b,n){const r=[];for(let i=0;i<n;i++)r.push(a+(b-a)*i/(n-1));return r}
 function sumBox(l,v,u,c){return`<div class="summary-box ${c||''}"><div class="label">${l}</div><div class="value">${v} <span class="unit">${u}</span></div></div>`}
@@ -310,7 +311,7 @@ document.getElementById('sum-1').innerHTML=sumBox('Total/jour',Et.toFixed(0),'Wh
 
 /* ═══════════════ SCRIPT 03: BILAN ANNUEL ═══════════════ */
 function render03(){
-const lat=50,alt=.05,tilt=37,Pn=500,eta=.95,Pl=15;
+const lat=50,alt=.05,tilt=37,Pn=500,eta=ETA_SYSTEM,Pl=15;
 const jm=[15,46,74,105,135,166,196,227,258,288,319,349],jp=[31,28,31,30,31,30,31,31,30,31,30,31],fm=[.30,.35,.42,.48,.52,.55,.55,.52,.48,.38,.30,.25];
 const dt=.2,hrs=[];for(let h=0;h<=24;h+=dt)hrs.push(h);
 const Ec=[],Er=[],Em=[],Eb=[];
@@ -349,7 +350,7 @@ document.getElementById('sum-3').innerHTML=sumBox('Capacité','100 Ah / 12V','= 
 
 /* ═══════════════ SCRIPT 05: INCLINAISON ═══════════════ */
 function render05(){
-const lat=50,alt=.05,Pn=500,eta=.95,dt=.2,hrs=[];for(let h=0;h<=24;h+=dt)hrs.push(h);
+const lat=50,alt=.05,Pn=500,eta=ETA_SYSTEM,dt=.2,hrs=[];for(let h=0;h<=24;h+=dt)hrs.push(h);
 const tilts=[];for(let t=0;t<=90;t+=2)tilts.push(t);
 const dT=[172,355,80],dN=['Solstice été','Solstice hiver','Équinoxe'],clr=['#ff6600','#3B82F6','#00D4A0'];
 const Es=dT.map(()=>[]);
@@ -366,16 +367,17 @@ document.getElementById('sum-4').innerHTML=sumBox('Optimum',tilts[io],'°','gree
 /* ═══════════════ SCRIPT 06: COURBE I-V ═══════════════ */
 function render06(){
 const Isc=13.89,Voc=41.3,Impp=13.13,Vmpp=38.1,Pmpp=500;
-const Vt=.026*72,n=(Vmpp-Voc)/(Vt*Math.log(1-Impp/Isc));
+const n=1.20,Vt=.026*72;
+const Is=Impp/(Math.exp(Vmpp/(n*Vt))-1);
 const Vr=linspace(0,Voc*1.05,400),irr=[1000,800,600,400,200],cl=['#EF4444','#F59E0B','#00D4A0','#3B82F6','#A855F7'];
-const tIV=irr.map((G,g)=>{const Is=Isc*G/1000,Vo=Math.max(0,Voc+n*Vt*Math.log(G/1000));return{x:Vr,y:Vr.map(v=>v>Vo?0:Math.max(0,Is*(1-Math.exp((v-Vo)/(n*Vt))))),name:G+' W/m²',line:{color:cl[g],width:2}}});
+const tIV=irr.map((G,g)=>{const Isc2=Isc*G/1000,Vo=Math.max(0,Voc+n*Vt*Math.log(G/1000));return{x:Vr,y:Vr.map(v=>v>Vo?0:Math.max(0,Isc2*(1-Math.exp((v-Vo)/(n*Vt))))),name:G+' W/m²',line:{color:cl[g],width:2}}});
 Plotly.newPlot('ch-iv',tIV,plotLayout({title:'Caractéristique I-V — TrinaSolar 500W',xaxis:{title:'Tension (V)',range:[0,45]},yaxis:{title:'Courant (A)',range:[0,16]}}),pCfg);
-const tPV=irr.map((G,g)=>{const Is=Isc*G/1000,Vo=Math.max(0,Voc+n*Vt*Math.log(G/1000));return{x:Vr,y:Vr.map(v=>{if(v>Vo)return 0;const I=Math.max(0,Is*(1-Math.exp((v-Vo)/(n*Vt))));return v*I}),name:G+' W/m²',line:{color:cl[g],width:2}}});
+const tPV=irr.map((G,g)=>{const Isc2=Isc*G/1000,Vo=Math.max(0,Voc+n*Vt*Math.log(G/1000));return{x:Vr,y:Vr.map(v=>{if(v>Vo)return 0;const I=Math.max(0,Isc2*(1-Math.exp((v-Vo)/(n*Vt))));return v*I}),name:G+' W/m²',line:{color:cl[g],width:2}}});
 Plotly.newPlot('ch-pv',tPV,plotLayout({title:'Caractéristique P-V',xaxis:{title:'Tension (V)',range:[0,45]},yaxis:{title:'Puissance (W)'}}),pCfg);
 const lat=50,alt=.05,tilt=37,day=172,dt=.2,hrs=[];for(let h=0;h<=24;h+=dt)hrs.push(h);
-const{irrs}=pvPow(hrs,day,lat,alt,tilt,500,.95);
-const Vb=14.4,Pm=[],Pw=[];
-for(const G of irrs){if(G<10){Pm.push(0);Pw.push(0);continue}const Is=Isc*G/1000,Vo=Math.max(0,Voc+n*Vt*Math.log(Math.max(.001,G/1000)));const Vt2=linspace(0,Vo,200);let mx=0;for(const v of Vt2){mx=Math.max(mx,v*Math.max(0,Is*(1-Math.exp((v-Vo)/(n*Vt)))))}Pm.push(mx*.95);const Ip=Math.max(0,Is*(1-Math.exp((Vb-Vo)/(n*Vt))));Pw.push(Vb*Ip*.90)}
+const irrs=[];const d=solarDecl(day);for(const h of hrs){const om=15*(h-12),a=solarElev(lat,d,om);if(a<=0){irrs.push(0);continue}const{Ibn,Idh,Igh}=hottel(a,day,alt);const ct=Math.max(0,sind(d)*sind(lat-tilt)+cosd(d)*cosd(lat-tilt)*cosd(om));const It=(Ibn*ct+Idh*(1+cosd(tilt))/2+Igh*.2*(1-cosd(tilt))/2);irrs.push(It)}
+const Vb=13.5,Pm=[],Pw=[];
+for(const G of irrs){if(G<10){Pm.push(0);Pw.push(0);continue}const Isc2=Isc*G/1000,Vo=Math.max(0,Voc+n*Vt*Math.log(Math.max(.001,G/1000)));const Vt2=linspace(0,Vo,200);let mx=0;for(const v of Vt2){mx=Math.max(mx,v*Math.max(0,Isc2*(1-Math.exp((v-Vo)/(n*Vt)))))}Pm.push(mx*ETA_SYSTEM);const Ip=Math.max(0,Isc2*(1-Math.exp((Vb-Vo)/(n*Vt))));Pw.push(Vb*Ip*ETA_SYSTEM)}
 const Em=trapz(hrs,Pm),Ew=trapz(hrs,Pw),gain=((Em-Ew)/Ew*100);
 Plotly.newPlot('ch-mppt-pwm',[{x:hrs,y:Pm,name:'MPPT (Victron)',line:{color:'#00D4A0',width:2.5}},{x:hrs,y:Pw,name:'PWM classique',line:{color:'#EF4444',dash:'dash',width:2}}],plotLayout({title:`MPPT vs PWM — Gain: +${gain.toFixed(0)}% (+${(Em-Ew).toFixed(0)} Wh)`,xaxis:{title:'Heure',range:[4,22]},yaxis:{title:'Puissance (W)'}}),pCfg);
 document.getElementById('sum-5').innerHTML=sumBox('Pmpp',Pmpp,'W','green')+sumBox('Vmpp / Impp',Vmpp+'V / '+Impp+'A','','')+sumBox('MPPT (été)',(Em/1000).toFixed(2),'kWh','green')+sumBox('Gain MPPT','+'+gain.toFixed(0),'%','green');
@@ -383,7 +385,7 @@ document.getElementById('sum-5').innerHTML=sumBox('Pmpp',Pmpp,'W','green')+sumBo
 
 /* ═══════════════ SCRIPT 07: SIMULATION 7 JOURS ═══════════════ */
 function render07(){
-const lat=50,alt=.05,tilt=37,Pn=500,eta=.95;
+const lat=50,alt=.05,tilt=37,Pn=500,eta=ETA_SYSTEM;
 const Cb=100,Vb=12,Ebat=Cb*Vb,ec=.85,ed=.85,Smin=20,Smax=100,Pcm=Cb/5*Vb;
 const mf=[.85,.90,.60,.25,.15,.50,.95],mN=['Lun (Beau)','Mar (Beau)','Mer (Voilé)','Jeu (Couvert)','Ven (Pluie)','Sam (Variable)','Dim (Beau)'];
 const dS=170,dtH=.2,hD=[];for(let h=0;h<=24;h+=dtH)hD.push(h);const Nd=hD.length;
@@ -391,7 +393,7 @@ const tA=[],pvA=[],ldA=[],scA=[];let SC=80;
 const Epd=[],Ecd=[],Sf=[];
 for(let d=0;d<7;d++){
 const sD=dS+d,mff=mf[d];
-const{powers}=pvPow(hD,sD,lat,alt,tilt,Pn,eta,mff);
+const decl=solarDecl(sD),pw=[];for(const h of hD){const om=15*(h-12),a=solarElev(lat,decl,om);if(a<=0){pw.push(0);continue}const{Ibn,Idh,Igh}=hottel(a,sD,alt);const ct=Math.max(0,sind(decl)*sind(lat-tilt)+cosd(decl)*cosd(lat-tilt)*cosd(om));const It=(Ibn*ct+Idh*(1+cosd(tilt))/2+Igh*.2*(1-cosd(tilt))/2)*(mff||1);pw.push(Math.min(Pn,It/1000*Pn))}const powers=pw.map(p=>p*eta);
 if(mff<.7)for(let i=0;i<powers.length;i++){powers[i]=Math.max(0,powers[i]*(1+.15*Math.sin(d*42+i*.3)*Math.cos(d*84+i*.17)))}
 const ld=hD.map(h=>{if(h<6)return 4;if(h<8)return 8;if(h<12)return 12;if(h<14)return 18;if(h<18)return 12;if(h<22)return 25;return 4});
 const sd=[SC];for(let i=1;i<Nd;i++){const ep=powers[i-1]*dtH,el=ld[i-1]*dtH;let ns;if(ep>=el){let tb=(ep-el)*ec;tb=Math.min(tb,Pcm*dtH);ns=Math.min(Smax,sd[i-1]+tb/Ebat*100)}else{ns=Math.max(Smin,sd[i-1]-(el-ep)/ed/Ebat*100)}sd.push(ns)}
