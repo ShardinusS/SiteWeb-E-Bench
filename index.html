@@ -1173,7 +1173,7 @@
       <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(3)"><div class="gallery-img"><img src="assets/img/screen-home.jpg" alt="Interface tactile du Banc Connecté" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-mobile-screen\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> Interface tactile — Banc Connecté</div></div>
       <div class="gallery-item reveal reveal-delay-2" onclick="openLightbox(4)"><div class="gallery-img"><img src="assets/img/screen-meteo.jpg" alt="Module météo — données locales" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-cloud-sun\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-cloud-sun" aria-hidden="true"></i> Module météo — données locales pré-enregistrées</div></div>
       <div class="gallery-item reveal reveal-delay-3" onclick="openLightbox(5)"><div class="gallery-img"><img src="assets/img/arduino-code.jpg" alt="Développement Python — script sensor_manager.py" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-laptop-code\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Développement Python — script sensor_manager.py</div></div>
-      <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(6)"><div class="gallery-img"><img src="assets/img/Ebench_affiche.png" alt="Affiche de présentation du projet E-Bench — banc solaire connecté" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-image\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-image" aria-hidden="true"></i> Affiche de présentation du projet E-Bench</div></div>
+      <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(6)"><div class="gallery-img"><img src="assets/img/Ebench_affiche.png" alt="Affiche de présentation du projet E-Bench" loading="lazy" style="object-fit:contain;background:var(--bg-2);" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-image\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-image" aria-hidden="true"></i> Affiche de présentation du projet E-Bench</div></div>
     </div>
   </div></div>
 </section>
@@ -1609,6 +1609,9 @@
     // Reveal elements
     var reveals = target.querySelectorAll('.reveal');
     reveals.forEach(function(r) { r.classList.add('visible'); });
+
+    // Re-init lightbox when galerie page is shown
+    if (id === 'galerie') { setTimeout(initLightbox, 50); }
 
     // Update nav highlights
     updateNavHighlights(id);
