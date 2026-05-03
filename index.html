@@ -486,10 +486,9 @@
       background: rgba(59, 130, 246, 0.2);
       transform: scale(1.1);
     }
-    .mcard h3 {
+    #page-matlab .mcard h3 {
       position: relative;
-      display: block;
-      min-height: 60px;
+      min-height: 50px;
     }
     .chart-container {
       position: relative;
@@ -501,22 +500,12 @@
     }
 
     /* Modal hypothèses */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
+    /* .modal-overlay base already defined above — only add .active trigger */
     .modal-overlay.active {
       display: flex;
     }
-    .modal-content {
+    /* ── Modal hypothèses (scoped) ── */
+    #modal-hypotheses .modal-content {
       background: var(--bg-card);
       border-radius: 12px;
       max-width: 800px;
@@ -527,13 +516,10 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
-    .modal-content::-webkit-scrollbar {
+    #modal-hypotheses .modal-content::-webkit-scrollbar {
       display: none;
-      width: 0;
-      height: 0;
-      background: transparent;
     }
-    .modal-header {
+    #modal-hypotheses .modal-header {
       padding: 20px 24px;
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -541,13 +527,18 @@
       align-items: center;
       flex-shrink: 0;
     }
-    .modal-header h3 {
+    #modal-hypotheses .modal-header h3 {
       margin: 0;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 18px;
-      color: var(--text-main);
+      color: var(--text);
+      min-height: unset;
+      position: static;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .modal-close {
+    #modal-hypotheses .modal-close {
       background: none;
       border: none;
       font-size: 24px;
@@ -561,24 +552,27 @@
       justify-content: center;
       flex-shrink: 0;
     }
-    .modal-close:hover {
-      color: var(--text-main);
+    #modal-hypotheses .modal-close:hover {
+      color: var(--text);
     }
-    .modal-body {
+    #modal-hypotheses .modal-body {
       padding: 24px;
       line-height: 1.7;
       color: var(--text);
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
+      /* Reset the normes modal overrides */
+      overflow-y: auto;
+      flex: unset;
     }
-    .modal-body > p {
+    #modal-hypotheses .modal-body > p {
       grid-column: 1 / -1;
     }
-    .modal-body ul {
+    #modal-hypotheses .modal-body ul {
       margin: 12px 0 12px 24px;
     }
-    .modal-body li {
+    #modal-hypotheses .modal-body li {
       margin-bottom: 8px;
     }
     .hypothesis-result {
@@ -616,7 +610,7 @@
     </button>
 
     <!-- Desktop nav links (max 5 visible + dropdowns) -->
-    <ul class="nav-links" id="navLinks" role="tablist" aria-label="Navigation principale">
+    <ul class="nav-links" id="navLinks" role="list" aria-label="Navigation principale">
       <li><button class="nav-link active" data-page="accueil" onclick="showPage('accueil')"><i class="fa-solid fa-house" aria-hidden="true"></i> Accueil</button></li>
 
       <!-- Dropdown: Le Projet -->
@@ -688,7 +682,7 @@
 <!-- ════════════════════════════════════════
      PAGE 1 — ACCUEIL
      ════════════════════════════════════════ -->
-<section class="page active" id="page-accueil" role="tabpanel" aria-labelledby="tab-accueil">
+<section class="page active" id="page-accueil" role="region" aria-label="Accueil">
   <div class="container" style="position:relative">
     <div class="orb orb-1" aria-hidden="true"></div>
     <div class="orb orb-2" aria-hidden="true"></div>
@@ -801,7 +795,7 @@
 <!-- ════════════════════════════════════════
      PAGE 2 — ÉQUIPE
      ════════════════════════════════════════ -->
-<section class="page" id="page-equipe" role="tabpanel" aria-labelledby="tab-equipe">
+<section class="page" id="page-equipe" role="region" aria-label="Équipe">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-users" aria-hidden="true"></i> L'Équipe</div>
     <h2 class="section-title reveal">Les Ingénieux</h2>
@@ -820,7 +814,7 @@
 <!-- ════════════════════════════════════════
      PAGE 3 — OLYMPIADES
      ════════════════════════════════════════ -->
-<section class="page" id="page-olympiades" role="tabpanel" aria-labelledby="tab-olympiades">
+<section class="page" id="page-olympiades" role="region" aria-label="Olympiades">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-trophy" aria-hidden="true"></i> Olympiades SI</div>
     <h2 class="section-title reveal">Résultat & <span style="color:var(--primary)">Parcours</span></h2>
@@ -846,7 +840,7 @@
 <!-- ════════════════════════════════════════
      PAGE 4 — CONCEPTION
      ════════════════════════════════════════ -->
-<section class="page" id="page-conception" role="tabpanel" aria-labelledby="tab-conception">
+<section class="page" id="page-conception" role="region" aria-label="Conception">
   <div class="container"><div class="section">
     <div class="design-grid">
       <div class="reveal">
@@ -891,7 +885,7 @@
 <!-- ════════════════════════════════════════
      PAGE 5 — TECHNOLOGIES
      ════════════════════════════════════════ -->
-<section class="page" id="page-technologies" role="tabpanel" aria-labelledby="tab-technologies">
+<section class="page" id="page-technologies" role="region" aria-label="Technologies">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Stack Technique</div>
     <h2 class="section-title reveal">3 Piliers, 1 <span style="color:var(--primary)">Vision</span></h2>
@@ -907,7 +901,7 @@
 <!-- ════════════════════════════════════════
      PAGE 6 — LOGICIEL
      ════════════════════════════════════════ -->
-<section class="page" id="page-logiciel" role="tabpanel" aria-labelledby="tab-logiciel">
+<section class="page" id="page-logiciel" role="region" aria-label="Logiciel">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Architecture Logicielle</div>
     <h2 class="section-title reveal">Le Code qui Fait Tourner le <span style="color:var(--primary)">Banc</span></h2>
@@ -1098,7 +1092,7 @@
 <!-- ════════════════════════════════════════
      PAGE 7 — ÉNERGIE
      ════════════════════════════════════════ -->
-<section class="page" id="page-energie" role="tabpanel" aria-labelledby="tab-energie">
+<section class="page" id="page-energie" role="region" aria-label="Énergie">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i> Bilan Énergétique</div>
     <h2 class="section-title reveal">Alimenté par le Soleil, Disponible <span style="color:var(--primary)">24/7</span></h2>
@@ -1127,7 +1121,7 @@
         </div>
           <div class="chart-row">
           <div class="chart-row-label"><span><i class="fa-solid fa-bolt" style="color:var(--amber)" aria-hidden="true"></i> Consommation</span><span class="cr-val mono" id="chartConso">0.42 kWh</span></div>
-          <div class="chart-bar-track"><div class="chart-bar-fill cb-amber" id="barConso" style="width:7%" role="progressbar" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div></div>
+          <div class="chart-bar-track"><div class="chart-bar-fill cb-amber" id="barConso" style="width:25%" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div></div>
         </div>
         <div class="chart-row">
           <div class="chart-row-label"><span><i class="fa-solid fa-battery-three-quarters" style="color:var(--blue)" aria-hidden="true"></i> Stockage (réserve)</span><span class="cr-val mono" id="chartStock">0.6 kWh</span></div>
@@ -1146,7 +1140,7 @@
 <!-- ════════════════════════════════════════
      PAGE 8 — NORMES
      ════════════════════════════════════════ -->
-<section class="page" id="page-normes" role="tabpanel" aria-labelledby="tab-normes">
+<section class="page" id="page-normes" role="region" aria-label="Normes">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Conformité</div>
     <h2 class="section-title reveal">18 Normes <span style="color:var(--primary)">Applicables</span></h2>
@@ -1169,18 +1163,18 @@
 <!-- ════════════════════════════════════════
      PAGE 9 — GALERIE
      ════════════════════════════════════════ -->
-<section class="page" id="page-galerie" role="tabpanel" aria-labelledby="tab-galerie">
+<section class="page" id="page-galerie" role="region" aria-label="Galerie">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</div>
     <h2 class="section-title reveal">Le Projet en <span style="color:var(--primary)">Images</span></h2>
     <p class="section-sub reveal">Photos et captures du processus de conception et de réalisation.</p>
     <div class="gallery-grid">
-      <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(0)"><div class="gallery-img"><img src="assets/img/arduino-board.jpg" alt="Arduino Uno — tests de câblage capteur PIR" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-microchip\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-microchip" aria-hidden="true"></i> Arduino Uno — tests de câblage capteur PIR</div></div>
-      <div class="gallery-item reveal reveal-delay-2" onclick="openLightbox(1)"><div class="gallery-img"><img src="assets/img/solar-panel.jpg" alt="Panneau solaire monocristallin 500Wc" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-solar-panel\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i> Panneau solaire monocristallin 500Wc</div></div>
-      <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(2)"><div class="gallery-img"><img src="assets/img/screen-home.jpg" alt="Interface tactile du Banc Connecté" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-mobile-screen\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> Interface tactile — Banc Connecté</div></div>
-      <div class="gallery-item reveal reveal-delay-2" onclick="openLightbox(3)"><div class="gallery-img"><img src="assets/img/screen-meteo.jpg" alt="Module météo — données locales" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-cloud-sun\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-cloud-sun" aria-hidden="true"></i> Module météo — données locales pré-enregistrées</div></div>
-      <div class="gallery-item reveal reveal-delay-3" onclick="openLightbox(4)"><div class="gallery-img"><img src="assets/img/arduino-code.jpg" alt="Développement Python — script sensor_manager.py" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-laptop-code\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Développement Python — script sensor_manager.py</div></div>
-      <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(5)"><div class="gallery-img"><img src="assets/img/Ebench_affiche.png" alt="Affiche de présentation du projet E-Bench" loading="lazy" style="object-fit:contain;background:var(--bg-2);" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-image\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-image" aria-hidden="true"></i> Affiche de présentation du projet E-Bench</div></div>
+      <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(0)" data-src="assets/img/arduino-board.jpg" data-caption="Arduino Uno — tests de câblage capteur PIR"><div class="gallery-img"><img src="assets/img/arduino-board.jpg" alt="Arduino Uno — tests de câblage capteur PIR" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-microchip\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-microchip" aria-hidden="true"></i> Arduino Uno — tests de câblage capteur PIR</div></div>
+      <div class="gallery-item reveal reveal-delay-2" onclick="openLightbox(1)" data-src="assets/img/solar-panel.jpg" data-caption="Panneau solaire monocristallin 500Wc"><div class="gallery-img"><img src="assets/img/solar-panel.jpg" alt="Panneau solaire monocristallin 500Wc" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-solar-panel\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i> Panneau solaire monocristallin 500Wc</div></div>
+      <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(2)" data-src="assets/img/screen-home.jpg" data-caption="Interface tactile — Banc Connecté"><div class="gallery-img"><img src="assets/img/screen-home.jpg" alt="Interface tactile du Banc Connecté" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-mobile-screen\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> Interface tactile — Banc Connecté</div></div>
+      <div class="gallery-item reveal reveal-delay-2" onclick="openLightbox(3)" data-src="assets/img/screen-meteo.jpg" data-caption="Module météo — données locales pré-enregistrées"><div class="gallery-img"><img src="assets/img/screen-meteo.jpg" alt="Module météo — données locales" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-cloud-sun\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-cloud-sun" aria-hidden="true"></i> Module météo — données locales pré-enregistrées</div></div>
+      <div class="gallery-item reveal reveal-delay-3" onclick="openLightbox(4)" data-src="assets/img/arduino-code.jpg" data-caption="Développement Python — script sensor_manager.py"><div class="gallery-img"><img src="assets/img/arduino-code.jpg" alt="Développement Python — script sensor_manager.py" loading="lazy" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-laptop-code\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Développement Python — script sensor_manager.py</div></div>
+      <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox(5)" data-src="assets/img/Ebench_affiche.png" data-caption="Affiche de présentation du projet E-Bench"><div class="gallery-img"><img src="assets/img/Ebench_affiche.png" alt="Affiche de présentation du projet E-Bench" loading="lazy" style="object-fit:contain;background:var(--bg-2);" onerror="this.outerHTML='<div class=img-placeholder><i class=\'fa-solid fa-image\' aria-hidden=\'true\'></i></div>'"></div><div class="gallery-caption"><i class="fa-solid fa-image" aria-hidden="true"></i> Affiche de présentation du projet E-Bench</div></div>
     </div>
   </div></div>
 </section>
@@ -1188,7 +1182,7 @@
 <!-- ════════════════════════════════════════
      PAGE 10 — PLANNING
      ════════════════════════════════════════ -->
-<section class="page" id="page-planning" role="tabpanel" aria-labelledby="tab-planning">
+<section class="page" id="page-planning" role="region" aria-label="Planning">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Planning du Projet</div>
     <h2 class="section-title reveal">Planning du Projet</h2>
@@ -1440,7 +1434,7 @@
 <!-- ════════════════════════════════════════
      PAGE MATLAB — ANALYSE ÉNERGÉTIQUE
      ════════════════════════════════════════ -->
-<section class="page" id="page-matlab" role="tabpanel" aria-labelledby="tab-matlab">
+<section class="page" id="page-matlab" role="region" aria-label="MATLAB">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Analyse MATLAB</div>
     <h2 class="section-title reveal">Analyse Énergétique <span style="color:var(--primary)">MATLAB</span></h2>
@@ -1734,13 +1728,7 @@
   }
   window.closeMobileMenu = closeMobileMenu;
 
-  // Close mobile menu on Escape
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeMobileMenu();
-      closeAllDropdowns();
-    }
-  });
+  // Close mobile menu and dropdowns on Escape (merged with modal focus-trap below)
 
   // Close mobile menu on resize to desktop
   window.addEventListener('resize', function() {
@@ -1766,7 +1754,7 @@
   /* ── Chart switch (Été / Hiver) ── */
   var chartData = {
     ete:  { prod: '1.7 kWh', conso: '0.416 kWh', stock: '0.6 kWh', barProd: '100%', barConso: '25%', barStock: '100%' },
-    hiver: { prod: '0.4 kWh', conso: '0.416 kWh', stock: '0.6 kWh', barProd: '24%', barConso: '100%', barStock: '100%' }
+    hiver: { prod: '0.4 kWh', conso: '0.416 kWh', stock: '0.6 kWh', barProd: '24%', barConso: '100%', barStock: '35%' }
   };
   window.switchChart = function(season) {
     var d = chartData[season];
@@ -2139,7 +2127,6 @@ document.getElementById('sum-6').innerHTML=sumBox('Prod. semaine',(tp/1000).toFi
 /* ═══════════════ INIT ═══════════════ */
 const renderers=[render03,render04,render06,render07];
 window._initMatlabPage=function(){showMPage(0);};
-(function(){var h=window.location.hash.replace('#','');if(h==='matlab'&&window._initMatlabPage)window._initMatlabPage();})();
 
 /* ═══════════════ GALLERY LIGHTBOX ═══════════════ */
 var lightboxIndex = 0;
@@ -2148,16 +2135,12 @@ var lightboxImages = [];
 
 function initLightbox() {
   lightboxImages = [];
-  document.querySelectorAll('.gallery-item').forEach(function(item) {
-    var img = item.querySelector('img');
-    var caption = item.querySelector('.gallery-caption');
-    if (img) {
-      lightboxImages.push({
-        src: img.src,
-        alt: img.alt,
-        caption: caption ? caption.textContent.trim() : ''
-      });
-    }
+  document.querySelectorAll('.gallery-item[data-src]').forEach(function(item) {
+    lightboxImages.push({
+      src: item.getAttribute('data-src'),
+      alt: item.getAttribute('data-caption') || '',
+      caption: item.getAttribute('data-caption') || ''
+    });
   });
 }
 

@@ -335,7 +335,7 @@ small, .text-sm { font-size: 0.85rem; }
 }
 
 .nav-dropdown-toggle {
-  composes: nav-link;
+  /* Inherits .nav-link styles via HTML class attribute */
 }
 
 .nav-dropdown-toggle::after {
