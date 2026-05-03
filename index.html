@@ -510,9 +510,17 @@
       border-radius: 12px;
       max-width: 500px;
       width: 90%;
-      max-height: 80vh;
+      max-height: 90vh;
       overflow-y: auto;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .modal-content::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+      background: transparent;
     }
     .modal-header {
       padding: 20px 24px;
@@ -520,6 +528,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-shrink: 0;
     }
     .modal-header h3 {
       margin: 0;
@@ -539,6 +548,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
     .modal-close:hover {
       color: var(--text-main);
