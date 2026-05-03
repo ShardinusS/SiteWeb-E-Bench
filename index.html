@@ -2197,29 +2197,44 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="modal-overlay" id="modal-hypotheses">
   <div class="modal-content">
     <div class="modal-header">
-      <h3><i class="fa-solid fa-clipboard-list"></i> Hypothèses de consommation</h3>
+      <h3><i class="fa-solid fa-gears"></i> Fiche technique – Consommation énergétique</h3>
       <button class="modal-close" id="modal-close"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="modal-body">
-      <p style="margin-bottom:16px"><strong>Équipements installés sur le banc public connecté :</strong></p>
+      <p style="margin-bottom:16px"><strong><i class="fa-solid fa-microchip"></i> Configuration :</strong></p>
       <ul>
-        <li><strong>Raspberry Pi 3B+</strong> (contrôleur principal) : 5.0W moyen, fonctionne 24h/24</li>
-        <li><strong>Écran LCD 7"</strong> (affichage informations) : 5.0W quand allumé, utilisé ~6h/jour (1-3 personnes consultent l'écran chaque heure)</li>
-        <li><strong>Capteur PIR</strong> (détection présence) : 0.2W, toujours actif</li>
-        <li><strong>Ports USB</strong> (charge téléphones/usagers) : 
-          <ul style="margin:4px 0 4px 20px">
-            <li>USB-C (2 ports) : 51W max total (charge rapide), utilisé ~2h/jour en pic</li>
-            <li>USB-A (2 ports) : 14W max total (charge standard), utilisé ~3h/jour</li>
-            <li>Usage estimé : <strong>5-10 personnes</strong> chargent leur téléphone par jour</li>
-          </ul>
-        </li>
-        <li><strong>Pertes convertisseur DC-DC</strong> : 0.3W en permanence</li>
+        <li>Raspberry Pi 3B+</li>
+        <li>Écran LCD 7" (activation par présence)</li>
+        <li>Capteur PIR</li>
+        <li>2 × USB-C + 2 × USB-A</li>
+        <li>Convertisseur DC-DC</li>
+      </ul>
+      <p style="margin-bottom:16px;margin-top:20px"><strong><i class="fa-solid fa-users"></i> Usage :</strong></p>
+      <ul>
+        <li>8 à 12 utilisateurs / jour</li>
+        <li>~10 recharges quotidiennes</li>
+        <li>~15 Wh utile / recharge (≈18 Wh avec pertes)</li>
+        <li>Jusqu'à 4 appareils simultanés</li>
+      </ul>
+      <p style="margin-bottom:16px;margin-top:20px"><strong><i class="fa-solid fa-bolt"></i> Consommation :</strong></p>
+      <ul>
+        <li>Système (24h) : 120 Wh/j</li>
+        <li>Écran : 20 Wh/j</li>
+        <li>USB : 150–180 Wh/j</li>
       </ul>
       <div class="hypothesis-result">
-        <strong>📊 Résultat énergétique :</strong><br>
-        Consommation moyenne = <strong>~415 Wh/jour</strong> (17.3W de moyenne)<br>
-        Soit environ <strong>12.5 kWh/mois</strong> en usage réel
+        <strong><i class="fa-solid fa-arrow-right"></i> Total retenu : ~300 Wh/jour</strong>
       </div>
+      <p style="margin-bottom:16px;margin-top:20px"><strong><i class="fa-solid fa-plug"></i> Caractéristiques électriques :</strong></p>
+      <ul>
+        <li>Puissance moyenne : ~12.5 W</li>
+        <li>Puissance max instantanée : ~60 W</li>
+      </ul>
+      <p style="margin-bottom:16px;margin-top:20px"><strong><i class="fa-solid fa-ruler-combined"></i> Dimensionnement :</strong></p>
+      <ul>
+        <li>Valeur incluant usage réel + marge de sécurité</li>
+        <li>Pic possible : ~400 Wh/jour</li>
+      </ul>
     </div>
   </div>
 </div>

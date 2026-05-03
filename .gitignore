@@ -1,1 +1,1 @@
-*.html
+(index.html is a source file, so no .gitignore content needed)
