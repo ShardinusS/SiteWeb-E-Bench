@@ -389,7 +389,7 @@
     #page-matlab .summary-box .label { font-size: .68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .5px; }
     #page-matlab .summary-box .value { font-family: 'Bebas Neue', cursive; font-size: 1.7rem; margin-top: 2px; line-height: 1.1; }
     #page-matlab .summary-box .unit { font-family: 'Space Grotesk', sans-serif; font-size: .72rem; color: var(--text-muted); }
-    #page-matlab .mcard { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin-bottom: 18px; box-shadow: var(--shadow); }
+    #page-matlab .mcard { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin-bottom: 18px; box-shadow: var(--shadow); position: relative; }
     #page-matlab .mcard h3 { font-size: .95rem; font-weight: 600; margin-bottom: 14px; color: var(--text); display: flex; align-items: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; }
     #page-matlab .mcard h3 i { color: var(--primary); font-size: .82rem; }
     #page-matlab .chart-container { width: 100%; min-height: 360px; }
@@ -457,7 +457,7 @@
     /* Bouton information graphique */
     .info-btn {
       position: absolute;
-      top: 10px;
+      top: 5px;
       right: 10px;
       background: rgba(59, 130, 246, 0.1);
       border: none;
@@ -472,6 +472,7 @@
       font-size: 16px;
       transition: all 0.2s ease;
       z-index: 10;
+      pointer-events: auto;
     }
     .info-btn:hover {
       background: rgba(59, 130, 246, 0.2);
@@ -480,9 +481,11 @@
     .mcard h3 {
       position: relative;
       display: block;
+      min-height: 60px;
     }
     .chart-container {
       position: relative;
+      min-height: 300px;
     }
     #btn-hypotheses {
       pointer-events: auto !important;
@@ -508,7 +511,7 @@
     .modal-content {
       background: var(--bg-card);
       border-radius: 12px;
-      max-width: 500px;
+      max-width: 800px;
       width: 90%;
       max-height: 90vh;
       overflow-y: auto;
@@ -557,6 +560,12 @@
       padding: 24px;
       line-height: 1.7;
       color: var(--text);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .modal-body > p {
+      grid-column: 1 / -1;
     }
     .modal-body ul {
       margin: 12px 0 12px 24px;
@@ -565,6 +574,7 @@
       margin-bottom: 8px;
     }
     .hypothesis-result {
+      grid-column: 1 / -1;
       margin-top: 16px;
       padding: 12px;
       background: rgba(0, 212, 160, 0.08);
@@ -1442,7 +1452,7 @@
   <div class="page-header"><h2>01 — Bilan Énergétique <span>Annuel</span></h2><p>Production vs consommation mois par mois — Panneau 500Wc, inclinaison 37°</p></div>
   <div class="summary-grid" id="sum-2"></div>
   
-  <div class="mcard"><h3><i class="fa-solid fa-chart-column"></i> Production vs Consommation mensuelle<span style="position:absolute;right:10px;top:5px;"><button class="info-btn" id="btn-hypotheses" title="Voir les hypothèses"><i class="fa-solid fa-circle-info"></i></button></span></h3><div id="ch-bilan-monthly" class="chart-container"></div></div>
+  <div class="mcard"><h3><i class="fa-solid fa-chart-column"></i> Production vs Consommation mensuelle<span style="position:absolute;right:10px;top:8px;"><button class="info-btn" id="btn-hypotheses" title="Voir les hypothèses"><i class="fa-solid fa-circle-info"></i></button></span></h3><div id="ch-bilan-monthly" class="chart-container"></div></div>
   <div class="mcard"><h3><i class="fa-solid fa-scale-balanced"></i> Bilan net mensuel</h3><div id="ch-bilan-net" class="chart-container"></div></div>
 </div>
 
@@ -2211,7 +2221,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button class="modal-close" id="modal-close"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="modal-body">
-      <p style="margin-bottom:16px"><strong><i class="fa-solid fa-microchip"></i> Configuration :</strong></p>
+      <p><strong><i class="fa-solid fa-microchip"></i> Configuration :</strong></p>
       <ul>
         <li>Raspberry Pi 3B+</li>
         <li>Écran LCD 7" (activation par présence)</li>
@@ -2219,14 +2229,14 @@ document.addEventListener('DOMContentLoaded', function() {
         <li>2 × USB-C + 2 × USB-A</li>
         <li>Convertisseur DC-DC</li>
       </ul>
-      <p style="margin-bottom:16px;margin-top:20px"><strong><i class="fa-solid fa-users"></i> Usage :</strong></p>
+      <p><strong><i class="fa-solid fa-users"></i> Usage :</strong></p>
       <ul>
         <li>8 à 12 utilisateurs / jour</li>
         <li>~10 recharges quotidiennes</li>
         <li>~15 Wh utile / recharge (≈18 Wh avec pertes)</li>
         <li>Jusqu'à 4 appareils simultanés</li>
       </ul>
-      <p style="margin-bottom:16px;margin-top:20px"><strong><i class="fa-solid fa-bolt"></i> Consommation :</strong></p>
+      <p><strong><i class="fa-solid fa-bolt"></i> Consommation :</strong></p>
       <ul>
         <li>Système (24h) : 120 Wh/j</li>
         <li>Écran : 20 Wh/j</li>
@@ -2235,12 +2245,12 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="hypothesis-result">
         <strong><i class="fa-solid fa-arrow-right"></i> Total retenu : ~300 Wh/jour</strong>
       </div>
-      <p style="margin-bottom:16px;margin-top:20px"><strong><i class="fa-solid fa-plug"></i> Caractéristiques électriques :</strong></p>
+      <p><strong><i class="fa-solid fa-plug"></i> Caractéristiques électriques :</strong></p>
       <ul>
         <li>Puissance moyenne : ~12.5 W</li>
         <li>Puissance max instantanée : ~60 W</li>
       </ul>
-      <p style="margin-bottom:16px;margin-top:20px"><strong><i class="fa-solid fa-ruler-combined"></i> Dimensionnement :</strong></p>
+      <p><strong><i class="fa-solid fa-ruler-combined"></i> Dimensionnement :</strong></p>
       <ul>
         <li>Valeur incluant usage réel + marge de sécurité</li>
         <li>Pic possible : ~400 Wh/jour</li>
