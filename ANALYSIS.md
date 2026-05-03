@@ -7,6 +7,11 @@
 
 ---
 
+> ⚠️ **CORRECTIONS v2 — Mai 2026** : Ce document a été mis à jour suite à un audit technique.
+> Principales corrections : consommation réelle 0.42 kWh/j (non 0.12), Voc panneau 41.8V (non 48V), 
+> autonomie réelle ~1.2j usage intensif / ~4.2j veille, modèle diode 60 cellules (non 72).
+
+
 ## 1. Vue d'ensemble du projet
 
 ### 1.1 Objectif du site
@@ -139,7 +144,7 @@ Le "métier" du site est la **présentation d'un projet technique** :
 2. Le système comprend :
    - Panneau solaire 500Wc monocristallin
    - Régulateur MPPT Victron SmartSolar 150|35
-   - Batterie GEL 12V 100Ah (1.2 kWh)
+   - Batterie GEL 12V 100Ah (1.2 kWh total, 0.6 kWh utile à 50% DoD)
    - Raspberry Pi 3B comme cerveau (Python 3.11, asyncio)
    - Écran tactile 7" IPS
    - Capteur PIR HC-SR501 (détection de présence)

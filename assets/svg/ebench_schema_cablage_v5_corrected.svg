@@ -2500,7 +2500,7 @@
        text-anchor="middle"
        dominant-baseline="central"
        style="fill:rgb(133, 79, 11);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central"
-       id="text63">Monocristallin — Voc 48V / Isc 13A</text>
+       id="text63">Monocristallin — Voc 41.8V / Isc 13.89A</text>
   </g>
   <line
      x1="300"

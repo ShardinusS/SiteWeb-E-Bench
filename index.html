@@ -872,7 +872,7 @@
       <p style="color:var(--text-sub);margin-bottom:8px">Transparence sur les contraintes actuelles et les pistes d'amélioration.</p>
       <div class="limits-grid">
         <div class="limit-card"><div class="lc-icon"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div><h4>Raspberry Pi 3B</h4><div class="limit-item limit-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Limite : Énergivore (~5W continu), surdimensionné pour la tâche</span></div><div class="limit-item limit-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>V2 : Pi Zero 2W (~0.5-1W), autonomie ×5</span></div></div>
-        <div class="limit-card"><div class="lc-icon"><i class="fa-solid fa-battery-half" aria-hidden="true"></i></div><h4>Batterie GEL 100Ah</h4><div class="limit-item limit-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Limite : ~500 cycles à 50% DOD (~3,3 ans). En pratique, DOD quotidien bien inférieur → durée de vie réelle 5-7 ans</span></div><div class="limit-item limit-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>V2 : LiFePO4 (3000+ cycles, -20°C à +60°C)</span></div></div>
+        <div class="limit-card"><div class="lc-icon"><i class="fa-solid fa-battery-half" aria-hidden="true"></i></div><h4>Batterie GEL 100Ah</h4><div class="limit-item limit-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Limite : ~500 cycles à 50% DOD (~2 ans usage intensif sans soleil, 5-7 ans en usage typique avec production solaire)</span></div><div class="limit-item limit-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>V2 : LiFePO4 (3000+ cycles, -20°C à +60°C)</span></div></div>
         <div class="limit-card"><div class="lc-icon"><i class="fa-solid fa-tower-cell" aria-hidden="true"></i></div><h4>Aucune connexion réseau</h4><div class="limit-item limit-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Limite : Affichage local seulement, pas de monitoring à distance</span></div><div class="limit-item limit-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>V2 : Module 4G + dashboard web distant</span></div></div>
         <div class="limit-card"><div class="lc-icon"><i class="fa-solid fa-snowflake" aria-hidden="true"></i></div><h4>Bilan hivernal</h4><div class="limit-item limit-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Limite : Production &lt; consommation dans la Somme en janvier</span></div><div class="limit-item limit-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>V2 : Délestage automatique + veille profonde</span></div></div>
       </div>
@@ -890,7 +890,7 @@
     <p class="section-sub reveal">Chaque composant a été sélectionné pour sa fiabilité et sa durabilité. Système 100&nbsp;% autonome, fonctionnel sans aucune connexion réseau.</p>
     <div class="features-grid">
       <div class="feature-card fc-green reveal"><div class="fc-header"><i class="fa-solid fa-plug" aria-hidden="true"></i></div><div class="fc-title">Recharge & Usage</div><div class="spec-item"><span class="spec-dot dot-green"></span>2× USB-C + 2× USB-A</div><div class="spec-item"><span class="spec-dot dot-green"></span>Alimentation 100% solaire locale</div><div class="spec-item"><span class="spec-dot dot-green"></span>Fonctionnement hors-ligne 24h/24</div></div>
-      <div class="feature-card fc-blue reveal reveal-delay-1"><div class="fc-header"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></div><div class="fc-title">Énergie Durable</div><div class="spec-item"><span class="spec-dot dot-blue"></span>1× Panneau 500Wc monocristallin</div><div class="spec-item"><span class="spec-dot dot-blue"></span>Batterie GEL 100Ah 12V</div><div class="spec-item"><span class="spec-dot dot-blue"></span>Contrôleur MPPT Victron 150|35</div><div class="spec-item"><span class="spec-dot dot-blue"></span>5+ jours autonomie sans soleil</div></div>
+      <div class="feature-card fc-blue reveal reveal-delay-1"><div class="fc-header"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></div><div class="fc-title">Énergie Durable</div><div class="spec-item"><span class="spec-dot dot-blue"></span>1× Panneau 500Wc monocristallin</div><div class="spec-item"><span class="spec-dot dot-blue"></span>Batterie GEL 100Ah 12V</div><div class="spec-item"><span class="spec-dot dot-blue"></span>Contrôleur MPPT Victron 150|35</div><div class="spec-item"><span class="spec-dot dot-blue"></span>~4 jours autonomie (veille) / ~1.2j usage réel</div></div>
       <div class="feature-card fc-amber reveal reveal-delay-2"><div class="fc-header"><i class="fa-solid fa-robot" aria-hidden="true"></i></div><div class="fc-title">Intelligence Embarquée</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Raspberry Pi 3B</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Capteur PIR HC-SR501 GPIO direct</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Écran tactile 7" IPS</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Traitement 100% local hors-ligne</div></div>
     </div>
   </div></div>
@@ -996,7 +996,7 @@
         <svg viewBox="0 0 680 860" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;padding:20px" role="img" aria-label="Schéma de câblage complet du système E-Bench 2026">
           <rect x="190" y="20" width="300" height="70" rx="10" fill="#2a2210" stroke="#F59E0B" stroke-width="1.5"/>
           <text x="340" y="50" text-anchor="middle" fill="#FBBF24" font-size="13" font-family="Bebas Neue,cursive">PANNEAU SOLAIRE 500Wc</text>
-          <text x="340" y="72" text-anchor="middle" fill="#D4A00A" font-size="9" font-family="JetBrains Mono,monospace">Voc 48V · Isc 13A · Monocristallin</text>
+          <text x="340" y="72" text-anchor="middle" fill="#D4A00A" font-size="9" font-family="JetBrains Mono,monospace">Voc 41.8V · Isc 13.89A · Monocristallin</text>
           <line x1="290" y1="90" x2="290" y2="130" stroke="#EF4444" stroke-width="2.5"/>
           <text x="272" y="108" fill="#EF4444" font-size="7" font-family="JetBrains Mono,monospace" text-anchor="end">PV+</text>
           <line x1="390" y1="90" x2="390" y2="160" stroke="#3B82F6" stroke-width="2.5"/>
@@ -1103,7 +1103,7 @@
           <div class="metric-box mb-amber"><div class="mb-icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></div><div class="mb-val">5+ jrs</div><div class="mb-lbl">Autonomie</div></div>
         </div>
         <p style="color:var(--text-sub);margin-bottom:16px;line-height:1.7">Le contrôleur MPPT Victron SmartSolar 150|35 optimise en permanence le point de puissance maximale du panneau, offrant un gain de <strong style="color:var(--primary)">+30% de rendement</strong> par rapport à un régulateur PWM classique.</p>
-        <p style="color:var(--text-sub);line-height:1.7">Avec une consommation moyenne d'environ <strong>5W</strong> (de <strong>5W</strong> en veille à <strong>62W</strong> en pic — Raspberry Pi, écran, USB-C pleine charge), le système assure une disponibilité supérieure à <strong>99%</strong> en Hauts-de-France. La puissance des ports USB est bridée logiciellement pour préserver l'autonomie. Le mode éco s'active sous 20% de batterie.</p>
+        <p style="color:var(--text-sub);line-height:1.7">Avec une consommation moyenne de <strong>17.3W</strong> (de <strong>5.5W</strong> en veille à <strong>62.1W</strong> en pic — Raspberry Pi, écran, USB-C pleine charge — soit <strong>0.416 kWh/jour</strong> en usage typique), le système assure une disponibilité supérieure à <strong>99%</strong> en Hauts-de-France. La puissance des ports USB est bridée logiciellement pour préserver l'autonomie. Le mode éco s'active sous 20% de batterie.</p>
       </div>
       <div class="chart-box reveal reveal-delay-1">
         <div class="chart-header">
@@ -1118,7 +1118,7 @@
           <div class="chart-bar-track"><div class="chart-bar-fill cb-green" id="barProd" style="width:100%" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
         </div>
           <div class="chart-row">
-          <div class="chart-row-label"><span><i class="fa-solid fa-bolt" style="color:var(--amber)" aria-hidden="true"></i> Consommation</span><span class="cr-val mono" id="chartConso">0.12 kWh</span></div>
+          <div class="chart-row-label"><span><i class="fa-solid fa-bolt" style="color:var(--amber)" aria-hidden="true"></i> Consommation</span><span class="cr-val mono" id="chartConso">0.42 kWh</span></div>
           <div class="chart-bar-track"><div class="chart-bar-fill cb-amber" id="barConso" style="width:7%" role="progressbar" aria-valuenow="7" aria-valuemin="0" aria-valuemax="100"></div></div>
         </div>
         <div class="chart-row">
@@ -1743,8 +1743,8 @@
 
   /* ── Chart switch (Été / Hiver) ── */
   var chartData = {
-    ete:  { prod: '1.7 kWh', conso: '0.12 kWh', stock: '0.6 kWh', barProd: '100%', barConso: '7%', barStock: '100%' },
-    hiver: { prod: '0.4 kWh', conso: '0.12 kWh', stock: '0.6 kWh', barProd: '24%', barConso: '30%', barStock: '100%' }
+    ete:  { prod: '1.7 kWh', conso: '0.416 kWh', stock: '0.6 kWh', barProd: '100%', barConso: '25%', barStock: '100%' },
+    hiver: { prod: '0.4 kWh', conso: '0.416 kWh', stock: '0.6 kWh', barProd: '24%', barConso: '100%', barStock: '100%' }
   };
   window.switchChart = function(season) {
     var d = chartData[season];
@@ -1966,7 +1966,7 @@ document.getElementById('sum-0').innerHTML=sumBox('Max (été)',mx.toFixed(1),'h
 /* ═══════════════ SCRIPT 02: CONSOMMATION ═══════════════ */
 function render02(){
 const hrs=[];for(let h=0;h<=24;h+=1/60)hrs.push(h);
-// Consommations réelles sans LEDs (valeurs mesurées)
+// Consommations réelles (valeurs mesurées)
 const Pr_a=5.0,Pr_p=5.5,Pr_i=5.0,Pe=5.0,Pp=0.2,Pu_c=51.1,Pu_a=13.6,Pd=0.3;
 const R=[],E=[],C=[],U=[],DC=[];
 for(const h of hrs){C.push(Pp);if(h<6){R.push(Pr_i);E.push(0);U.push(0);DC.push(Pd)}else if(h<8){R.push(Pr_a);E.push(Pe*.3);U.push(0);DC.push(Pd)}else if(h<12){R.push(Pr_a);E.push(Pe*.6);U.push(Pu_a*.2);DC.push(Pd)}else if(h<14){R.push(Pr_p);E.push(Pe);U.push(Pu_c);DC.push(Pd)}else if(h<18){R.push(Pr_a);E.push(Pe*.5);U.push(Pu_a*.3);DC.push(Pd)}else if(h<22){R.push(Pr_p);E.push(Pe*.7);U.push(Pu_c*.5);DC.push(Pd)}else{R.push(Pr_i);E.push(0);U.push(0);DC.push(Pd)}}
@@ -1976,9 +1976,9 @@ const nm=['Raspberry Pi 3B','Écran LCD 7"','Capteur PIR','Ports USB','Pertes DC
 Plotly.newPlot('ch-conso-stack',ds.map((d,i)=>({x:h_s,y:d,name:nm[i],stackgroup:'one',fillcolor:cl[i],line:{color:cl[i],width:0}})),plotLayout({title:'Profil de consommation journalier',xaxis:{title:'Heure',range:[0,24],dtick:2},yaxis:{title:'Puissance (W)'}}),pCfg);
 const En=[R,E,C,U,DC].map(p=>trapz(hrs,p)),Et=En.reduce((a,b)=>a+b,0);
 Plotly.newPlot('ch-conso-pie',[{values:En,labels:nm,type:'pie',marker:{colors:cl},textinfo:'label+percent',textfont:{size:10}}],plotLayout({title:`Répartition — Total: ${Et.toFixed(0)} Wh/jour`}),pCfg);
-// Modes sans LEDs : Veille (nuit/absence), Actif (écran ON), Pic (USB-C pleine charge)
+// Modes : Veille (nuit/absence), Actif (écran ON), Pic (USB-C pleine charge)
 const mN=['Veille','Actif','Pic USB-C'],mP=[Pr_i+Pp+Pd,Pr_a+Pe+Pp+Pd,Pr_p+Pe+Pp+Pu_c+Pd],mC=['#4d4db3','#4dcc4d','#ff9900'];
-Plotly.newPlot('ch-conso-modes',[{x:mN,y:mP,type:'bar',marker:{color:mC},text:mP.map(v=>v.toFixed(1)+'W'),textposition:'outside'}],plotLayout({title:'Puissance par mode (sans LEDs)',yaxis:{title:'Puissance (W)'}}),pCfg);
+Plotly.newPlot('ch-conso-modes',[{x:mN,y:mP,type:'bar',marker:{color:mC},text:mP.map(v=>v.toFixed(1)+'W'),textposition:'outside'}],plotLayout({title:'Puissance par mode',yaxis:{title:'Puissance (W)'}}),pCfg);
 const Pt=hrs.map((_,i)=>R[i]+E[i]+C[i]+U[i]+DC[i]);
 document.getElementById('sum-1').innerHTML=sumBox('Total/jour',Et.toFixed(0),'Wh','')+sumBox('Puiss. moyenne',(Et/24).toFixed(1),'W','green')+sumBox('Pic max',Math.max(...Pt).toFixed(1),'W','red')+sumBox('Veille min',Math.min(...Pt).toFixed(1),'W','blue');
 }
@@ -2027,16 +2027,16 @@ document.getElementById('sum-2').innerHTML=sumBox('Prod. annuelle',tp.toFixed(0)
 /* ═══════════════ SCRIPT 04: BATTERIE ═══════════════ */
 function render04(){
 const C=100,V=12,Eb=C*V,D50=.5,D80=.8,eta_bat=.85;
-// Puissances réelles sans LEDs : Veille=5.2W, Actif=10.2W, Pic=61W
-const mP=[5.2,10.2,30,61],mN=['Veille','Actif','Pic modéré','Pic USB-C'],mC=['#00D4A0','#3B82F6','#F59E0B','#EF4444'];
+// Puissances réelles : Veille=5.5W, Actif=10.5W, Pic=62.1W
+const mP=[5.5,10.5,30.3,62.1],mN=['Veille','Actif','Pic modéré','Pic USB-C'],mC=['#00D4A0','#3B82F6','#F59E0B','#EF4444'];
 const Pr=[];for(let p=1;p<=70;p++)Pr.push(p);
 const a50=Pr.map(p=>D50*Eb*eta_bat/p),a80=Pr.map(p=>D80*Eb*eta_bat/p);
 const tr=[{x:Pr,y:a50,name:'DoD 50%',line:{color:'#3B82F6',width:2.5}},{x:Pr,y:a80,name:'DoD 80%',line:{color:'#EF4444',dash:'dash',width:2}}];
 mP.forEach((p,i)=>{const a=D50*Eb*eta_bat/p;tr.push({x:[p],y:[a],mode:'markers+text',name:`${mN[i]} (${p}W)`,marker:{size:12,color:mC[i]},text:[a.toFixed(0)+'h'],textposition:'top center'})});
 Plotly.newPlot('ch-bat-auto',tr,plotLayout({title:'Autonomie batterie 100Ah/12V (600Wh utiles)',xaxis:{title:'Puissance (W)',range:[0,70]},yaxis:{title:'Autonomie (h)',range:[0,140]}}),pCfg);
 const h120=[];for(let h=0;h<=120;h+=.1)h120.push(h);
-// Profil réaliste banc public : nuit 5W, jour mixte 5-10W
-const ld=h120.map(h=>{const hm=h%24;if(hm<6)return 5.2;if(hm<8)return 8;if(hm<12)return 5.2;if(hm<14)return 10.2;if(hm<18)return 5.2;if(hm<22)return 10.2;return 5.2});
+// Profil réaliste banc public : cohérent avec le profil render02 (RPi + écran + USB + PIR + DC-DC)
+const ld=h120.map(h=>{const hm=h%24;if(hm<6)return 5.5;if(hm<8)return 7.0;if(hm<12)return 11.22;if(hm<14)return 62.1;if(hm<18)return 12.08;if(hm<22)return 35.05;return 5.5});
 const SOC=[100];for(let i=1;i<h120.length;i++){const e=ld[i-1]*.1/eta_bat;SOC.push(Math.max(0,SOC[i-1]-e/Eb*100))}
 const i50=SOC.findIndex(s=>s<=50),i20=SOC.findIndex(s=>s<=20),ann=[];
 if(i50>=0)ann.push({x:h120[i50],y:50,text:h120[i50].toFixed(0)+'h (~5j)',showarrow:true,arrowhead:2,font:{color:'#F59E0B'}});
@@ -2044,7 +2044,7 @@ if(i20>=0)ann.push({x:h120[i20],y:20,text:h120[i20].toFixed(0)+'h',showarrow:tru
 Plotly.newPlot('ch-bat-dchg',[{x:h120,y:SOC,line:{color:'#3B82F6',width:2}}],plotLayout({title:'Décharge 5 jours sans soleil (usage réel)',xaxis:{title:'Heures',range:[0,120],dtick:12},yaxis:{title:'SOC (%)',range:[0,105]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:120,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:120,line:{color:'#EF4444'}}],annotations:ann}),pCfg);
 const Dv=[10,20,30,40,50,60,70,80,90,100],cy=[6000,3500,2500,1800,1200,800,550,400,300,200];
 // Graphique ch-bat-cycles supprimé - données présentées dans le résumé textuel
-document.getElementById('sum-3').innerHTML=sumBox('Capacité','100 Ah / 12V','= 1200 Wh','')+sumBox('Utile (DoD50%)','600','Wh','green')+sumBox('Autonomie @5W',(D50*Eb*eta_bat/5).toFixed(0),'h (~5j)','orange')+sumBox('Durée de vie','~3.3','ans (DoD50%)','blue');
+document.getElementById('sum-3').innerHTML=sumBox('Capacité','100 Ah / 12V','= 1200 Wh','')+sumBox('Utile (DoD50%)','600','Wh','green')+sumBox('Autonomie @5W (veille)',(D50*Eb*eta_bat/5).toFixed(0),'h (~4.2j)','orange')+sumBox('Durée de vie','~3.3','ans (DoD50%)','blue');
 }
 
 /* ═══════════════ SCRIPT 05: INCLINAISON ═══════════════ */
@@ -2066,8 +2066,8 @@ document.getElementById('sum-4').innerHTML=sumBox('Optimum',tilts[io],'°','gree
 /* ═══════════════ SCRIPT 06: COURBE I-V ═══════════════ */
 function render06(){
 const Isc=13.89,Voc=41.3,Impp=13.13,Vmpp=38.1,Pmpp=500;
-const n=1.20,Vt=.026*72;
-const Is=Impp/(Math.exp(Vmpp/(n*Vt))-1);
+const n=1.20,Vt=.026*60; // TrinaSolar 500W = 120 demi-cellules = 60 cellules équiv.
+const Is=(Isc-Impp)/(Math.exp(Vmpp/(n*Vt))-1); // formule correcte: Is=(Isc-Impp)/(...)
 const Vr=linspace(0,Voc*1.05,400),irr=[1000,800,600,400,200],cl=['#EF4444','#F59E0B','#00D4A0','#3B82F6','#A855F7'];
 const tIV=irr.map((G,g)=>{const Isc2=Isc*G/1000,Vo=Math.max(0,Voc+n*Vt*Math.log(G/1000));return{x:Vr,y:Vr.map(v=>v>Vo?0:Math.max(0,Isc2*(1-Math.exp((v-Vo)/(n*Vt))))),name:G+' W/m²',line:{color:cl[g],width:2}}});
 Plotly.newPlot('ch-iv',tIV,plotLayout({title:'Caractéristique I-V — TrinaSolar 500W',xaxis:{title:'Tension (V)',range:[0,45]},yaxis:{title:'Courant (A)',range:[0,16]}}),pCfg);
@@ -2096,8 +2096,8 @@ const Epd=[],Ecd=[],Sf=[];
 for(let d=0;d<7;d++){
 const sD=dS+d,mff=mf[d];
 const decl=solarDecl(sD),pw=[];for(const h of hD){const om=15*(h-12),a=solarElev(lat,decl,om);if(a<=0){pw.push(0);continue}const{Ibn,Idh,Igh}=hottel(a,sD,alt);const ct=Math.max(0,sind(decl)*sind(lat-tilt)+cosd(decl)*cosd(lat-tilt)*cosd(om));const It=(Ibn*ct+Idh*(1+cosd(tilt))/2+Igh*.2*(1-cosd(tilt))/2)*(mff||1);pw.push(Math.min(Pn,It/1000*Pn))}const powers=pw.map(p=>p*ETA_SYSTEM);
-// Profil de consommation réaliste sans LEDs : 5W nuit, 8-10W jour avec présence
-const ld=hD.map(h=>{if(h<6)return 5.2;if(h<8)return 8;if(h<12)return 5.2;if(h<14)return 10.2;if(h<18)return 5.2;if(h<22)return 10.2;return 5.2});
+// Profil de consommation : cohérent avec render02 (RPi + écran + USB + PIR + DC-DC)
+const ld=hD.map(h=>{if(h<6)return 5.5;if(h<8)return 7.0;if(h<12)return 11.22;if(h<14)return 62.1;if(h<18)return 12.08;if(h<22)return 35.05;return 5.5});
 const sd=[SC];for(let i=1;i<Nd;i++){const ep=powers[i-1]*dtH,el=ld[i-1]*dtH;let ns;if(ep>=el){let tb=(ep-el)*ec;tb=Math.min(tb,Pcm*dtH);ns=Math.min(Smax,sd[i-1]+tb/Ebat*100)}else{ns=Math.max(Smin,sd[i-1]-(el-ep)/ed/Ebat*100)}sd.push(ns)}
 SC=sd[sd.length-1];
 const tO=d*24;for(let i=0;i<Nd;i++){tA.push(tO+hD[i]);pvA.push(powers[i]);ldA.push(ld[i]);scA.push(sd[i])}
