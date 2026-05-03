@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="E-Bench 2026 : banc public intelligent 100% autonome en énergie solaire. Projet STI2D — 3e aux Olympiades des Sciences de l'Ingénieur, Hauts-de-France.">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://ebench.github.io/index.html">
+  <link rel="canonical" href="https://ebench.github.io/">
   <meta property="og:title" content="E-Bench 2026 — Le Mobilier Urbain Réinventé">
   <meta property="og:description" content="Banc public intelligent 100% autonome en énergie solaire. 3e aux Olympiades des Sciences de l'Ingénieur — Hauts-de-France.">
   <meta property="og:type" content="website">
@@ -65,11 +65,19 @@
     .eb-usb-sub{font-size:11px;color:var(--text-muted)}
     .eb-usb-active{width:6px;height:6px;border-radius:50%;background:var(--primary);flex-shrink:0}
 
-    /* Hide scrollbar */
-    html{scrollbar-width:none;-ms-overflow-style:none}
-    html::-webkit-scrollbar{display:none;width:0;height:0;background:transparent}
-    body{scrollbar-width:none;-ms-overflow-style:none}
-    body::-webkit-scrollbar{display:none;width:0;height:0;background:transparent}
+    /* Simulation badge */
+    .sim-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;padding:4px 10px;border-radius:100px;background:var(--primary-08);border:1px solid var(--primary-15);color:var(--primary);font-weight:500}
+    .sim-badge i{font-size:.65rem}
+
+    /* Scrollbar — thin on desktop, hidden on mobile */
+    html{scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+    html::-webkit-scrollbar{width:6px}
+    html::-webkit-scrollbar-track{background:transparent}
+    html::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+    @media(max-width:768px){
+      html{scrollbar-width:none;-ms-overflow-style:none}
+      html::-webkit-scrollbar{display:none}
+    }
 
     /* Scroll indicator */
     .scroll-indicator{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:80;animation:scrollBounce 2s ease-in-out infinite;transition:opacity .4s ease;pointer-events:none}
@@ -608,7 +616,7 @@
     </button>
 
     <!-- Desktop nav links (max 5 visible + dropdowns) -->
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links" id="navLinks" role="tablist" aria-label="Navigation principale">
       <li><button class="nav-link active" data-page="accueil" onclick="showPage('accueil')"><i class="fa-solid fa-house" aria-hidden="true"></i> Accueil</button></li>
 
       <!-- Dropdown: Le Projet -->
@@ -658,8 +666,8 @@
   <div class="mobile-nav-section">
     <div class="mobile-nav-section-title">Principal</div>
     <button class="mobile-nav-link active" data-page="accueil" onclick="showPage('accueil'); closeMobileMenu();"><i class="fa-solid fa-house" aria-hidden="true"></i> Accueil</button>
-    <button class="mobile-nav-link" data-page="galerie" onclick="showPage('galerie'); closeMobileMenu();"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</button>
     <button class="mobile-nav-link" data-page="normes" onclick="showPage('normes'); closeMobileMenu();"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Normes</button>
+    <button class="mobile-nav-link" data-page="galerie" onclick="showPage('galerie'); closeMobileMenu();"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</button>
   </div>
   <div class="mobile-nav-section">
     <div class="mobile-nav-section-title">Le Projet</div>
@@ -1455,6 +1463,7 @@
   
   <div class="mcard"><h3><i class="fa-solid fa-chart-column"></i> Production vs Consommation mensuelle<span style="position:absolute;right:10px;top:8px;"><button class="info-btn" id="btn-hypotheses" title="Voir les hypothèses"><i class="fa-solid fa-circle-info"></i></button></span></h3><div id="ch-bilan-monthly" class="chart-container"></div></div>
   <div class="mcard"><h3><i class="fa-solid fa-scale-balanced"></i> Bilan net mensuel</h3><div id="ch-bilan-net" class="chart-container"></div></div>
+  <div class="mcard"><h3><i class="fa-solid fa-table"></i> Détail mensuel</h3><div id="bilan-table" style="overflow-x:auto"></div></div>
 </div>
 
 <!-- PAGE 02 -->
@@ -1480,7 +1489,12 @@
   <div class="summary-grid" id="sum-6"></div>
   <div class="mcard"><h3><i class="fa-solid fa-solar-panel"></i> Production PV vs Consommation</h3><div id="ch-sim-power" class="chart-container"></div></div>
   <div class="mcard"><h3><i class="fa-solid fa-battery-half"></i> État de charge (SOC)</h3><div id="ch-sim-soc" class="chart-container"></div></div>
+  <div class="mcard"><h3><i class="fa-solid fa-table"></i> Tableau journalier</h3><div id="sim-table" style="overflow-x:auto"></div></div>
 </div>
+      </div><!-- /mlab-content -->
+    </div><!-- /mlab-layout -->
+  </div></div></section><!-- /page-matlab -->
+
 
 <!-- FOOTER (après toutes les pages) -->
 <footer class="footer" role="contentinfo">
@@ -1580,11 +1594,15 @@
   function updateNavHighlights(pageId) {
     // Desktop nav links
     document.querySelectorAll('.nav-link[data-page], .nav-dropdown-item[data-page]').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-page') === pageId);
+      var isActive = btn.getAttribute('data-page') === pageId;
+      btn.classList.toggle('active', isActive);
+      if (isActive) { btn.setAttribute('aria-current', 'page'); } else { btn.removeAttribute('aria-current'); }
     });
     // Mobile nav links
     document.querySelectorAll('.mobile-nav-link[data-page]').forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-page') === pageId);
+      var isActive = btn.getAttribute('data-page') === pageId;
+      btn.classList.toggle('active', isActive);
+      if (isActive) { btn.setAttribute('aria-current', 'page'); } else { btn.removeAttribute('aria-current'); }
     });
   }
 
@@ -1598,13 +1616,14 @@
 
     PAGES.forEach(function(p) {
       var el = document.getElementById('page-' + p);
-      if (el) { el.classList.remove('active'); el.style.display = 'none'; }
+      if (el) { el.classList.remove('active'); el.style.display = 'none'; el.setAttribute('aria-hidden', 'true'); }
     });
     var target = document.getElementById('page-' + id);
     if (!target) return;
     target.style.display = 'block';
     void target.offsetWidth;
     target.classList.add('active');
+    target.setAttribute('aria-hidden', 'false');
 
     // Reveal elements
     var reveals = target.querySelectorAll('.reveal');
@@ -2188,28 +2207,26 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'ArrowRight') nextLightbox();
 });
 
-// Modal hypothèses de consommation
-document.addEventListener('DOMContentLoaded', function() {
-  const btn = document.getElementById('btn-hypotheses');
-  const overlay = document.getElementById('modal-hypotheses');
-  const closeBtn = document.getElementById('modal-close');
-  
-  if (btn && overlay && closeBtn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      overlay.classList.add('active');
-    });
-    
-    closeBtn.addEventListener('click', function() {
-      overlay.classList.remove('active');
-    });
-    
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) {
-        overlay.classList.remove('active');
-      }
-    });
+// Modal hypothèses de consommation — event delegation (DOMContentLoaded already fired)
+document.addEventListener('click', function(e) {
+  if (e.target.closest('#btn-hypotheses')) {
+    e.preventDefault();
+    e.stopPropagation();
+    var overlay = document.getElementById('modal-hypotheses');
+    if (overlay) overlay.classList.add('active');
+  }
+  if (e.target.closest('#modal-close')) {
+    var overlay = document.getElementById('modal-hypotheses');
+    if (overlay) overlay.classList.remove('active');
+  }
+  if (e.target.id === 'modal-hypotheses') {
+    e.target.classList.remove('active');
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var overlay = document.getElementById('modal-hypotheses');
+    if (overlay) overlay.classList.remove('active');
   }
 });
 
@@ -2227,37 +2244,35 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="modal-body">
       <p><strong><i class="fa-solid fa-microchip"></i> Configuration :</strong></p>
       <ul>
-        <li>Raspberry Pi 3B+</li>
-        <li>Écran LCD 7" (activation par présence)</li>
-        <li>Capteur PIR</li>
-        <li>2 × USB-C + 2 × USB-A</li>
-        <li>Convertisseur DC-DC</li>
+        <li>Raspberry Pi 3B — 5.0 W moyen (veille 5.0 W, actif 5.5 W)</li>
+        <li>Écran LCD 7" — 5.0 W (activation par présence PIR)</li>
+        <li>Capteur PIR — 0.2 W continu</li>
+        <li>2 × USB-C (51.1 W max) + 2 × USB-A (13.6 W max)</li>
+        <li>Convertisseur DC-DC — 0.3 W pertes</li>
       </ul>
-      <p><strong><i class="fa-solid fa-users"></i> Usage :</strong></p>
+      <p><strong><i class="fa-solid fa-users"></i> Profil d'usage (journée type) :</strong></p>
       <ul>
-        <li>8 à 12 utilisateurs / jour</li>
-        <li>~10 recharges quotidiennes</li>
-        <li>~15 Wh utile / recharge (≈18 Wh avec pertes)</li>
-        <li>Jusqu'à 4 appareils simultanés</li>
+        <li>00h–06h : veille système (5.5 W)</li>
+        <li>06h–08h / 18h–22h : actif sans USB (7–12 W)</li>
+        <li>12h–14h : pic USB-C pleine charge (62.1 W)</li>
+        <li>Reste : usage modéré (11–35 W)</li>
       </ul>
-      <p><strong><i class="fa-solid fa-bolt"></i> Consommation :</strong></p>
+      <p><strong><i class="fa-solid fa-bolt"></i> Consommation calculée (profil horaire intégré) :</strong></p>
       <ul>
-        <li>Système (24h) : 120 Wh/j</li>
-        <li>Écran : 20 Wh/j</li>
-        <li>USB : 150–180 Wh/j</li>
+        <li>Raspberry Pi : ~123 Wh/j</li>
+        <li>Écran LCD : ~49 Wh/j</li>
+        <li>Capteur PIR : ~5 Wh/j</li>
+        <li>Ports USB (C + A) : ~231 Wh/j</li>
+        <li>Pertes DC-DC : ~7 Wh/j</li>
       </ul>
       <div class="hypothesis-result">
-        <strong><i class="fa-solid fa-arrow-right"></i> Total retenu : ~300 Wh/jour</strong>
+        <strong><i class="fa-solid fa-arrow-right"></i> Total calculé : ~415 Wh/jour (17.3 W moy.)</strong>
       </div>
       <p><strong><i class="fa-solid fa-plug"></i> Caractéristiques électriques :</strong></p>
       <ul>
-        <li>Puissance moyenne : ~12.5 W</li>
-        <li>Puissance max instantanée : ~60 W</li>
-      </ul>
-      <p><strong><i class="fa-solid fa-ruler-combined"></i> Dimensionnement :</strong></p>
-      <ul>
-        <li>Valeur incluant usage réel + marge de sécurité</li>
-        <li>Pic possible : ~400 Wh/jour</li>
+        <li>Puissance moyenne : 17.3 W</li>
+        <li>Puissance veille (nuit) : 5.5 W</li>
+        <li>Puissance max instantanée : 62.1 W (USB-C pleine charge)</li>
       </ul>
     </div>
   </div>
