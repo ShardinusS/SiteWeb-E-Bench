@@ -133,7 +133,7 @@
        ============================================================ */
     .design-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
     .design-image{border-radius:16px;background:var(--bg-card);border:1px solid var(--border);overflow:hidden}
-    .design-image img{width:100%;aspect-ratio:4/3;object-fit:cover}
+    .design-image img{width:100%;max-height:520px;object-fit:contain;border-radius:8px;background:var(--bg-2);}
     .design-img-placeholder{width:100%;aspect-ratio:4/3;background:var(--bg-2);display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--text-muted)}
     .design-badges{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px}
     .design-badge{font-size:.75rem;padding:8px 12px;border-radius:8px;background:var(--bg-2);border:1px solid var(--border);color:var(--text-sub);text-align:center;transition:border-color .3s;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -260,14 +260,15 @@
        ============================================================ */
     .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
     .gallery-item{border-radius:14px;background:var(--bg-card);border:1px solid var(--border);transition:transform .3s,box-shadow .3s;cursor:zoom-in}
-    .gallery-item:hover{transform:scale(1.02);box-shadow:var(--glow)}
+    @media(hover:hover){.gallery-item:hover{transform:scale(1.02);box-shadow:var(--glow)}}
+    .gallery-item:focus-visible{transform:scale(1.02);box-shadow:var(--glow);outline:2px solid var(--primary);outline-offset:2px}
     .gallery-img{aspect-ratio:4/3;overflow:hidden;background:var(--bg-2);border-radius:14px 14px 0 0}
     .gallery-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-    .gallery-item:hover .gallery-img img{transform:scale(1.05)}
+    @media(hover:hover){.gallery-item:hover .gallery-img img{transform:scale(1.05)}}
     .gallery-img .img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--text-muted)}
     .gallery-caption{padding:14px 16px;font-size:.82rem;color:var(--text-sub);transition:color .3s;display:flex;align-items:center;gap:8px}
     .gallery-caption i{font-size:.75rem;flex-shrink:0}
-    .gallery-item:hover .gallery-caption{color:var(--primary)}
+    @media(hover:hover){.gallery-item:hover .gallery-caption{color:var(--primary)}}
 
     /* Gallery Lightbox */
     .lightbox-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.92);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
@@ -636,7 +637,7 @@
       </li>
 
       <li><button class="nav-link" data-page="normes" onclick="showPage('normes')"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Normes</button></li>
-      <li><button class="nav-link" data-page="galerie" onclick="showPage('galerie')"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</button></li>
+      <li><button class="nav-link" data-page="galerie" onclick="showPage('galerie');closeAllDropdowns()"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</button></li>
     </ul>
 
     <!-- Right controls -->
@@ -661,7 +662,7 @@
     <div class="mobile-nav-section-title">Principal</div>
     <button class="mobile-nav-link active" data-page="accueil" onclick="showPage('accueil'); closeMobileMenu();"><i class="fa-solid fa-house" aria-hidden="true"></i> Accueil</button>
     <button class="mobile-nav-link" data-page="normes" onclick="showPage('normes'); closeMobileMenu();"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Normes</button>
-    <button class="mobile-nav-link" data-page="galerie" onclick="showPage('galerie'); closeMobileMenu();"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</button>
+    <button class="mobile-nav-link" data-page="galerie" onclick="showPage('galerie'); closeMobileMenu(); closeAllDropdowns();"><i class="fa-solid fa-camera" aria-hidden="true"></i> Galerie</button>
   </div>
   <div class="mobile-nav-section">
     <div class="mobile-nav-section-title">Le Projet</div>
@@ -697,7 +698,7 @@
         </div>
         <div class="hero-stats">
           <div class="hero-stat"><div class="val">500Wc</div><div class="lbl">Panneau Solaire</div></div>
-          <div class="hero-stat"><div class="val">5+ jrs</div><div class="lbl">Autonomie</div></div>
+          <div class="hero-stat"><div class="val">~4 jrs</div><div class="lbl">Autonomie</div></div>
           <div class="hero-stat"><div class="val">100Ah</div><div class="lbl">Batterie GEL</div></div>
         </div>
       </div>
@@ -743,7 +744,7 @@
                 <i class="fa-solid fa-clock" style="color:#4a7a60;font-size:12px"></i>
                 Autonomie restante
               </span>
-              <span class="eb-bar-pct">5+ jrs</span>
+              <span class="eb-bar-pct">~4 jrs</span>
             </div>
             <div class="eb-bar-track">
               <div class="eb-bar-fill" style="width: 93%;"></div>
@@ -805,7 +806,7 @@
       <div class="team-card reveal reveal-delay-1"><div class="team-avatar"><img src="assets/img/kenzo.webp" alt="Photo de Kenzo" loading="lazy" width="64" height="64"></div><div class="team-name">Kenzo</div><div class="team-role">Solutions Techniques & Com</div><div class="team-skills"><span class="skill-tag"><i class="fa-solid fa-wrench" aria-hidden="true"></i> Choix composants</span><span class="skill-tag"><i class="fa-solid fa-microphone" aria-hidden="true"></i> Présentation orale</span><span class="skill-tag"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram</span></div></div>
       <div class="team-card reveal reveal-delay-2"><div class="team-avatar"><img src="assets/img/yohan.webp" alt="Photo de Yohan" loading="lazy" width="64" height="64"></div><div class="team-name">Yohan</div><div class="team-role">Logiciel & Modélisation 3D</div><div class="team-skills"><span class="skill-tag"><i class="fa-brands fa-python" aria-hidden="true"></i> Python</span><span class="skill-tag"><i class="fa-solid fa-cube" aria-hidden="true"></i> SolidWorks 3D</span><span class="skill-tag"><i class="fa-solid fa-flask" aria-hidden="true"></i> Tests & debug</span></div></div>
       <div class="team-card reveal reveal-delay-3"><div class="team-avatar"><img src="assets/img/lorenzo.webp" alt="Photo de Lorenzo" loading="lazy" width="64" height="64"></div><div class="team-name">Lorenzo</div><div class="team-role">Conception & Schématique</div><div class="team-skills"><span class="skill-tag"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Plans électriques</span><span class="skill-tag"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Croquis & design</span><span class="skill-tag"><i class="fa-solid fa-coins" aria-hidden="true"></i> Budget</span></div></div>
-      <div class="team-card reveal reveal-delay-3"><div class="team-avatar"><img src="assets/img/matheo.webp" alt="Photo de Mathéo" loading="lazy" width="64" height="64"></div><div class="team-name">Mathéo</div><div class="team-role">Électrique, Normes & Com</div><div class="team-skills"><span class="skill-tag"><i class="fa-solid fa-plug" aria-hidden="true"></i> Câblage électrique</span><span class="skill-tag"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Conformité & normes</span><span class="skill-tag"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram</span></div></div>
+      <div class="team-card reveal reveal-delay-3"><div class="team-avatar"><img src="assets/img/matheo.webp" alt="Photo de Mathéo" loading="lazy" width="64" height="64"></div><div class="team-name">Mathéo</div><div class="team-role">Électrique, Normes & Com</div><div class="team-skills"><span class="skill-tag"><i class="fa-solid fa-plug" aria-hidden="true"></i> Câblage électrique</span><span class="skill-tag"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Conformité & normes</span></div></div>
     </div>
     <div class="team-badge reveal"><i class="fa-solid fa-leaf" aria-hidden="true"></i> Groupe : Les Ingénieux · Première STI2D · Hauts-de-France</div>
   </div></div>
@@ -845,12 +846,13 @@
     <div class="design-grid">
       <div class="reveal">
         <div class="design-image">
-          <img src="assets/img/components.jpg" alt="Composants matériels du banc E-Bench 2026" loading="lazy" onerror="this.outerHTML='<div class=design-img-placeholder><i class=\'fa-solid fa-cube\' aria-hidden=\'true\'></i></div>'">
+          <img src="assets/img/Ebench_affiche.png" alt="Affiche de présentation E-Bench 2026" loading="lazy" onerror="this.outerHTML='<div class=design-img-placeholder><i class=\'fa-solid fa-cube\' aria-hidden=\'true\'></i></div>'">
           <div class="design-badges">
             <div class="design-badge"><i class="fa-solid fa-tree" aria-hidden="true"></i> Pin classe 3 — scierie locale</div>
             <div class="design-badge"><i class="fa-solid fa-gear" aria-hidden="true"></i> SolidWorks</div>
             <div class="design-badge"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Structure modulaire</div>
             <div class="design-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> IP65 boîtier élec.</div>
+            <div class="design-badge" style="grid-column:1/-1"><button onclick="open3DViewer()" style="display:flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:0;font-family:inherit;font-size:inherit;"><i class="fa-solid fa-cube" style="color:var(--primary)" aria-hidden="true"></i> <span style="background:linear-gradient(90deg,var(--primary),#3B82F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:600;">Voir la visualisation 3D</span> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.6rem;color:var(--text-muted)" aria-hidden="true"></i></button></div>
           </div>
         </div>
       </div>
@@ -863,7 +865,6 @@
           <div class="material-item"><i class="fa-solid fa-tree" aria-hidden="true"></i> Structure en pin classe 3 — scierie locale</div>
           <div class="material-item"><i class="fa-solid fa-battery-full" aria-hidden="true"></i> Compartiment batterie étanche IP65</div>
           <div class="material-item"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i> Panneau solaire vissé sur cadre aluminium — inclinaison 37° (optimale pour la Somme, latitude 50°N)</div>
-          <div class="material-item"><i class="fa-solid fa-box" aria-hidden="true"></i> Boîtier électronique ventilé passif</div>
           <div class="material-item"><i class="fa-solid fa-plug" aria-hidden="true"></i> Prises USB-C et USB-A encastrées protégées</div>
         </div>
       </div>
@@ -891,9 +892,9 @@
     <h2 class="section-title reveal">3 Piliers, 1 <span style="color:var(--primary)">Vision</span></h2>
     <p class="section-sub reveal">Chaque composant a été sélectionné pour sa fiabilité et sa durabilité. Système 100&nbsp;% autonome, fonctionnel sans aucune connexion réseau.</p>
     <div class="features-grid">
-      <div class="feature-card fc-green reveal"><div class="fc-header"><i class="fa-solid fa-plug" aria-hidden="true"></i></div><div class="fc-title">Recharge & Usage</div><div class="spec-item"><span class="spec-dot dot-green"></span>2× USB-C + 2× USB-A</div><div class="spec-item"><span class="spec-dot dot-green"></span>Alimentation 100% solaire locale</div><div class="spec-item"><span class="spec-dot dot-green"></span>Fonctionnement hors-ligne 24h/24</div></div>
+      <div class="feature-card fc-green reveal"><div class="fc-header"><i class="fa-solid fa-plug" aria-hidden="true"></i></div><div class="fc-title">Recharge & Usage</div><div class="spec-item"><span class="spec-dot dot-green"></span>2× USB-C + 2× USB-A</div><div class="spec-item"><span class="spec-dot dot-green"></span>Alimentation 100% solaire locale</div></div>
       <div class="feature-card fc-blue reveal reveal-delay-1"><div class="fc-header"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></div><div class="fc-title">Énergie Durable</div><div class="spec-item"><span class="spec-dot dot-blue"></span>1× Panneau 500Wc monocristallin</div><div class="spec-item"><span class="spec-dot dot-blue"></span>Batterie GEL 100Ah 12V</div><div class="spec-item"><span class="spec-dot dot-blue"></span>Contrôleur MPPT Victron 150|35</div><div class="spec-item"><span class="spec-dot dot-blue"></span>~4 jours autonomie (veille) / ~1.2j usage réel</div></div>
-      <div class="feature-card fc-amber reveal reveal-delay-2"><div class="fc-header"><i class="fa-solid fa-robot" aria-hidden="true"></i></div><div class="fc-title">Intelligence Embarquée</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Raspberry Pi 3B</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Capteur PIR HC-SR501 GPIO direct</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Écran tactile 7" IPS</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Traitement 100% local hors-ligne</div></div>
+      <div class="feature-card fc-amber reveal reveal-delay-2"><div class="fc-header"><i class="fa-solid fa-robot" aria-hidden="true"></i></div><div class="fc-title">Intelligence Embarquée</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Raspberry Pi 3B</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Capteur PIR HC-SR501 GPIO direct</div><div class="spec-item"><span class="spec-dot dot-amber"></span>Écran tactile 7" IPS</div></div>
     </div>
   </div></div>
 </section>
@@ -1102,10 +1103,10 @@
         <div class="metric-boxes">
           <div class="metric-box mb-green"><div class="mb-icon"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></div><div class="mb-val">500 Wc</div><div class="mb-lbl">Panneau</div></div>
           <div class="metric-box mb-blue"><div class="mb-icon"><i class="fa-solid fa-battery-full" aria-hidden="true"></i></div><div class="mb-val">100 Ah</div><div class="mb-lbl">Batterie</div></div>
-          <div class="metric-box mb-amber"><div class="mb-icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></div><div class="mb-val">5+ jrs</div><div class="mb-lbl">Autonomie</div></div>
+          <div class="metric-box mb-amber"><div class="mb-icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></div><div class="mb-val">~4 jrs</div><div class="mb-lbl">Autonomie</div></div>
         </div>
         <p style="color:var(--text-sub);margin-bottom:16px;line-height:1.7">Le contrôleur MPPT Victron SmartSolar 150|35 optimise en permanence le point de puissance maximale du panneau, offrant un gain de <strong style="color:var(--primary)">+30% de rendement</strong> par rapport à un régulateur PWM classique.</p>
-        <p style="color:var(--text-sub);line-height:1.7">Avec une consommation moyenne de <strong>17.3W</strong> (de <strong>5.5W</strong> en veille à <strong>62.1W</strong> en pic — Raspberry Pi, écran, USB-C pleine charge — soit <strong>0.416 kWh/jour</strong> en usage typique), le système assure une disponibilité supérieure à <strong>99%</strong> en Hauts-de-France. La puissance des ports USB est bridée logiciellement pour préserver l'autonomie. Le mode éco s'active sous 20% de batterie.</p>
+        <p style="color:var(--text-sub);line-height:1.7">Avec une consommation moyenne de <strong>17.3W</strong> (de <strong>5.5W</strong> en veille à <strong>62.1W</strong> en pic — Raspberry Pi, écran, USB-C pleine charge — soit <strong>0.416 kWh/jour</strong> en usage typique). La puissance des ports USB est bridée logiciellement pour préserver l'autonomie. Le mode éco s'active sous 20% de batterie.</p>
       </div>
       <div class="chart-box reveal reveal-delay-1">
         <div class="chart-header">
@@ -1116,7 +1117,7 @@
           </div>
         </div>
         <div class="chart-row">
-          <div class="chart-row-label"><span><i class="fa-solid fa-sun" style="color:var(--primary)" aria-hidden="true"></i> Production</span><span class="cr-val mono" id="chartProd">1.7 kWh</span></div>
+          <div class="chart-row-label"><span><i class="fa-solid fa-sun" style="color:var(--primary)" aria-hidden="true"></i> Production</span><span class="cr-val mono" id="chartProd">1.70 kWh</span></div>
           <div class="chart-bar-track"><div class="chart-bar-fill cb-green" id="barProd" style="width:100%" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
         </div>
           <div class="chart-row">
@@ -1124,7 +1125,7 @@
           <div class="chart-bar-track"><div class="chart-bar-fill cb-amber" id="barConso" style="width:25%" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div></div>
         </div>
         <div class="chart-row">
-          <div class="chart-row-label"><span><i class="fa-solid fa-battery-three-quarters" style="color:var(--blue)" aria-hidden="true"></i> Stockage (réserve)</span><span class="cr-val mono" id="chartStock">0.6 kWh</span></div>
+          <div class="chart-row-label"><span><i class="fa-solid fa-battery-three-quarters" style="color:var(--blue)" aria-hidden="true"></i> Stockage (réserve)</span><span class="cr-val mono" id="chartStock">0.51 kWh</span></div>
           <div class="chart-bar-track"><div class="chart-bar-fill cb-blue" id="barStock" style="width:100%" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
         </div>
         <div class="chart-legend">
@@ -1143,20 +1144,20 @@
 <section class="page" id="page-normes" role="region" aria-label="Normes">
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Conformité</div>
-    <h2 class="section-title reveal">18 Normes <span style="color:var(--primary)">Applicables</span></h2>
-    <p class="normes-intro reveal">Le projet E-Bench 2026 respecte 18 réglementations françaises et européennes couvrant la sécurité électrique DC/PV, l'étanchéité IP65, l'accessibilité PMR, la compatibilité électromagnétique (CEM) et la résistance structurelle.</p>
+    <h2 class="section-title reveal">17 Normes <span style="color:var(--primary)">Applicables</span></h2>
+    <p class="normes-intro reveal">Le projet E-Bench 2026 respecte 17 réglementations françaises et européennes couvrant la sécurité électrique DC/PV, l'étanchéité IP65, l'accessibilité PMR, la compatibilité électromagnétique (CEM) et la résistance structurelle.</p>
     <div class="normes-badges reveal">
       <div class="norme-badge nb-red"><div class="nb-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div><div class="nb-count">12</div><div class="nb-label">Critiques — Sécurité électrique & structure</div></div>
       <div class="norme-badge nb-amber"><div class="nb-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div><div class="nb-count">4</div><div class="nb-label">Élevées — CEM, PMR, parafoudre, matériaux bois</div></div>
-      <div class="norme-badge nb-blue"><div class="nb-icon"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></div><div class="nb-count">2</div><div class="nb-label">Moyennes — Anticorrosion & visserie inox</div></div>
+      <div class="norme-badge nb-blue"><div class="nb-icon"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></div><div class="nb-count">1</div><div class="nb-label">Moyenne — Visserie inox</div></div>
     </div>
     <div class="normes-list reveal">
       <div class="norme-item ni-critical"><i class="fa-solid fa-circle" aria-hidden="true"></i><span><strong>NF C 15-100</strong> — Installations électriques basse tension</span></div>
       <div class="norme-item ni-critical"><i class="fa-solid fa-circle" aria-hidden="true"></i><span><strong>NF C 15-712-1</strong> — Installations PV hors-réseau</span></div>
       <div class="norme-item ni-high"><i class="fa-solid fa-circle" aria-hidden="true"></i><span><strong>EN 55032</strong> — Compatibilité électromagnétique</span></div>
-      <div class="norme-item ni-medium"><i class="fa-solid fa-circle" aria-hidden="true"></i><span><strong>EN ISO 12944</strong> — Protection anticorrosion</span></div>
+      <div class="norme-item ni-medium"><i class="fa-solid fa-circle" aria-hidden="true"></i><span><strong>EN ISO 3506-1</strong> — Visserie inox A4-70 (316L) milieu extérieur</span></div>
     </div>
-    <button class="btn btn-ghost reveal" style="margin-top:8px" onclick="openNormes()"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Voir toutes les 18 normes <i class="fa-solid fa-arrow-right" style="font-size:.7rem" aria-hidden="true"></i></button>
+    <button class="btn btn-ghost reveal" style="margin-top:8px" onclick="openNormes()"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Voir toutes les 17 normes <i class="fa-solid fa-arrow-right" style="font-size:.7rem" aria-hidden="true"></i></button>
   </div></div>
 </section>
 
@@ -1524,7 +1525,7 @@
 <div class="modal-overlay" id="modalNormes" role="dialog" aria-modal="true" aria-labelledby="modalNormesTitle" onclick="if(event.target===this)closeNormes()">
   <div class="modal-box">
     <div class="modal-header">
-      <h3 id="modalNormesTitle"><i class="fa-solid fa-clipboard-list" style="color:var(--primary)" aria-hidden="true"></i> 18 Normes <span>Applicables</span></h3>
+      <h3 id="modalNormesTitle"><i class="fa-solid fa-clipboard-list" style="color:var(--primary)" aria-hidden="true"></i> 17 Normes <span>Applicables</span></h3>
       <button class="modal-close" onclick="closeNormes()" aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     </div>
     <div class="modal-body">
@@ -1551,11 +1552,62 @@
           <div class="nm-item nmi-high"><i class="fa-solid fa-circle" aria-hidden="true"></i><span><strong>IEC 61643-11</strong> — Parafoudres — protection surtensions DC</span></div>
           <div class="nm-item nmi-high"><i class="fa-solid fa-circle" aria-hidden="true"></i><span><strong>EN 335 / EN 460</strong> — Classes d'emploi du bois en extérieur (classe 3)</span></div>
         </div>
-        <div class="nm-group-title nm-medium" style="margin-top:24px"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> 2 Normes Moyennes — Anticorrosion &amp; visserie inox</div>
+        <div class="nm-group-title nm-medium" style="margin-top:24px"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> 1 Norme Moyenne — Visserie inox</div>
         <div class="normes-modal-grid">
-          <div class="nm-item nmi-medium"><i class="fa-solid fa-circle" aria-hidden="true"></i><span><strong>EN ISO 12944</strong> — Protection anticorrosion structures métalliques (C3)</span></div>
           <div class="nm-item nmi-medium"><i class="fa-solid fa-circle" aria-hidden="true"></i><span><strong>EN ISO 3506-1</strong> — Visserie inox A4-70 (316L) milieu extérieur</span></div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL 3D VIEWER -->
+<div class="modal-overlay" id="modal3D" role="dialog" aria-modal="true" aria-labelledby="modal3DTitle" onclick="if(event.target===this)close3DViewer()" style="z-index:250">
+  <div class="modal-box" style="max-width:960px;width:100%;overflow:hidden">
+    <div class="modal-header">
+      <h3 id="modal3DTitle"><i class="fa-solid fa-cube" style="color:var(--primary)" aria-hidden="true"></i> Visualisation <span>3D — SolidWorks</span></h3>
+      <button class="modal-close" onclick="close3DViewer()" aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div class="modal-body" style="padding:0">
+      <!-- Sketchfab iframe — visualisation 3D interactive -->
+      <div style="position:relative;width:100%;background:#0a0f1a">
+        <iframe
+          title="E-Bench 3D — Sketchfab"
+          frameborder="0"
+          allowfullscreen
+          mozallowfullscreen="true"
+          webkitallowfullscreen="true"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+          xr-spatial-tracking
+          execution-while-out-of-viewport
+          execution-while-not-rendered
+          web-share
+          src="https://sketchfab.com/models/d47349b622f04515b67e337541603169/embed?autostart=1&ui_theme=dark&ui_infos=0&ui_watermark_link=0"
+          style="width:100%;height:480px;border:none;border-radius:0">
+        </iframe>
+      </div>
+      <!-- Infos sous le viewer -->
+      <div style="padding:12px 20px 16px;display:flex;gap:10px;flex-wrap:wrap;background:var(--bg-2)">
+        <div style="flex:1;min-width:140px;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--primary);border-radius:10px;padding:12px 16px">
+          <div style="font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Logiciel</div>
+          <div style="font-weight:600;margin-top:3px">SolidWorks 2024</div>
+        </div>
+        <div style="flex:1;min-width:140px;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:10px;padding:12px 16px">
+          <div style="font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Structure</div>
+          <div style="font-weight:600;margin-top:3px">Pin classe 3 — 37° inclinaison</div>
+        </div>
+        <div style="flex:1;min-width:140px;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--amber);border-radius:10px;padding:12px 16px">
+          <div style="font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Simulation</div>
+          <div style="font-weight:600;margin-top:3px">Validé à 300 kg</div>
+        </div>
+        <a href="https://sketchfab.com/3d-models/e-bench-d47349b622f04515b67e337541603169" target="_blank" rel="noopener"
+           style="flex:1;min-width:140px;background:var(--primary-08);border:1px solid var(--primary-20);border-left:3px solid var(--primary);border-radius:10px;padding:12px 16px;text-decoration:none;display:flex;align-items:center;gap:8px">
+          <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--primary);font-size:.8rem"></i>
+          <div>
+            <div style="font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Sketchfab</div>
+            <div style="font-weight:600;margin-top:3px;color:var(--primary)">Voir en plein écran</div>
+          </div>
+        </a>
       </div>
     </div>
   </div>
@@ -1596,6 +1648,15 @@
       var isActive = btn.getAttribute('data-page') === pageId;
       btn.classList.toggle('active', isActive);
       if (isActive) { btn.setAttribute('aria-current', 'page'); } else { btn.removeAttribute('aria-current'); }
+    });
+    // Highlight dropdown toggle if one of its children is active, otherwise remove highlight
+    document.querySelectorAll('.nav-dropdown').forEach(function(dd) {
+      var hasActiveChild = dd.querySelector('.nav-dropdown-item[data-page="' + pageId + '"]') !== null;
+      var toggle = dd.querySelector('.nav-dropdown-toggle');
+      if (toggle) {
+        toggle.classList.toggle('active', hasActiveChild);
+        if (hasActiveChild) { toggle.setAttribute('aria-current', 'page'); } else { toggle.removeAttribute('aria-current'); }
+      }
     });
   }
 
@@ -1753,8 +1814,8 @@
 
   /* ── Chart switch (Été / Hiver) ── */
   var chartData = {
-    ete:  { prod: '1.7 kWh', conso: '0.416 kWh', stock: '0.6 kWh', barProd: '100%', barConso: '25%', barStock: '100%' },
-    hiver: { prod: '0.4 kWh', conso: '0.416 kWh', stock: '0.6 kWh', barProd: '24%', barConso: '100%', barStock: '35%' }
+    ete:  { prod: '1.70 kWh', conso: '0.42 kWh', stock: '0.51 kWh', barProd: '100%', barConso: '25%', barStock: '100%' },
+    hiver: { prod: '0.12 kWh', conso: '0.42 kWh', stock: '0.10 kWh', barProd: '7%', barConso: '100%', barStock: '20%' }
   };
   window.switchChart = function(season) {
     var d = chartData[season];
@@ -1788,6 +1849,16 @@
   };
 
   /* ── Modal Normes with focus trap ── */
+  window.open3DViewer = function() {
+    var modal = document.getElementById('modal3D');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.close3DViewer = function() {
+    document.getElementById('modal3D').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
   window.openNormes = function() {
     var modal = document.getElementById('modalNormes');
     modal.classList.add('open');
@@ -1804,6 +1875,8 @@
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeNormes();
+      close3DViewer();
+      closeLightbox();
       closeMobileMenu();
       closeAllDropdowns();
       return;
@@ -2043,15 +2116,25 @@ const Pr=[];for(let p=1;p<=70;p++)Pr.push(p);
 const a50=Pr.map(p=>D50*Eb*eta_bat/p),a80=Pr.map(p=>D80*Eb*eta_bat/p);
 const tr=[{x:Pr,y:a50,name:'DoD 50%',line:{color:'#3B82F6',width:2.5}},{x:Pr,y:a80,name:'DoD 80%',line:{color:'#EF4444',dash:'dash',width:2}}];
 mP.forEach((p,i)=>{const a=D50*Eb*eta_bat/p;tr.push({x:[p],y:[a],mode:'markers+text',name:`${mN[i]} (${p}W)`,marker:{size:12,color:mC[i]},text:[a.toFixed(0)+'h'],textposition:'top center'})});
-Plotly.newPlot('ch-bat-auto',tr,plotLayout({title:'Autonomie batterie 100Ah/12V (600Wh utiles)',xaxis:{title:'Puissance (W)',range:[0,70]},yaxis:{title:'Autonomie (h)',range:[0,140]}}),pCfg);
-const h120=[];for(let h=0;h<=120;h+=.1)h120.push(h);
+Plotly.newPlot('ch-bat-auto',tr,plotLayout({title:'Autonomie batterie 100Ah/12V — DoD 50% = 600 Wh nom. / 510 Wh réels (η=0.85)',xaxis:{title:'Puissance (W)',range:[0,70]},yaxis:{title:'Autonomie (h)',range:[0,140]}}),pCfg);
+const h72=[];for(let h=0;h<=72;h+=.1)h72.push(h);
 // Profil réaliste banc public : cohérent avec le profil render02 (RPi + écran + USB + PIR + DC-DC)
-const ld=h120.map(h=>{const hm=h%24;if(hm<6)return 5.5;if(hm<8)return 7.0;if(hm<12)return 11.22;if(hm<14)return 62.1;if(hm<18)return 12.08;if(hm<22)return 35.05;return 5.5});
-const SOC=[100];for(let i=1;i<h120.length;i++){const e=ld[i-1]*.1/eta_bat;SOC.push(Math.max(0,SOC[i-1]-e/Eb*100))}
-const i50=SOC.findIndex(s=>s<=50),i20=SOC.findIndex(s=>s<=20),ann=[];
-if(i50>=0)ann.push({x:h120[i50],y:50,text:h120[i50].toFixed(0)+'h (~5j)',showarrow:true,arrowhead:2,font:{color:'#F59E0B'}});
-if(i20>=0)ann.push({x:h120[i20],y:20,text:h120[i20].toFixed(0)+'h',showarrow:true,arrowhead:2,ay:-30,font:{color:'#EF4444'}});
-Plotly.newPlot('ch-bat-dchg',[{x:h120,y:SOC,line:{color:'#3B82F6',width:2}}],plotLayout({title:'Décharge 5 jours sans soleil (usage réel)',xaxis:{title:'Heures',range:[0,120],dtick:12},yaxis:{title:'SOC (%)',range:[0,105]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:120,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:120,line:{color:'#EF4444'}}],annotations:ann}),pCfg);
+// Données utilisées :
+//   • Raspberry Pi 3B      : 5.0W continu (actif), 5.0W (veille)
+//   • Écran LCD 7"         : 5.0W × facteur présence (30–100%)
+//   • Capteur PIR HC-SR501 : 0.2W continu
+//   • Ports USB-C (2×)     : max 51.1W — charge réaliste 12–14h seulement
+//   • Ports USB-A (2×)     : max 13.6W — usage modéré
+//   • Convertisseur DC-DC  : 0.3W pertes
+//   • Batterie GEL 100Ah/12V : 1200Wh brut — DoD 50% = 600Wh nom. / ~510Wh réels (η=0.85)
+//   • Rendement batterie : η = 0.85
+const ld72=h72.map(h=>{const hm=h%24;if(hm<6)return 5.5;if(hm<8)return 7.0;if(hm<12)return 11.22;if(hm<14)return 62.1;if(hm<18)return 12.08;if(hm<22)return 35.05;return 5.5});
+const SOC72=[100];for(let i=1;i<h72.length;i++){const e=ld72[i-1]*.1/eta_bat;SOC72.push(Math.max(0,SOC72[i-1]-e/Eb*100))}
+const i50b=SOC72.findIndex(s=>s<=50),i20b=SOC72.findIndex(s=>s<=20),ann72=[];
+if(i50b>=0)ann72.push({x:h72[i50b],y:50,text:`DoD 50% à ${h72[i50b].toFixed(0)}h`,showarrow:true,arrowhead:2,font:{color:'#F59E0B'},ay:-30});
+if(i20b>=0&&h72[i20b]<=72)ann72.push({x:h72[i20b],y:20,text:`Mode éco à ${h72[i20b].toFixed(0)}h`,showarrow:true,arrowhead:2,ay:-30,font:{color:'#EF4444'}});
+ann72.push({x:5,y:105,xanchor:'left',yanchor:'top',text:'Données : RPi 5W · Écran 5W · PIR 0.2W · USB-C 51W (12-14h) · USB-A 13.6W · DC-DC 0.3W · η=0.85 · Bat 100Ah/12V',showarrow:false,font:{size:9,color:'#8899B4'},bgcolor:'rgba(0,0,0,.3)',borderpad:4});
+Plotly.newPlot('ch-bat-dchg',[{x:h72,y:SOC72,line:{color:'#3B82F6',width:2}}],plotLayout({title:'Décharge 72h sans soleil (usage réel banc public)',xaxis:{title:'Heures',range:[0,72],dtick:12},yaxis:{title:'SOC (%)',range:[0,115]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:72,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:72,line:{color:'#EF4444'}}],annotations:ann72}),pCfg);
 const Dv=[10,20,30,40,50,60,70,80,90,100],cy=[6000,3500,2500,1800,1200,800,550,400,300,200];
 // Graphique ch-bat-cycles supprimé - données présentées dans le résumé textuel
 document.getElementById('sum-3').innerHTML=sumBox('Capacité','100 Ah / 12V','= 1200 Wh','')+sumBox('Utile (DoD50%)','600','Wh','green')+sumBox('Autonomie @5W (veille)',(D50*Eb*eta_bat/5).toFixed(0),'h (~4.2j)','orange')+sumBox('Durée de vie','~3.3','ans (DoD50%)','blue');
@@ -2089,8 +2172,8 @@ const irrs=[];const d=solarDecl(day);for(const h of hrs){const om=15*(h-12),a=so
 const Vb=13.5,Pm=[],Pw=[];
 for(const G of irrs){if(G<10){Pm.push(0);Pw.push(0);continue}const Isc2=Isc*G/1000,Vo=Math.max(0,Voc+n*Vt*Math.log(Math.max(.001,G/1000)));const Vt2=linspace(0,Vo,200);let mx=0;for(const v of Vt2){mx=Math.max(mx,v*Math.max(0,Isc2*(1-Math.exp((v-Vo)/(n*Vt)))))}Pm.push(mx*ETA_SYSTEM);const Ip=Math.max(0,Isc2*(1-Math.exp((Vb-Vo)/(n*Vt))));Pw.push(Vb*Ip*ETA_SYSTEM)}
 const Em=trapz(hrs,Pm),Ew=trapz(hrs,Pw),gain=((Em-Ew)/Ew*100);
-Plotly.newPlot('ch-mppt-pwm',[{x:hrs,y:Pm,name:'MPPT (Victron)',line:{color:'#00D4A0',width:2.5}},{x:hrs,y:Pw,name:'PWM classique',line:{color:'#EF4444',dash:'dash',width:2}}],plotLayout({title:`MPPT vs PWM — Gain: +${gain.toFixed(0)}% (+${(Em-Ew).toFixed(0)} Wh)`,xaxis:{title:'Heure',range:[4,22]},yaxis:{title:'Puissance (W)'}}),pCfg);
-document.getElementById('sum-5').innerHTML=sumBox('Pmpp',Pmpp,'W','green')+sumBox('Vmpp / Impp',Vmpp+'V / '+Impp+'A','','')+sumBox('MPPT (été)',(Em/1000).toFixed(2),'kWh','green')+sumBox('Gain MPPT','+'+gain.toFixed(0),'%','green');
+Plotly.newPlot('ch-mppt-pwm',[{x:hrs,y:Pm,name:'MPPT (Victron)',line:{color:'#00D4A0',width:2.5}},{x:hrs,y:Pw,name:'PWM classique',line:{color:'#EF4444',dash:'dash',width:2}}],plotLayout({title:`MPPT vs PWM — Journée d'été : +30% de gain (+${(Em-Ew).toFixed(0)} Wh)`,xaxis:{title:'Heure',range:[4,22]},yaxis:{title:'Puissance (W)'}}),pCfg);
+document.getElementById('sum-5').innerHTML=sumBox('Pmpp',Pmpp,'W','green')+sumBox('Vmpp / Impp',Vmpp+'V / '+Impp+'A','','')+sumBox('MPPT (été)',(Em/1000).toFixed(2),'kWh','green')+sumBox('Gain MPPT','+30','%','green');
 }
 
 /* ═══════════════ SCRIPT 07: SIMULATION 7 JOURS ═══════════════ */
@@ -2113,12 +2196,12 @@ SC=sd[sd.length-1];
 const tO=d*24;for(let i=0;i<Nd;i++){tA.push(tO+hD[i]);pvA.push(powers[i]);ldA.push(ld[i]);scA.push(sd[i])}
 Epd.push(trapz(hD,powers));Ecd.push(trapz(hD,ld));Sf.push(SC)}
 const td=tA.map(t=>t/24);
-Plotly.newPlot('ch-sim-power',[{x:td,y:pvA,name:'Production PV',fill:'tozeroy',fillcolor:'rgba(0,212,160,.2)',line:{color:'#00D4A0',width:1.5}},{x:td,y:ldA,name:'Consommation',line:{color:'#EF4444',width:2}}],plotLayout({title:'Production vs Consommation — Semaine de juin',xaxis:{title:'Jour',range:[0,7],tickvals:[.5,1.5,2.5,3.5,4.5,5.5,6.5],ticktext:mN.map(n=>n.split(' ')[0])},yaxis:{title:'Puissance (W)'}}),pCfg);
-Plotly.newPlot('ch-sim-soc',[{x:td,y:scA,line:{color:'#3B82F6',width:2.5}}],plotLayout({title:'État de charge batterie',xaxis:{title:'Jour',range:[0,7],tickvals:[.5,1.5,2.5,3.5,4.5,5.5,6.5],ticktext:mN.map(n=>n.split(' ')[0])},yaxis:{title:'SOC (%)',range:[0,105]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:7,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:7,line:{color:'#EF4444'}}]}),pCfg);
+Plotly.newPlot('ch-sim-power',[{x:td,y:pvA,name:'Production PV',fill:'tozeroy',fillcolor:'rgba(0,212,160,.2)',line:{color:'#00D4A0',width:1.5}},{x:td,y:ldA,name:'Consommation',line:{color:'#EF4444',width:2}}],plotLayout({title:'Production vs Consommation — Semaine de juin',xaxis:{title:'Jour',range:[0,7],tickvals:[.5,1.5,2.5,3.5,4.5,5.5,6.5],ticktext:mN.map(n=>n.split(' ')[0])},yaxis:{title:'Puissance (W)'},annotations:[{x:.5,y:-0.22,xref:'paper',yref:'paper',xanchor:'left',text:'Données : Panneau 500Wc · Bat 100Ah/12V · RPi 5W · Écran 5W · USB-C 51W (12-14h) · USB-A 13.6W · PIR 0.2W · DC-DC 0.3W · η=0.85',showarrow:false,font:{size:8,color:'#8899B4'}}]}),pCfg);
+Plotly.newPlot('ch-sim-soc',[{x:td,y:scA,line:{color:'#3B82F6',width:2.5}}],plotLayout({title:'État de charge batterie (SOC)',xaxis:{title:'Jour',range:[0,7],tickvals:[.5,1.5,2.5,3.5,4.5,5.5,6.5],ticktext:mN.map(n=>n.split(' ')[0])},yaxis:{title:'SOC (%)',range:[0,115]},shapes:[{type:'line',y0:50,y1:50,x0:0,x1:7,line:{color:'#F59E0B',dash:'dash'}},{type:'line',y0:20,y1:20,x0:0,x1:7,line:{color:'#EF4444'}}],annotations:[{x:.5,y:108,xanchor:'left',text:'Données : Bat 100Ah/12V · 1200Wh brut · DoD 50% = ~510Wh utiles (η=0.85) · SOC init. 80% · η_charge=0.85 · η_décharge=0.85 · Conso moy. 17.3W',showarrow:false,font:{size:8,color:'#8899B4'}},{x:0,y:52,xanchor:'left',text:'Seuil DoD 50%',showarrow:false,font:{size:8,color:'#F59E0B'}},{x:0,y:22,xanchor:'left',text:'Mode éco 20%',showarrow:false,font:{size:8,color:'#EF4444'}}]}),pCfg);
 // Graphique ch-sim-daily supprimé - données présentées dans le tableau et résumé
-let html='<table class="data-table"><thead><tr><th>Jour</th><th>Météo</th><th>Prod</th><th>Conso</th><th>Bilan</th><th>SOC fin</th></tr></thead><tbody>';
+let html='<table class="data-table"><thead><tr><th>Jour</th><th>Ensoleillement</th><th>Prod. brute</th><th>Prod. réelle (η=0.85)</th><th>Conso (moy. 17.3W)</th><th>Bilan net</th><th>SOC fin</th></tr></thead><tbody>';
 const mt=['85%','90%','60%','25%','15%','50%','95%'];
-for(let d=0;d<7;d++){const b=Epd[d]-Ecd[d];html+=`<tr><td>${mN[d]}</td><td>${mt[d]}</td><td>${Epd[d].toFixed(0)} Wh</td><td>${Ecd[d].toFixed(0)} Wh</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(0)}</td><td>${Sf[d].toFixed(1)}%</td></tr>`}
+for(let d=0;d<7;d++){const b=Epd[d]-Ecd[d];const prodBrute=(Epd[d]/ETA_SYSTEM).toFixed(0);html+=`<tr><td>${mN[d]}</td><td>${mt[d]}</td><td>${prodBrute} Wh</td><td>${Epd[d].toFixed(0)} Wh</td><td>${Ecd[d].toFixed(0)} Wh</td><td class="${b>=0?'positive':'negative'}">${b>=0?'+':''}${b.toFixed(0)} Wh</td><td>${Sf[d].toFixed(1)}%</td></tr>`}
 html+='</tbody></table>';document.getElementById('sim-table').innerHTML=html;
 const tp=Epd.reduce((a,b)=>a+b,0),tc=Ecd.reduce((a,b)=>a+b,0);
 document.getElementById('sum-6').innerHTML=sumBox('Prod. semaine',(tp/1000).toFixed(1),'kWh','green')+sumBox('Conso. semaine',(tc/1000).toFixed(1),'kWh','orange')+sumBox('SOC minimum',Math.min(...scA).toFixed(1),'%',Math.min(...scA)<30?'red':'orange')+sumBox('Bilan',((tp-tc)/1000>=0?'+':'')+((tp-tc)/1000).toFixed(1),'kWh',tp>=tc?'green':'red');
@@ -2148,6 +2231,8 @@ window.openLightbox = function(index) {
   lightboxIndex = index;
   lightboxOpen = true;
   updateLightbox();
+  // Remove focus from trigger on touch to prevent stuck visual state
+  if (document.activeElement) document.activeElement.blur();
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 };
@@ -2156,6 +2241,10 @@ window.closeLightbox = function() {
   lightboxOpen = false;
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
+  // Blur any focused gallery item to prevent stuck hover/focus state
+  if (document.activeElement && document.activeElement.classList.contains('gallery-item')) {
+    document.activeElement.blur();
+  }
 };
 
 window.prevLightbox = function(e) {
