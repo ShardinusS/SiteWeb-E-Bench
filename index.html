@@ -633,6 +633,7 @@
           <button class="nav-dropdown-item" data-page="logiciel" onclick="showPage('logiciel'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Logiciel</button>
           <button class="nav-dropdown-item" data-page="energie" onclick="showPage('energie'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-sun" aria-hidden="true"></i> Énergie</button>
           <button class="nav-dropdown-item" data-page="matlab" onclick="showPage('matlab'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> MATLAB</button>
+          <button class="nav-dropdown-item" data-page="mecanique" onclick="showPage('mecanique'); closeAllDropdowns();" role="menuitem"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> Mécanique</button>
         </div>
       </li>
 
@@ -677,6 +678,7 @@
     <button class="mobile-nav-link" data-page="logiciel" onclick="showPage('logiciel'); closeMobileMenu();"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Logiciel</button>
     <button class="mobile-nav-link" data-page="energie" onclick="showPage('energie'); closeMobileMenu();"><i class="fa-solid fa-sun" aria-hidden="true"></i> Énergie</button>
     <button class="mobile-nav-link" data-page="matlab" onclick="showPage('matlab'); closeMobileMenu();"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> MATLAB</button>
+    <button class="mobile-nav-link" data-page="mecanique" onclick="showPage('mecanique'); closeMobileMenu();"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> Mécanique</button>
   </div>
 </div>
 
@@ -1516,25 +1518,7 @@
   </div></div></section><!-- /page-matlab -->
 
 
-<!-- FOOTER (après toutes les pages) -->
-<footer class="footer" role="contentinfo">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo">
-        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="5" y="4" width="22" height="7" rx="1.5" fill="currentColor" opacity=".2"/><rect x="14" y="10" width="4" height="3" rx=".5" fill="currentColor" opacity=".15"/><rect x="2" y="13" width="28" height="3.5" rx="1.75" fill="var(--primary)"/><rect x="2" y="17.5" width="28" height="3.5" rx="1.75" fill="var(--primary)" opacity=".65"/><rect x="6" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/><rect x="15" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/><rect x="23.5" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/></svg>
-        E-Bench <span>2026</span>
-      </div>
-      <p class="footer-tagline">Banc public intelligent, 100% autonome en énergie solaire. Projet STI2D récompensé aux Olympiades des Sciences de l'Ingénieur — Hauts-de-France.</p>
-    </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Les Ingénieux — STI2D Hauts-de-France</span>
-      <div style="display:flex;gap:10px;align-items:center;">
-        <a href="https://www.instagram.com/e_bench_osi_doullens/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Suivez-nous sur Instagram" aria-label="Instagram — @e_bench_osi_doullens"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-        <a href="SysML-corrige.html" target="_blank" rel="noopener noreferrer" class="social-btn" title="Voir le diagramme SysML" aria-label="Diagramme SysML du projet" style="font-size:.65rem;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:-.5px;">SysML</a>
-      </div>
-    </div>
-  </div>
-</footer>
+
 
 <!-- BACK TO TOP -->
 <button class="back-to-top" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut de page"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
@@ -1648,7 +1632,7 @@
   'use strict';
 
   /* ── Config ── */
-  var PAGES = ['accueil','equipe','olympiades','conception','technologies','logiciel','energie','normes','galerie','planning','matlab'];
+  var PAGES = ['accueil','equipe','olympiades','conception','technologies','logiciel','energie','normes','galerie','planning','matlab','mecanique'];
 
   /* ── Navigation ── */
   var solarInterval = null;
@@ -2510,6 +2494,215 @@ document.addEventListener('keydown', function(e) {
     </div>
   </div>
 </div>
+<!-- ════════════════════════════════════════
+     PAGE — MÉCANIQUE (Vérification structurelle)
+     ════════════════════════════════════════ -->
+<section class="page" id="page-mecanique" role="region" aria-label="Mécanique">
+  <div class="container"><div class="section">
+    <div class="section-tag reveal"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> Vérification Structurelle</div>
+    <h2 class="section-title reveal">Assise du Banc — <span style="color:var(--primary)">3 Planches Douglas</span></h2>
+    <p class="section-sub reveal">Calcul de la résistance et de la flèche pour 3 personnes (240 kg) — Portée 1,80 m — Douglas C24 (NF EN 338)</p>
+    <div class="reveal" style="margin-top:16px">
+      <a href="assets/banc_douglas_3planches.pdf" download="banc_douglas_3planches.pdf"
+         style="display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:10px;background:color-mix(in srgb,#EF4444 12%,transparent);border:1.5px solid #EF4444;color:#EF4444;font-size:.85rem;font-weight:700;text-decoration:none;transition:background .2s,transform .15s;cursor:pointer;"
+         onmouseover="this.style.background='color-mix(in srgb,#EF4444 22%,transparent)';this.style.transform='translateY(-1px)'"
+         onmouseout="this.style.background='color-mix(in srgb,#EF4444 12%,transparent)';this.style.transform='translateY(0)'"
+         title="Télécharger la note de calcul structurelle complète" aria-label="Télécharger la note de calcul en PDF">
+        <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="0" y="0" width="20" height="24" rx="3" fill="#EF4444" opacity=".18"/>
+          <rect x="0" y="0" width="8" height="8" rx="0" fill="#EF4444" opacity=".0"/>
+          <path d="M12 0 L20 8 L12 8 Z" fill="#EF4444" opacity=".25"/>
+          <line x1="12" y1="0" x2="12" y2="8" stroke="#EF4444" stroke-width="1" opacity=".4"/>
+          <line x1="12" y1="8" x2="20" y2="8" stroke="#EF4444" stroke-width="1" opacity=".4"/>
+          <text x="3" y="18" font-size="7" font-weight="900" fill="#EF4444" font-family="Arial,sans-serif" letter-spacing="0.5">PDF</text>
+          <line x1="3" y1="20" x2="17" y2="20" stroke="#EF4444" stroke-width="1" opacity=".5"/>
+        </svg>
+        <span>Télécharger la note de calcul <span style="opacity:.7;font-size:.75rem;font-weight:400">(banc_douglas_3planches.pdf)</span></span>
+        <i class="fa-solid fa-download" style="font-size:.8rem;opacity:.8" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <!-- KPI cards -->
+    <div class="metric-boxes reveal" style="margin-top:40px">
+      <div class="metric-box" style="border-color:var(--primary);background:var(--primary-06)">
+        <div class="mb-icon" style="color:var(--primary)"><i class="fa-solid fa-square-root-variable"></i></div>
+        <div class="mb-val" style="color:var(--primary)">612 057</div>
+        <div class="mb-lbl">Moment quadratique I (mm⁴)</div>
+      </div>
+      <div class="metric-box" style="border-color:var(--blue);background:color-mix(in srgb,var(--blue) 8%,transparent)">
+        <div class="mb-icon" style="color:var(--blue)"><i class="fa-solid fa-arrows-left-right-to-line"></i></div>
+        <div class="mb-val" style="color:var(--blue)">33 084</div>
+        <div class="mb-lbl">Module de résistance W (mm³)</div>
+      </div>
+      <div class="metric-box" style="border-color:var(--amber);background:color-mix(in srgb,var(--amber) 8%,transparent)">
+        <div class="mb-icon" style="color:var(--amber)"><i class="fa-solid fa-arrow-down"></i></div>
+        <div class="mb-val" style="color:var(--amber)">8,1 mm</div>
+        <div class="mb-lbl">Flèche réelle calculée</div>
+      </div>
+      <div class="metric-box" style="border-color:var(--primary);background:var(--primary-06)">
+        <div class="mb-icon" style="color:var(--primary)"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="mb-val" style="color:var(--primary)">×2,25</div>
+        <div class="mb-lbl">Marge de résistance</div>
+      </div>
+    </div>
+
+    <!-- Two columns : bilan table + deformed shape SVG -->
+    <div style="display:flex;gap:32px;margin-top:48px;flex-wrap:wrap;align-items:flex-start">
+
+      <!-- Left : bilan table -->
+      <div class="reveal" style="flex:1;min-width:280px">
+        <div class="section-tag" style="margin-bottom:16px"><i class="fa-solid fa-table-list"></i> Bilan par planche</div>
+        <p style="color:var(--text-sub);font-size:.9rem;margin-bottom:20px;line-height:1.7">
+          Section 37 × 145 mm — Charge réelle : <strong>436 N/m</strong> par planche (3 pers. × 80 kg, portée 1,80 m). Module E = 12 000 MPa (Douglas C24).
+        </p>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:.85rem">
+            <thead>
+              <tr style="background:var(--primary-10);border-bottom:2px solid var(--primary)">
+                <th style="padding:10px 12px;text-align:left;color:var(--text);font-weight:700">Critère</th>
+                <th style="padding:10px 12px;text-align:right;color:var(--text);font-weight:700">Limite (N/m)</th>
+                <th style="padding:10px 12px;text-align:right;color:var(--text);font-weight:700">Réel (N/m)</th>
+                <th style="padding:10px 12px;text-align:center;color:var(--text);font-weight:700">Ratio</th>
+                <th style="padding:10px 12px;text-align:center;color:var(--text);font-weight:700">Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)">
+                <td style="padding:10px 12px;color:var(--text)"><strong>Résistance</strong> σ ≤ 12 MPa</td>
+                <td style="padding:10px 12px;text-align:right;color:var(--text-sub)">980</td>
+                <td style="padding:10px 12px;text-align:right;color:var(--text-sub)">436</td>
+                <td style="padding:10px 12px;text-align:center;color:var(--primary);font-weight:700">0,44</td>
+                <td style="padding:10px 12px;text-align:center"><span style="background:color-mix(in srgb,var(--primary) 15%,transparent);color:var(--primary);border:1px solid var(--primary);border-radius:20px;padding:3px 10px;font-size:.8rem;font-weight:700">✓ OK</span></td>
+              </tr>
+              <tr>
+                <td style="padding:10px 12px;color:var(--text)"><strong>Flèche</strong> f ≤ L/300 = 6 mm</td>
+                <td style="padding:10px 12px;text-align:right;color:var(--text-sub)">322</td>
+                <td style="padding:10px 12px;text-align:right;color:var(--text-sub)">436</td>
+                <td style="padding:10px 12px;text-align:center;color:var(--amber);font-weight:700">1,35</td>
+                <td style="padding:10px 12px;text-align:center"><span style="background:color-mix(in srgb,var(--amber) 15%,transparent);color:var(--amber);border:1px solid var(--amber);border-radius:20px;padding:3px 10px;font-size:.8rem;font-weight:700">⚠ Dépassé</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Section data table -->
+        <div class="section-tag" style="margin-top:36px;margin-bottom:16px"><i class="fa-solid fa-list-check"></i> Données section</div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+            <thead>
+              <tr style="background:var(--primary-06);border-bottom:1px solid var(--border)">
+                <th style="padding:8px 12px;text-align:left;color:var(--text-sub)">Paramètre</th>
+                <th style="padding:8px 12px;text-align:left;color:var(--text-sub)">Formule</th>
+                <th style="padding:8px 12px;text-align:right;color:var(--text-sub)">Valeur</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 12px;color:var(--text)">Largeur b</td><td style="padding:8px 12px;color:var(--text-sub)">—</td><td style="padding:8px 12px;text-align:right;color:var(--primary);font-family:monospace">145 mm</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 12px;color:var(--text)">Épaisseur h</td><td style="padding:8px 12px;color:var(--text-sub)">—</td><td style="padding:8px 12px;text-align:right;color:var(--primary);font-family:monospace">37 mm</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 12px;color:var(--text)">Portée L</td><td style="padding:8px 12px;color:var(--text-sub)">—</td><td style="padding:8px 12px;text-align:right;color:var(--primary);font-family:monospace">1 800 mm</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 12px;color:var(--text)">Module E (Douglas C24)</td><td style="padding:8px 12px;color:var(--text-sub)">—</td><td style="padding:8px 12px;text-align:right;color:var(--primary);font-family:monospace">12 000 MPa</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 12px;color:var(--text)">Moment quadratique I</td><td style="padding:8px 12px;color:var(--text-sub);font-family:monospace">b·h³/12</td><td style="padding:8px 12px;text-align:right;color:var(--primary);font-family:monospace">612 057 mm⁴</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 12px;color:var(--text)">Module de résistance W</td><td style="padding:8px 12px;color:var(--text-sub);font-family:monospace">b·h²/6</td><td style="padding:8px 12px;text-align:right;color:var(--primary);font-family:monospace">33 084 mm³</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 12px;color:var(--text)">Flèche admissible f_lim</td><td style="padding:8px 12px;color:var(--text-sub);font-family:monospace">L/300</td><td style="padding:8px 12px;text-align:right;color:var(--primary);font-family:monospace">6,0 mm</td></tr>
+              <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 12px;color:var(--text)">Charge réelle / planche</td><td style="padding:8px 12px;color:var(--text-sub);font-family:monospace">P/(L·n)</td><td style="padding:8px 12px;text-align:right;color:var(--primary);font-family:monospace">436 N/m</td></tr>
+              <tr><td style="padding:8px 12px;color:var(--text)">Flèche réelle calculée</td><td style="padding:8px 12px;color:var(--text-sub);font-family:monospace">5qL⁴/384EI</td><td style="padding:8px 12px;text-align:right;color:var(--amber);font-family:monospace;font-weight:700">8,11 mm</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right : deformed shape visualization + verdict -->
+      <div class="reveal reveal-delay-1" style="flex:1;min-width:260px">
+        <div class="section-tag" style="margin-bottom:16px"><i class="fa-solid fa-wave-square"></i> Déformée — Vue de profil (×15)</div>
+
+        <!-- SVG beam deformation -->
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:24px">
+          <svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:160px" aria-label="Modélisation de la déformée du banc">
+            <!-- Grid lines -->
+            <line x1="50" y1="20" x2="50" y2="140" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+            <line x1="450" y1="20" x2="450" y2="140" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4,4"/>
+            <!-- Neutral axis (reference) -->
+            <line x1="50" y1="80" x2="450" y2="80" stroke="var(--border)" stroke-width="1" stroke-dasharray="6,4"/>
+            <!-- Deformed beam (cubic curve, max sag ×15 amplified) -->
+            <path d="M50,80 C150,80 200,130 250,130 C300,130 350,80 450,80" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round"/>
+            <!-- Support triangles -->
+            <polygon points="50,82 42,100 58,100" fill="var(--text-sub)" opacity="0.6"/>
+            <polygon points="450,82 442,100 458,100" fill="var(--text-sub)" opacity="0.6"/>
+            <!-- Arrow for max deflection -->
+            <line x1="250" y1="82" x2="250" y2="126" stroke="var(--amber)" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <polygon points="250,130 246,118 254,118" fill="var(--amber)"/>
+            <!-- Labels -->
+            <text x="255" y="108" fill="var(--amber)" font-size="11" font-family="monospace">f = 8,1 mm</text>
+            <text x="255" y="72" fill="var(--text-sub)" font-size="10" font-family="monospace">f_lim = 6,0 mm</text>
+            <text x="50" y="112" fill="var(--text-sub)" font-size="10" text-anchor="middle">A</text>
+            <text x="450" y="112" fill="var(--text-sub)" font-size="10" text-anchor="middle">B</text>
+            <!-- Span label -->
+            <line x1="55" y1="148" x2="445" y2="148" stroke="var(--text-sub)" stroke-width="1" marker-start="url(#arrL)" marker-end="url(#arrR)"/>
+            <text x="250" y="158" fill="var(--text-sub)" font-size="10" text-anchor="middle">L = 1 800 mm</text>
+            <!-- Distributed load arrows -->
+            <g fill="none" stroke="var(--blue)" stroke-width="1">
+              <line x1="130" y1="40" x2="130" y2="60"/><polygon points="130,62 127,52 133,52" fill="var(--blue)"/>
+              <line x1="180" y1="40" x2="180" y2="60"/><polygon points="180,62 177,52 183,52" fill="var(--blue)"/>
+              <line x1="230" y1="40" x2="230" y2="60"/><polygon points="230,62 227,52 233,52" fill="var(--blue)"/>
+              <line x1="280" y1="40" x2="280" y2="60"/><polygon points="280,62 277,52 283,52" fill="var(--blue)"/>
+              <line x1="330" y1="40" x2="330" y2="60"/><polygon points="330,62 327,52 333,52" fill="var(--blue)"/>
+              <line x1="115" y1="40" x2="370" y2="40" stroke="var(--blue)" stroke-width="1.5"/>
+            </g>
+            <text x="245" y="33" fill="var(--blue)" font-size="9" text-anchor="middle">q = 436 N/m / planche</text>
+          </svg>
+        </div>
+
+        <!-- Verdict boxes -->
+        <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
+          <div style="background:color-mix(in srgb,var(--primary) 8%,transparent);border:1px solid var(--primary);border-radius:14px;padding:16px 20px">
+            <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--primary);margin-bottom:6px;font-weight:700"><i class="fa-solid fa-check-circle"></i> Résistance ✓</div>
+            <p style="color:var(--text-sub);font-size:.88rem;line-height:1.6;margin:0">La contrainte maximale est de <strong style="color:var(--text)">σ = 5,3 MPa</strong>, bien en dessous de la limite de 12 MPa. La marge est de <strong style="color:var(--primary)">×2,25</strong> : aucun risque de rupture, même sous charge maximale.</p>
+          </div>
+          <div style="background:color-mix(in srgb,var(--amber) 8%,transparent);border:1px solid var(--amber);border-radius:14px;padding:16px 20px">
+            <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);margin-bottom:6px;font-weight:700"><i class="fa-solid fa-triangle-exclamation"></i> Flèche ⚠ dépassée (confort)</div>
+            <p style="color:var(--text-sub);font-size:.88rem;line-height:1.6;margin:0">La flèche de <strong style="color:var(--text)">8,1 mm</strong> dépasse le critère L/300 = 6,0 mm de <strong style="color:var(--amber)">+2,1 mm (+35 %)</strong>. Il s'agit d'un critère de <em>rigidité</em> (confort), non de résistance. La légère souplesse perçue est normale et <strong style="color:var(--primary)">sans danger structurel</strong>.</p>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px 20px">
+            <p style="color:var(--text-muted);font-size:.78rem;line-height:1.6;margin:0"><i class="fa-solid fa-circle-info" style="color:var(--text-muted)"></i> Calcul basé sur Douglas classe C24 (NF EN 338) sans coefficients partiels Eurocode 5. Document généré — Lycée Polyvalent de l'Authie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- FOOTER (après toutes les pages) -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="5" y="4" width="22" height="7" rx="1.5" fill="currentColor" opacity=".2"/><rect x="14" y="10" width="4" height="3" rx=".5" fill="currentColor" opacity=".15"/><rect x="2" y="13" width="28" height="3.5" rx="1.75" fill="var(--primary)"/><rect x="2" y="17.5" width="28" height="3.5" rx="1.75" fill="var(--primary)" opacity=".65"/><rect x="6" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/><rect x="15" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/><rect x="23.5" y="21" width="2.5" height="8" rx="1.25" fill="currentColor" opacity=".3"/></svg>
+        E-Bench <span>2026</span>
+      </div>
+      <p class="footer-tagline">Banc public intelligent, 100% autonome en énergie solaire. Projet STI2D récompensé aux Olympiades des Sciences de l'Ingénieur — Hauts-de-France.</p>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Les Ingénieux — STI2D Hauts-de-France</span>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <a href="https://www.instagram.com/e_bench_osi_doullens/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Suivez-nous sur Instagram" aria-label="Instagram — @e_bench_osi_doullens"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a href="SysML-corrige.html" target="_blank" rel="noopener noreferrer" class="social-btn" title="Voir le diagramme SysML" aria-label="Diagramme SysML du projet" style="font-size:.65rem;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:-.5px;">SysML</a>
+        <a href="assets/banc_douglas_3planches.pdf" download="banc_douglas_3planches.pdf"
+           title="Télécharger la note de calcul structurelle (PDF)" aria-label="Télécharger le PDF de vérification structurelle"
+           style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:8px;background:color-mix(in srgb,#EF4444 12%,transparent);border:1px solid #EF4444;color:#EF4444;font-size:.72rem;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:-.3px;text-decoration:none;transition:background .2s;"
+           onmouseover="this.style.background='color-mix(in srgb,#EF4444 22%,transparent)'" onmouseout="this.style.background='color-mix(in srgb,#EF4444 12%,transparent)'">
+          <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="13" height="15" rx="2" fill="#EF4444" opacity=".18"/>
+            <text x="1.5" y="10.5" font-size="5.5" font-weight="900" fill="#EF4444" font-family="Arial,sans-serif">PDF</text>
+            <line x1="2" y1="12.5" x2="11" y2="12.5" stroke="#EF4444" stroke-width=".8" opacity=".55"/>
+          </svg>
+          Note de calcul
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 <script>
 function switchTab(tab){
   var isNeuf = tab==='neuf';
