@@ -767,7 +767,7 @@
                 <i class="fa-brands fa-usb" style="font-size:18px"></i>
               </div>
               <div class="eb-usb-info">
-                <div class="eb-usb-name">USB-A</div>
+                <div class="eb-usb-name">USB-C</div>
                 <div class="eb-usb-sub">12W · actif</div>
               </div>
               <div class="eb-usb-active"></div>
@@ -874,9 +874,7 @@
       <h2 class="section-title">Limites du Prototype & <span style="color:var(--primary)">Vision V2</span></h2>
       <p style="color:var(--text-sub);margin-bottom:8px">Transparence sur les contraintes actuelles et les pistes d'amélioration.</p>
       <div class="limits-grid">
-        <div class="limit-card"><div class="lc-icon"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div><h4>Raspberry Pi 3B</h4><div class="limit-item limit-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Limite : Énergivore (~5W continu), surdimensionné pour la tâche</span></div><div class="limit-item limit-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>V2 : Pi Zero 2W (~0.5-1W), autonomie ×5</span></div></div>
         <div class="limit-card"><div class="lc-icon"><i class="fa-solid fa-battery-half" aria-hidden="true"></i></div><h4>Batterie GEL 100Ah</h4><div class="limit-item limit-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Limite : ~500 cycles à 50% DOD (~2 ans usage intensif sans soleil, 5-7 ans en usage typique avec production solaire)</span></div><div class="limit-item limit-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>V2 : LiFePO4 (3000+ cycles, -20°C à +60°C)</span></div></div>
-        <div class="limit-card"><div class="lc-icon"><i class="fa-solid fa-tower-cell" aria-hidden="true"></i></div><h4>Aucune connexion réseau</h4><div class="limit-item limit-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Limite : Affichage local seulement, pas de monitoring à distance</span></div><div class="limit-item limit-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>V2 : Module 4G + dashboard web distant</span></div></div>
         <div class="limit-card"><div class="lc-icon"><i class="fa-solid fa-snowflake" aria-hidden="true"></i></div><h4>Bilan hivernal</h4><div class="limit-item limit-warn"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Limite : Production &lt; consommation dans la Somme en janvier</span></div><div class="limit-item limit-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>V2 : Délestage automatique + veille profonde</span></div></div>
       </div>
     </div>
@@ -891,6 +889,9 @@
     <div class="section-tag reveal"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Stack Technique</div>
     <h2 class="section-title reveal">3 Piliers, 1 <span style="color:var(--primary)">Vision</span></h2>
     <p class="section-sub reveal">Chaque composant a été sélectionné pour sa fiabilité et sa durabilité. Système 100&nbsp;% autonome, fonctionnel sans aucune connexion réseau.</p>
+    <div class="reveal" style="margin-bottom:28px;">
+      <button onclick="document.getElementById('budget-modal').style.display='flex'" class="btn btn-primary" style="gap:8px;"><i class="fa-solid fa-coins" aria-hidden="true"></i> Voir le Budget du Projet</button>
+    </div>
     <div class="features-grid">
       <div class="feature-card fc-green reveal"><div class="fc-header"><i class="fa-solid fa-plug" aria-hidden="true"></i></div><div class="fc-title">Recharge & Usage</div><div class="spec-item"><span class="spec-dot dot-green"></span>2× USB-C + 2× USB-A</div><div class="spec-item"><span class="spec-dot dot-green"></span>Alimentation 100% solaire locale</div></div>
       <div class="feature-card fc-blue reveal reveal-delay-1"><div class="fc-header"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></div><div class="fc-title">Énergie Durable</div><div class="spec-item"><span class="spec-dot dot-blue"></span>1× Panneau 500Wc monocristallin</div><div class="spec-item"><span class="spec-dot dot-blue"></span>Batterie GEL 100Ah 12V</div><div class="spec-item"><span class="spec-dot dot-blue"></span>Contrôleur MPPT Victron 150|35</div><div class="spec-item"><span class="spec-dot dot-blue"></span>~4 jours autonomie (veille) / ~1.2j usage réel</div></div>
@@ -1005,7 +1006,7 @@
           <line x1="390" y1="90" x2="390" y2="160" stroke="#3B82F6" stroke-width="2.5"/>
           <text x="405" y="108" fill="#3B82F6" font-size="7" font-family="JetBrains Mono,monospace">PV−</text>
           <rect x="275" y="120" width="30" height="18" rx="4" fill="#2a1515" stroke="#EF4444" stroke-width="1"/>
-          <text x="290" y="133" text-anchor="middle" fill="#FCA5A5" font-size="7" font-family="JetBrains Mono,monospace" font-weight="500">F1 15A</text>
+          <text x="290" y="133" text-anchor="middle" fill="#FCA5A5" font-size="7" font-family="JetBrains Mono,monospace" font-weight="500">F1 20A</text>
           <line x1="290" y1="138" x2="290" y2="160" stroke="#EF4444" stroke-width="2.5"/>
           <text x="330" y="154" fill="#6B7A94" font-size="7" font-family="JetBrains Mono,monospace" font-style="italic">4mm²</text>
           <rect x="200" y="160" width="280" height="70" rx="10" fill="#0f1d32" stroke="#3B82F6" stroke-width="1.5"/>
@@ -1056,9 +1057,9 @@
           <line x1="130" y1="650" x2="60" y2="650" stroke="#00D4A0" stroke-width="1.5"/>
           <line x1="60" y1="650" x2="60" y2="700" stroke="#00D4A0" stroke-width="1.5"/>
           <text x="90" y="642" fill="#00D4A0" font-size="7" font-family="JetBrains Mono,monospace">GPIO 17</text>
-          <line x1="130" y1="660" x2="70" y2="660" stroke="#F59E0B" stroke-width="1" stroke-dasharray="3 2"/>
-          <line x1="70" y1="660" x2="70" y2="700" stroke="#F59E0B" stroke-width="1" stroke-dasharray="3 2"/>
-          <text x="90" y="672" fill="#F59E0B" font-size="7" font-family="JetBrains Mono,monospace">3.3V</text>
+          <line x1="130" y1="660" x2="70" y2="660" stroke="#F59E0B" stroke-width="1.5"/>
+          <line x1="70" y1="660" x2="70" y2="700" stroke="#F59E0B" stroke-width="1.5"/>
+          <text x="90" y="672" fill="#F59E0B" font-size="7" font-family="JetBrains Mono,monospace">5V</text>
           <rect x="20" y="700" width="110" height="45" rx="8" fill="#1a2744" stroke="#00D4A0" stroke-width="1.2"/>
           <text x="75" y="722" text-anchor="middle" fill="#00D4A0" font-size="9" font-family="Bebas Neue,cursive">PIR HC-SR501</text>
           <text x="75" y="738" text-anchor="middle" fill="#6EE7B7" font-size="7" font-family="JetBrains Mono,monospace">Détection 7m · 120°</text>
@@ -1069,14 +1070,14 @@
           <line x1="510" y1="460" x2="510" y2="530" stroke="#3B82F6" stroke-width="2"/>
           <text x="525" y="516" fill="#6B7A94" font-size="7" font-family="JetBrains Mono,monospace" font-style="italic">1.5mm²</text>
           <rect x="420" y="530" width="140" height="50" rx="8" fill="#0a2a1a" stroke="#00D4A0" stroke-width="1.2"/>
-          <text x="490" y="555" text-anchor="middle" fill="#00D4A0" font-size="10" font-family="Bebas Neue,cursive">MODULE USB</text>
-          <text x="490" y="572" text-anchor="middle" fill="#6EE7B7" font-size="8" font-family="JetBrains Mono,monospace">USB-C + USB-A</text>
+          <text x="490" y="555" text-anchor="middle" fill="#00D4A0" font-size="10" font-family="Bebas Neue,cursive">MODULE USB-C PD</text>
+          <text x="490" y="572" text-anchor="middle" fill="#6EE7B7" font-size="8" font-family="JetBrains Mono,monospace">2× USB-C 45W</text>
           <line x1="460" y1="580" x2="460" y2="620" stroke="#00D4A0" stroke-width="2"/>
           <line x1="520" y1="580" x2="520" y2="620" stroke="#00D4A0" stroke-width="2"/>
           <rect x="435" y="620" width="50" height="35" rx="6" fill="#1a2744" stroke="#00D4A0" stroke-width="1"/>
           <text x="460" y="641" text-anchor="middle" fill="#00D4A0" font-size="8" font-family="JetBrains Mono,monospace" font-weight="500">USB-C</text>
           <rect x="495" y="620" width="50" height="35" rx="6" fill="#1a2744" stroke="#00D4A0" stroke-width="1"/>
-          <text x="520" y="641" text-anchor="middle" fill="#00D4A0" font-size="8" font-family="JetBrains Mono,monospace" font-weight="500">USB-A</text>
+          <text x="520" y="641" text-anchor="middle" fill="#00D4A0" font-size="8" font-family="JetBrains Mono,monospace" font-weight="500">USB-C</text>
           <rect x="40" y="780" width="600" height="65" rx="10" fill="#0D1220" stroke="#1a2744" stroke-width="1"/>
           <text x="340" y="802" text-anchor="middle" fill="#8899B4" font-size="10" font-family="Bebas Neue,cursive">LÉGENDE</text>
           <line x1="70" y1="822" x2="100" y2="822" stroke="#EF4444" stroke-width="3"/><text x="110" y="826" fill="#8899B4" font-size="8" font-family="JetBrains Mono,monospace">+12V DC</text>
@@ -1187,250 +1188,284 @@
   <div class="container"><div class="section">
     <div class="section-tag reveal"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Planning du Projet</div>
     <h2 class="section-title reveal">Planning du Projet</h2>
-    <p class="section-sub reveal">Projet IDD/SIN — Du 3 mars au 6 mai 2025. Vacances Zone B : 11 avril → 27 avril. Compte rendu : 5 mai 2025. Grand oral : 6 mai 2025.</p>
+    <p class="section-sub reveal">Projet IDD/SIN — Du 3 mars au 7 mai 2026. Vacances Zone B : 5 avril → 22 avril. Dossier technique : 5 mai. Grand oral : 6 mai 2026.</p>
 
-    <!-- Résumé visuel -->
+    <!-- Stats bar -->
     <div class="planning-intro reveal">
       <div class="planning-summary">
-        <div class="planning-stat">
-          <i class="fa-solid fa-calendar-week" style="color:var(--primary)"></i>
-          <div>
-            <div class="planning-stat-value">3 mars → 6 mai</div>
-            <div class="planning-stat-label">Période (9 semaines)</div>
-          </div>
-        </div>
-        <div class="planning-stat">
-          <i class="fa-solid fa-bullseye" style="color:var(--blue)"></i>
-          <div>
-            <div class="planning-stat-value">50h</div>
-            <div class="planning-stat-label">Objectif réel (ajusté)</div>
-          </div>
-        </div>
-        <div class="planning-stat">
-          <i class="fa-solid fa-clock" style="color:var(--amber)"></i>
-          <div>
-            <div class="planning-stat-value">~50h</div>
-            <div class="planning-stat-label">Temps réel / personne</div>
-          </div>
-        </div>
-        <div class="planning-stat">
-          <i class="fa-solid fa-flag-checkered" style="color:var(--red)"></i>
-          <div>
-            <div class="planning-stat-value">6 mai</div>
-            <div class="planning-stat-label">Grand oral</div>
-          </div>
-        </div>
+        <div class="planning-stat"><i class="fa-solid fa-calendar-week" style="color:var(--primary)"></i><div><div class="planning-stat-value">3 mars → 6 mai</div><div class="planning-stat-label">Période (9 semaines)</div></div></div>
+        <div class="planning-stat"><i class="fa-solid fa-bullseye" style="color:var(--blue)"></i><div><div class="planning-stat-value">50h</div><div class="planning-stat-label">Objectif / personne</div></div></div>
+        <div class="planning-stat"><i class="fa-solid fa-users" style="color:var(--amber)"></i><div><div class="planning-stat-value">5</div><div class="planning-stat-label">Membres</div></div></div>
+        <div class="planning-stat"><i class="fa-solid fa-flag-checkered" style="color:var(--red)"></i><div><div class="planning-stat-value">6 mai</div><div class="planning-stat-label">Grand oral</div></div></div>
       </div>
     </div>
 
-    <!-- Jalons clés -->
-    <div class="reveal" style="margin-bottom:40px">
-      <h3 style="font-family:'Bebas Neue',cursive;font-size:1.5rem;margin-bottom:16px;color:var(--text)">Jalons du projet</h3>
-      <div class="milestones-row">
-        <div class="milestone-card">
-          <div class="milestone-date">3 mars</div>
-          <div class="milestone-label">Lancement du projet</div>
-        </div>
-        <div class="milestone-card" style="background:rgba(127,140,141,.08)">
-          <div class="milestone-date" style="color:var(--text-muted)">11 avr. → 27 avr.</div>
-          <div class="milestone-label">Vacances Zone B</div>
-        </div>
-        <div class="milestone-card" style="background:rgba(0,212,160,.06)">
-          <div class="milestone-date" style="color:var(--primary)">1 mai</div>
-          <div class="milestone-label">Prototype validé</div>
-        </div>
-        <div class="milestone-card" style="background:rgba(59,130,246,.06)">
-          <div class="milestone-date" style="color:var(--blue)">5 mai</div>
-          <div class="milestone-label">Compte rendu</div>
-        </div>
-        <div class="milestone-card" style="background:rgba(239,68,68,.06)">
-          <div class="milestone-date" style="color:var(--red)">6 mai</div>
-          <div class="milestone-label">Grand oral</div>
+    <!-- GANTT INTERACTIF -->
+    <div class="reveal" style="margin-bottom:36px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+        <h3 style="font-family:'Bebas Neue',cursive;font-size:1.5rem;color:var(--text);margin:0;">Diagramme de Gantt</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="gantt-filters">
+          <button onclick="ganttFilter('all')" class="g-filter-btn g-active" data-f="all">Tous</button>
+          <button onclick="ganttFilter('axel')" class="g-filter-btn" data-f="axel" style="--fc:#2980b9">Axel</button>
+          <button onclick="ganttFilter('kenzo')" class="g-filter-btn" data-f="kenzo" style="--fc:#27ae60">Kenzo</button>
+          <button onclick="ganttFilter('yohan')" class="g-filter-btn" data-f="yohan" style="--fc:#f1c40f">Yohan</button>
+          <button onclick="ganttFilter('lorenzo')" class="g-filter-btn" data-f="lorenzo" style="--fc:#e67e22">Lorenzo</button>
+          <button onclick="ganttFilter('matheo')" class="g-filter-btn" data-f="matheo" style="--fc:#c0392b">Mathéo</button>
         </div>
       </div>
-    </div>
-
-    <!-- ═══ TABLEAU RÉCAPITULATIF ═══ -->
-    <div class="reveal" style="margin-bottom:40px">
-      <h3 style="font-family:'Bebas Neue',cursive;font-size:1.5rem;margin-bottom:16px;color:var(--text)">Tableau récapitulatif par phase</h3>
-      <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
-        <table class="planning-table">
-          <thead>
-            <tr>
-              <th style="min-width:120px">Membre</th>
-              <th>Recherche</th>
-              <th>Conception</th>
-              <th>Développement</th>
-              <th>Réalisation</th>
-              <th>Présentation</th>
-              <th style="min-width:60px">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- AXEL -->
-            <tr>
-              <td style="font-weight:600;color:#2980b9">Axel</td>
-              <td>5h<br><small style="color:var(--text-muted)">3 mars → 28 mars</small></td>
-              <td>8h<br><small style="color:var(--text-muted)">28 mars → 4 avr.</small></td>
-              <td>20h<br><small style="color:var(--text-muted)">3 mars → 4 mai</small></td>
-              <td>12h<br><small style="color:var(--text-muted)">26 mars → 4 mai</small></td>
-              <td>5h<br><small style="color:var(--text-muted)">5 → 6 mai</small></td>
-              <td style="font-family:'Bebas Neue',cursive;font-size:1.3rem;color:var(--primary)">50h</td>
-            </tr>
-            <!-- KENZO -->
-            <tr>
-              <td style="font-weight:600;color:#27ae60">Kenzo</td>
-              <td>5h<br><small style="color:var(--text-muted)">3 mars → 28 mars</small></td>
-              <td>13h<br><small style="color:var(--text-muted)">3 mars → 4 avr.</small></td>
-              <td>5h<br><small style="color:var(--text-muted)">25 mars → 4 mai</small></td>
-              <td>15h<br><small style="color:var(--text-muted)">26 mars → 4 mai</small></td>
-              <td>12h<br><small style="color:var(--text-muted)">2 avr. → 6 mai</small></td>
-              <td style="font-family:'Bebas Neue',cursive;font-size:1.3rem;color:var(--primary)">50h</td>
-            </tr>
-            <!-- YOHAN -->
-            <tr>
-              <td style="font-weight:600;color:#f1c40f">Yohan</td>
-              <td>4h<br><small style="color:var(--text-muted)">3 mars → 28 mars</small></td>
-              <td>15h<br><small style="color:var(--text-muted)">3 mars → 4 avr.</small></td>
-              <td>16h<br><small style="color:var(--text-muted)">31 mars → 4 mai</small></td>
-              <td>11h<br><small style="color:var(--text-muted)">26 mars → 4 mai</small></td>
-              <td>4h<br><small style="color:var(--text-muted)">5 → 6 mai</small></td>
-              <td style="font-family:'Bebas Neue',cursive;font-size:1.3rem;color:var(--primary)">50h</td>
-            </tr>
-            <!-- LORENZO -->
-            <tr>
-              <td style="font-weight:600;color:#e67e22">Lorenzo</td>
-              <td>5h<br><small style="color:var(--text-muted)">3 mars → 28 mars</small></td>
-              <td>18h<br><small style="color:var(--text-muted)">3 mars → 7 avr.</small></td>
-              <td>4h<br><small style="color:var(--text-muted)">1 → 4 mai</small></td>
-              <td>15h<br><small style="color:var(--text-muted)">2 avr. → 4 mai</small></td>
-              <td>8h<br><small style="color:var(--text-muted)">1 → 6 mai</small></td>
-              <td style="font-family:'Bebas Neue',cursive;font-size:1.3rem;color:var(--primary)">50h</td>
-            </tr>
-            <!-- MATHÉO -->
-            <tr>
-              <td style="font-weight:600;color:#c0392b">Mathéo</td>
-              <td>5h<br><small style="color:var(--text-muted)">3 mars → 18 mars</small></td>
-              <td>12h<br><small style="color:var(--text-muted)">12 mars → 2 avr.</small></td>
-              <td>4h<br><small style="color:var(--text-muted)">1 → 4 mai</small></td>
-              <td>20h<br><small style="color:var(--text-muted)">2 avr. → 4 mai</small></td>
-              <td>9h<br><small style="color:var(--text-muted)">2 avr. → 6 mai</small></td>
-              <td style="font-family:'Bebas Neue',cursive;font-size:1.3rem;color:var(--primary)">50h</td>
-            </tr>
-            <!-- TOTAUX -->
-            <tr style="background:var(--bg-2);font-weight:700">
-              <td style="color:var(--text)">TOTAL / Phase</td>
-              <td>24h</td>
-              <td>66h</td>
-              <td>49h</td>
-              <td>73h</td>
-              <td>38h</td>
-              <td style="font-family:'Bebas Neue',cursive;font-size:1.3rem;color:var(--amber)">250h</td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="gantt-wrap" style="overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--bg-card);">
+        <div id="gantt-chart" style="min-width:900px;font-size:.78rem;"></div>
       </div>
+      <div id="gantt-tooltip" style="display:none;position:fixed;background:var(--bg-2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.78rem;z-index:9999;pointer-events:none;max-width:260px;box-shadow:0 4px 20px rgba(0,0,0,.4)"></div>
     </div>
 
-    <!-- ═══ TABLEAU DÉTAILLÉ PAR SEMAINE ═══ -->
-    <div class="reveal" style="margin-bottom:40px">
-      <h3 style="font-family:'Bebas Neue',cursive;font-size:1.5rem;margin-bottom:16px;color:var(--text)">Planning semaine par semaine</h3>
-      <div style="overflow-x:auto;border-radius:12px;border:1px solid var(--border)">
-        <table class="planning-table">
-          <thead>
-            <tr>
-              <th style="min-width:100px">Semaine</th>
-              <th>Période</th>
-              <th>Thème</th>
-              <th>Axel</th>
-              <th>Kenzo</th>
-              <th>Yohan</th>
-              <th>Lorenzo</th>
-              <th>Mathéo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="font-weight:600">S1–S2</td>
-              <td>3 → 14 mars</td>
-              <td><span style="color:var(--primary)">Recherche</span></td>
-              <td>Brainstorm, Benchmark</td>
-              <td>Brainstorm, Benchmark, Croquis</td>
-              <td>Brainstorm, Benchmark, Croquis</td>
-              <td>Brainstorm, Benchmark, Normes</td>
-              <td>Brainstorm, Benchmark, Normes</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">S3–S4</td>
-              <td>17 → 28 mars</td>
-              <td><span style="color:var(--blue)">Conception</span></td>
-              <td>Veille, Calculs, Schémas</td>
-              <td>Veille, Recherche comp., 3D</td>
-              <td>Veille, 3D, Recherche comp.</td>
-              <td>Veille, 3D, Schémas, Recherche</td>
-              <td>Recherche comp., Schémas, 3D</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">S5–S6</td>
-              <td>31 mars → 10 avr.</td>
-              <td><span style="color:var(--blue)">Conception → Dev</span></td>
-              <td>Schémas, Intégration, Python</td>
-              <td>3D, Intégration, Config sys.</td>
-              <td>Python, Intégration</td>
-              <td>3D, Config sys., Intégration</td>
-              <td>Schémas, Intégration, Config sys.</td>
-            </tr>
-            <tr style="background:rgba(127,140,141,.04)">
-              <td style="font-weight:600;color:var(--text-muted)">S7–S8</td>
-              <td style="color:var(--text-muted)">11 → 27 avr.</td>
-              <td style="color:var(--text-muted)"><i class="fa-solid fa-umbrella-beach" style="margin-right:4px"></i> Vacances Zone B</td>
-              <td colspan="5" style="text-align:center;color:var(--text-muted);font-style:italic">Pause — Vacances scolaires</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">S9</td>
-              <td>28 → 30 avr.</td>
-              <td><span style="color:var(--amber)">Développement</span></td>
-              <td>Python (suite), Achat comp.</td>
-              <td>Instagram, Config sys.</td>
-              <td>Python (suite)</td>
-              <td>Achat comp., Construction</td>
-              <td>Construction, Instagram</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">S10</td>
-              <td>1 → 4 mai</td>
-              <td><span style="color:var(--amber)">Finalisation</span></td>
-              <td>Tests API, Interface, Intégration, Install.</td>
-              <td>Tests, Intégration, Install., Photos</td>
-              <td>Tests API, Interface, Intégration</td>
-              <td>Tests API, Intégration, Install., Photos</td>
-              <td>Intégration élec., Install., Tests</td>
-            </tr>
-            <tr>
-              <td style="font-weight:600">S11</td>
-              <td>5 → 6 mai</td>
-              <td><span style="color:var(--red)"><i class="fa-solid fa-file-lines" style="margin-right:4px"></i> CR + Oral</span></td>
-              <td>CR (5), Oral (6)</td>
-              <td>CR (5), Oral (6)</td>
-              <td>CR (5), Oral (6)</td>
-              <td>CR (5), Oral (6)</td>
-              <td>CR (5), Oral (6)</td>
-            </tr>
-          </tbody>
-        </table>
+    <!-- LÉGENDE COULEURS -->
+    <div class="reveal" style="margin-bottom:32px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+      <span style="font-size:.72rem;color:var(--text-muted);margin-right:4px;">PHASES :</span>
+      <span class="g-legend" style="background:#1abc9c22;border-color:#1abc9c;color:#1abc9c">Recherche</span>
+      <span class="g-legend" style="background:#3498db22;border-color:#3498db;color:#3498db">Conception</span>
+      <span class="g-legend" style="background:#9b59b622;border-color:#9b59b6;color:#9b59b6">Développement</span>
+      <span class="g-legend" style="background:#e67e2222;border-color:#e67e22;color:#e67e22">Réalisation</span>
+      <span class="g-legend" style="background:#e74c3c22;border-color:#e74c3c;color:#e74c3c">Communication</span>
+      <span class="g-legend" style="background:#7f8c8d22;border-color:#7f8c8d;color:#7f8c8d">Vacances</span>
+      <span class="g-legend" style="background:var(--primary-10);border-color:var(--primary);color:var(--primary)">◆ Jalons</span>
+    </div>
+
+    <!-- CAPTURE GANTTPROJECT -->
+    <div class="reveal" style="margin-bottom:8px;">
+      <h3 style="font-family:'Bebas Neue',cursive;font-size:1.5rem;color:var(--text);margin-bottom:12px;">Fichier GanttProject Original</h3>
+      <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg-card);">
+        <img src="assets/img/gantt-capture.png" alt="Capture du diagramme GanttProject — Projet IDD/SIN 2026" style="width:100%;display:block;max-height:500px;object-fit:contain;background:#1a1a2e;" loading="lazy">
       </div>
-    </div>
-
-    <!-- Note de fin -->
-    <div class="planning-note reveal" style="margin-top:32px;padding:16px 20px;background:var(--primary-06);border:1px solid var(--primary-12);border-radius:10px;color:var(--text-sub);font-size:.82rem;line-height:1.6">
-      <i class="fa-solid fa-circle-info" style="color:var(--primary);margin-right:8px"></i>
-      <strong>Total : 50h par personne</strong> (objectif initial 72h, réduit en raison des dates butoires OSI et vacances Zone B : 11 avr. → 27 avr.). Chaque membre participe au brainstorming collectif (2h). Les tâches sont organisées par phase : Recherche, Conception, Développement, Réalisation, Présentation.
-      <br><br>
-      <strong>Optimisations appliquées :</strong> Les plages de travail traversant les vacances ont été segmentées. Les tâches de finalisation (intégration, tests) sont décalées au 1-4 mai. Le compte rendu est finalisé le 5 mai, le grand oral le 6 mai. La communication Instagram est répartie : Kenzo (28-30 avr.) et Mathéo (1-4 mai). Les achats composants sont échelonnés pour éviter les doublons.
+      <p style="font-size:.75rem;color:var(--text-muted);margin-top:8px;text-align:center;"><i class="fa-solid fa-file-export" style="margin-right:6px"></i>Source : <code>projet_IDD_SIN_zoneB_v9.gan</code> — GanttProject 3.3</p>
     </div>
 
   </div></div>
 </section>
+
+<style>
+.g-filter-btn{padding:5px 14px;border-radius:20px;border:1px solid var(--fc,var(--border));background:transparent;color:var(--fc,var(--text-sub));font-size:.73rem;font-weight:600;cursor:pointer;transition:.2s}
+.g-filter-btn.g-active{background:var(--fc,var(--primary));color:#fff;border-color:var(--fc,var(--primary))}
+.g-filter-btn[data-f="all"].g-active{background:var(--primary);color:#000;border-color:var(--primary)}
+.g-legend{padding:3px 10px;border-radius:20px;border:1px solid;font-size:.7rem;font-weight:600}
+.gantt-row{display:flex;align-items:center;border-bottom:1px solid var(--border);min-height:28px}
+.gantt-row:hover{background:rgba(255,255,255,.02)}
+.gantt-row.g-group{background:var(--bg-2);font-weight:700;min-height:32px}
+.gantt-label{flex:0 0 210px;padding:4px 10px;font-size:.73rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-right:1px solid var(--border)}
+.gantt-bars{flex:1;position:relative;height:28px}
+.gantt-row.g-group .gantt-bars{height:32px}
+.gantt-bar{position:absolute;top:50%;transform:translateY(-50%);height:14px;border-radius:4px;cursor:pointer;transition:filter .15s,opacity .15s}
+.gantt-bar:hover{filter:brightness(1.3)}
+.gantt-milestone{position:absolute;top:50%;transform:translateY(-50%) rotate(45deg);width:12px;height:12px;cursor:pointer}
+.gantt-header{display:flex;align-items:stretch;border-bottom:2px solid var(--border);background:var(--bg-2)}
+.gantt-header-label{flex:0 0 210px;padding:6px 10px;font-size:.7rem;font-weight:700;color:var(--text-sub);text-transform:uppercase;letter-spacing:.06em;border-right:1px solid var(--border)}
+.gantt-header-cols{flex:1;display:flex;position:relative;}
+.gantt-week-col{flex:1;text-align:center;padding:6px 2px;font-size:.65rem;color:var(--text-muted);border-right:1px solid var(--border);white-space:nowrap}
+.gantt-week-col:last-child{border-right:none}
+.gantt-vacation{position:absolute;top:0;bottom:0;background:rgba(127,140,141,.1);border-left:1px dashed #7f8c8d66;border-right:1px dashed #7f8c8d66;pointer-events:none}
+</style>
+
+<script>
+(function(){
+  var PROJECT_START = new Date('2026-03-03');
+  var PROJECT_END   = new Date('2026-05-07');
+  var TOTAL_DAYS = Math.round((PROJECT_END - PROJECT_START)/86400000);
+
+  // All tasks from .gan
+  var GROUPS = [
+    {id:'jalons', label:'📅 Jalons', color:'#2c3e50', member:'all', children:[
+      {label:'🚀 Lancement', start:'2026-03-03', dur:0, color:'#00D4A0', milestone:true, member:'all'},
+      {label:'✅ Prototype validé', start:'2026-05-02', dur:0, color:'#27ae60', milestone:true, member:'all'},
+      {label:'📄 Dossier technique rendu', start:'2026-05-05', dur:0, color:'#c0392b', milestone:true, member:'all'},
+      {label:'🏁 GRAND ORAL', start:'2026-05-06', dur:0, color:'#c0392b', milestone:true, member:'all'},
+    ]},
+    {id:'collectif', label:'👥 Collectif', color:'#95a5a6', member:'all', children:[
+      {label:'Brainstorming collectif', start:'2026-03-03', dur:2, color:'#1abc9c', member:'all'},
+    ]},
+    {id:'axel', label:'🔵 AXEL', color:'#2980b9', member:'axel', children:[
+      {label:'[RECH] Benchmark ★', start:'2026-03-03', dur:5, color:'#1abc9c', member:'axel'},
+      {label:'[RECH] Veille technologique', start:'2026-03-07', dur:6, color:'#1abc9c', member:'axel'},
+      {label:'[CONC] Calculs structure ★', start:'2026-03-14', dur:2, color:'#3498db', member:'axel'},
+      {label:'[CONC] Schémas élec. (part.)', start:'2026-03-18', dur:3, color:'#3498db', member:'axel'},
+      {label:'[CONC] Intégration CAO ★', start:'2026-03-21', dur:4, color:'#3498db', member:'axel'},
+      {label:'[CONC] Design interface ★', start:'2026-03-27', dur:3, color:'#3498db', member:'axel'},
+      {label:'[DEV] Prog. Python ★', start:'2026-04-01', dur:7, color:'#9b59b6', member:'axel'},
+      {label:'[DEV] Tests API ★', start:'2026-04-30', dur:2, color:'#9b59b6', member:'axel'},
+      {label:'[DEV] Interface écran ★', start:'2026-05-01', dur:2, color:'#9b59b6', member:'axel'},
+    ]},
+    {id:'kenzo', label:'🟢 KENZO', color:'#27ae60', member:'kenzo', children:[
+      {label:'[CONC] Croquis / Design ★', start:'2026-03-03', dur:4, color:'#3498db', member:'kenzo'},
+      {label:'[CONC] Recherche composants ★', start:'2026-03-07', dur:6, color:'#3498db', member:'kenzo'},
+      {label:'[DEV] Tests API (part.)', start:'2026-03-17', dur:2, color:'#9b59b6', member:'kenzo'},
+      {label:'[DEV] Config système OS ★', start:'2026-03-19', dur:4, color:'#9b59b6', member:'kenzo'},
+      {label:'[RÉAL] Achat composants (part.)', start:'2026-03-25', dur:2, color:'#e67e22', member:'kenzo'},
+      {label:'[COM] Instagram ★', start:'2026-03-27', dur:7, color:'#e74c3c', member:'kenzo'},
+      {label:'[COM] Photos / Vidéos ★', start:'2026-04-30', dur:3, color:'#e74c3c', member:'kenzo'},
+      {label:'[COM] Documentation dossier ★', start:'2026-05-02', dur:2, color:'#e74c3c', member:'kenzo'},
+      {label:'[ORAL] Préparation oral ★', start:'2026-05-06', dur:1, color:'#e74c3c', member:'kenzo'},
+    ]},
+    {id:'yohan', label:'🟡 YOHAN', color:'#f1c40f', member:'yohan', children:[
+      {label:'[CONC] Modélisation 3D CAO ★', start:'2026-03-03', dur:11, color:'#3498db', member:'yohan'},
+      {label:'[DEV] Programmation Python', start:'2026-03-18', dur:11, color:'#9b59b6', member:'yohan'},
+      {label:'[RÉAL] Construction bois (part.)', start:'2026-04-01', dur:5, color:'#e67e22', member:'yohan'},
+      {label:'[RÉAL] Intégration élec. (part.)', start:'2026-04-07', dur:4, color:'#e67e22', member:'yohan'},
+      {label:'[DEV] Tests unitaires ★', start:'2026-04-30', dur:5, color:'#9b59b6', member:'yohan'},
+    ]},
+    {id:'lorenzo', label:'🟠 LORENZO', color:'#e67e22', member:'lorenzo', children:[
+      {label:'[RECH] Normes STI2D ★', start:'2026-03-03', dur:5, color:'#1abc9c', member:'lorenzo'},
+      {label:'[CONC] Croquis / Design ★', start:'2026-03-07', dur:11, color:'#3498db', member:'lorenzo'},
+      {label:'[CONC] Schémas élec. (part.)', start:'2026-03-21', dur:2, color:'#3498db', member:'lorenzo'},
+      {label:'[RÉAL] Achat composants ★', start:'2026-03-25', dur:5, color:'#e67e22', member:'lorenzo'},
+      {label:'[RÉAL] Construction bois ★', start:'2026-04-01', dur:8, color:'#e67e22', member:'lorenzo'},
+      {label:'[RÉAL] Installation élec. ★', start:'2026-04-30', dur:5, color:'#e67e22', member:'lorenzo'},
+    ]},
+    {id:'matheo', label:'🔴 MATHÉO', color:'#c0392b', member:'matheo', children:[
+      {label:'[CONC] Schémas électriques ★', start:'2026-03-03', dur:11, color:'#3498db', member:'matheo'},
+      {label:'[CONC] Calculs structure (part.)', start:'2026-03-17', dur:5, color:'#3498db', member:'matheo'},
+      {label:'[CONC] Intégration CAO (part.)', start:'2026-03-21', dur:2, color:'#3498db', member:'matheo'},
+      {label:'[DEV] Config système (part.)', start:'2026-03-25', dur:4, color:'#9b59b6', member:'matheo'},
+      {label:'[RÉAL] Achat composants (part.)', start:'2026-03-28', dur:2, color:'#e67e22', member:'matheo'},
+      {label:'[RÉAL] Construction bois (part.)', start:'2026-04-02', dur:7, color:'#e67e22', member:'matheo'},
+      {label:'[RÉAL] Intégration électrique ★', start:'2026-04-30', dur:3, color:'#e67e22', member:'matheo'},
+      {label:'[RÉAL] Tests intégration ★', start:'2026-05-02', dur:3, color:'#e67e22', member:'matheo'},
+    ]},
+  ];
+
+  // Weeks
+  var weeks = [];
+  var d = new Date(PROJECT_START);
+  while(d <= PROJECT_END){
+    var wstart = new Date(d);
+    var wend = new Date(d); wend.setDate(wend.getDate()+6);
+    var label = wstart.toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
+    weeks.push({start:new Date(wstart), label:label});
+    d.setDate(d.getDate()+7);
+  }
+
+  function dayOff(date){ return (new Date(date) - PROJECT_START)/86400000; }
+  function pct(days){ return (days/TOTAL_DAYS*100).toFixed(3)+'%'; }
+
+  function buildHeader(){
+    var h = document.createElement('div');
+    h.className='gantt-header';
+    var lbl = document.createElement('div');
+    lbl.className='gantt-header-label'; lbl.textContent='Tâche';
+    h.appendChild(lbl);
+    var cols = document.createElement('div');
+    cols.className='gantt-header-cols';
+    // Vacation overlay
+    var vacStart = dayOff('2026-04-05');
+    var vacEnd = dayOff('2026-04-23');
+    var vac = document.createElement('div');
+    vac.className='gantt-vacation';
+    vac.style.left=pct(vacStart); vac.style.width=pct(vacEnd-vacStart);
+    vac.title='Vacances Zone B';
+    cols.appendChild(vac);
+    weeks.forEach(function(w){
+      var c=document.createElement('div');
+      c.className='gantt-week-col';
+      c.textContent=w.label;
+      cols.appendChild(c);
+    });
+    h.appendChild(cols);
+    return h;
+  }
+
+  function buildRow(task, isGroup){
+    var row = document.createElement('div');
+    row.className='gantt-row'+(isGroup?' g-group':'');
+    row.dataset.member = task.member||'all';
+
+    var lbl = document.createElement('div');
+    lbl.className='gantt-label';
+    lbl.textContent=task.label;
+    if(isGroup) lbl.style.color=task.color;
+    row.appendChild(lbl);
+
+    var bars = document.createElement('div');
+    bars.className='gantt-bars';
+
+    // vacation band
+    var vacStart = dayOff('2026-04-05');
+    var vacEnd = dayOff('2026-04-23');
+    var vac = document.createElement('div');
+    vac.style.cssText='position:absolute;top:0;bottom:0;left:'+pct(vacStart)+';width:'+pct(vacEnd-vacStart)+';background:rgba(127,140,141,.07);pointer-events:none';
+    bars.appendChild(vac);
+
+    if(!isGroup){
+      var off = dayOff(task.start);
+      if(task.milestone){
+        var m = document.createElement('div');
+        m.className='gantt-milestone';
+        m.style.left='calc('+pct(off)+' - 6px)';
+        m.style.background=task.color;
+        m.style.borderRadius='2px';
+        m.title=task.label;
+        m.addEventListener('mouseenter', showTip.bind(null, task));
+        m.addEventListener('mouseleave', hideTip);
+        bars.appendChild(m);
+      } else if(task.dur>0){
+        var bar = document.createElement('div');
+        bar.className='gantt-bar';
+        bar.style.left=pct(off);
+        bar.style.width=pct(task.dur);
+        bar.style.background=task.color;
+        bar.style.opacity='.9';
+        bar.addEventListener('mouseenter', showTip.bind(null, task));
+        bar.addEventListener('mouseleave', hideTip);
+        bars.appendChild(bar);
+      }
+    }
+    row.appendChild(bars);
+    return row;
+  }
+
+  var tip = document.getElementById('gantt-tooltip');
+  function showTip(task, e){
+    var sd = new Date(task.start);
+    var ed = new Date(task.start); ed.setDate(ed.getDate()+task.dur);
+    var dstr = task.milestone ? sd.toLocaleDateString('fr-FR',{day:'numeric',month:'long'})
+      : sd.toLocaleDateString('fr-FR',{day:'numeric',month:'short'})+' → '+ed.toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
+    tip.innerHTML='<strong style="color:'+task.color+'">'+task.label+'</strong><br>'
+      +'<span style="color:var(--text-muted);font-size:.7rem">'+dstr+(task.dur?' — '+task.dur+' jour'+(task.dur>1?'s':''):'')+'</span>';
+    tip.style.display='block';
+    moveTip(e);
+  }
+  function moveTip(e){
+    tip.style.left=(e.clientX+14)+'px';
+    tip.style.top=(e.clientY-10)+'px';
+  }
+  function hideTip(){ tip.style.display='none'; }
+  document.addEventListener('mousemove', function(e){
+    if(tip.style.display!=='none') moveTip(e);
+  });
+
+  function render(filter){
+    var chart = document.getElementById('gantt-chart');
+    chart.innerHTML='';
+    chart.appendChild(buildHeader());
+    GROUPS.forEach(function(g){
+      var showGroup = filter==='all' || g.member===filter || g.member==='all';
+      if(!showGroup) return;
+      var gRow = buildRow(g, true);
+      chart.appendChild(gRow);
+      g.children.forEach(function(t){
+        if(filter!=='all' && t.member!=='all' && t.member!==filter) return;
+        chart.appendChild(buildRow(t, false));
+      });
+    });
+  }
+
+  window.ganttFilter = function(f){
+    document.querySelectorAll('.g-filter-btn').forEach(function(b){
+      b.classList.toggle('g-active', b.dataset.f===f);
+    });
+    render(f);
+  };
+
+  render('all');
+})();
+</script>
 
 <!-- ════════════════════════════════════════
      PAGE MATLAB — ANALYSE ÉNERGÉTIQUE
@@ -1502,7 +1537,10 @@
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Les Ingénieux — STI2D Hauts-de-France</span>
-      <a href="https://www.instagram.com/e_bench_osi_doullens/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Suivez-nous sur Instagram" aria-label="Instagram — @e_bench_osi_doullens"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <a href="https://www.instagram.com/e_bench_osi_doullens/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Suivez-nous sur Instagram" aria-label="Instagram — @e_bench_osi_doullens"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a href="SysML-corrige.html" target="_blank" rel="noopener noreferrer" class="social-btn" title="Voir le diagramme SysML" aria-label="Diagramme SysML du projet" style="font-size:.65rem;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:-.5px;">SysML</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -2349,5 +2387,152 @@ document.addEventListener('keydown', function(e) {
   </div>
 </div>
 
+<!-- BUDGET MODAL -->
+<div id="budget-modal" role="dialog" aria-modal="true" aria-label="Budget du projet E-Bench" onclick="if(event.target===this)this.style.display='none'" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--bg-2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:820px;max-height:90vh;overflow-y:auto;padding:32px 28px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <div>
+        <div style="font-size:.75rem;font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px;"><i class="fa-solid fa-coins"></i> Budget Projet</div>
+        <h2 style="font-family:'Bebas Neue',cursive;font-size:1.8rem;margin:0;">E-Bench — <span style="color:var(--primary)">Estimation Financière</span></h2>
+      </div>
+      <button onclick="document.getElementById('budget-modal').style.display='none'" aria-label="Fermer" style="width:36px;height:36px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);cursor:pointer;color:var(--text-sub);font-size:1rem;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Toggle onglets -->
+    <div style="display:flex;gap:8px;margin-bottom:24px;">
+      <button id="tab-neuf" onclick="switchTab('neuf')" style="padding:8px 18px;border-radius:8px;border:1px solid var(--primary);background:var(--primary);color:#000;font-weight:600;font-size:.85rem;cursor:pointer;">Tout Neuf</button>
+      <button id="tab-reel" onclick="switchTab('reel')" style="padding:8px 18px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-sub);font-weight:600;font-size:.85rem;cursor:pointer;">Coût Réel</button>
+    </div>
+
+    <!-- TAB TOUT NEUF -->
+    <div id="budget-neuf">
+      <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:16px;">Simulation achat tout neuf — tous les composants à l'état neuf.</p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:.82rem;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:8px 10px;color:var(--text-sub);font-weight:600;">Composant</th>
+              <th style="text-align:center;padding:8px 6px;color:var(--text-sub);font-weight:600;">Qté</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--text-sub);font-weight:600;">P.U. HT</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--text-sub);font-weight:600;">Montant HT</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--text-sub);font-weight:600;">TTC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="5" style="padding:10px 10px 4px;font-size:.7rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.1em;">Matériaux Bois</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Sciage Douglas 2m × 145×45 mm raboté 4 faces</td><td style="text-align:center;padding:7px 6px;">9</td><td style="text-align:right;padding:7px 6px;">15,50 €</td><td style="text-align:right;padding:7px 6px;">139,50 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">167,40 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Sciage Douglas 2m × 100×100 mm raboté 4 faces</td><td style="text-align:center;padding:7px 6px;">4</td><td style="text-align:right;padding:7px 6px;">23,00 €</td><td style="text-align:right;padding:7px 6px;">92,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">110,40 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Planches Douglas raboté à 20 mm</td><td style="text-align:center;padding:7px 6px;">5,4 m²</td><td style="text-align:right;padding:7px 6px;">23,80 €</td><td style="text-align:right;padding:7px 6px;">128,52 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">154,22 €</td></tr>
+            <tr><td colspan="5" style="padding:10px 10px 4px;font-size:.7rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.1em;">Composants Électroniques &amp; Énergie</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Raspberry Pi 3B</td><td style="text-align:center;padding:7px 6px;">1</td><td style="text-align:right;padding:7px 6px;">35,00 €</td><td style="text-align:right;padding:7px 6px;">35,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">42,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Batterie GEL 100 Ah 12V</td><td style="text-align:center;padding:7px 6px;">1</td><td style="text-align:right;padding:7px 6px;">110,00 €</td><td style="text-align:right;padding:7px 6px;">110,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">132,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Panneau solaire 500 Wc monocristallin</td><td style="text-align:center;padding:7px 6px;">1</td><td style="text-align:right;padding:7px 6px;">200,00 €</td><td style="text-align:right;padding:7px 6px;">200,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">240,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Contrôleur MPPT Victron 150|35</td><td style="text-align:center;padding:7px 6px;">1</td><td style="text-align:right;padding:7px 6px;">170,00 €</td><td style="text-align:right;padding:7px 6px;">170,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">204,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Écran tactile 7" IPS</td><td style="text-align:center;padding:7px 6px;">1</td><td style="text-align:right;padding:7px 6px;">60,00 €</td><td style="text-align:right;padding:7px 6px;">60,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">72,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Capteur PIR HC-SR501</td><td style="text-align:center;padding:7px 6px;">1</td><td style="text-align:right;padding:7px 6px;">5,00 €</td><td style="text-align:right;padding:7px 6px;">5,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">6,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Prises USB-C (×2) + USB-A (×2)</td><td style="text-align:center;padding:7px 6px;">1</td><td style="text-align:right;padding:7px 6px;">15,00 €</td><td style="text-align:right;padding:7px 6px;">15,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">18,00 €</td></tr>
+            <tr><td colspan="5" style="padding:10px 10px 4px;font-size:.7rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.1em;">Câblage, Connectique &amp; Fixations</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Convertisseur DC-DC 12V→5V 3A</td><td style="text-align:center;padding:7px 6px;">1</td><td style="text-align:right;padding:7px 6px;">12,00 €</td><td style="text-align:right;padding:7px 6px;">12,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">14,40 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Convertisseur DC-DC 12V→5V 4A</td><td style="text-align:center;padding:7px 6px;">1</td><td style="text-align:right;padding:7px 6px;">14,00 €</td><td style="text-align:right;padding:7px 6px;">14,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">16,80 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Équerres inox + vis inox</td><td style="text-align:center;padding:7px 6px;">1 lot</td><td style="text-align:right;padding:7px 6px;">18,00 €</td><td style="text-align:right;padding:7px 6px;">18,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">21,60 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Platines acier galvanisé + boulons inox</td><td style="text-align:center;padding:7px 6px;">1 lot</td><td style="text-align:right;padding:7px 6px;">22,00 €</td><td style="text-align:right;padding:7px 6px;">22,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">26,40 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Bornes de connexion, cosses et câbles</td><td style="text-align:center;padding:7px 6px;">1 lot</td><td style="text-align:right;padding:7px 6px;">15,00 €</td><td style="text-align:right;padding:7px 6px;">15,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">18,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Câble souple 6mm² (lot 5m) batterie→MPPT</td><td style="text-align:center;padding:7px 6px;">1 lot</td><td style="text-align:right;padding:7px 6px;">18,00 €</td><td style="text-align:right;padding:7px 6px;">18,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">21,60 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Connecteurs MC4 (paire ×5)</td><td style="text-align:center;padding:7px 6px;">1 lot</td><td style="text-align:right;padding:7px 6px;">8,00 €</td><td style="text-align:right;padding:7px 6px;">8,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">9,60 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Charnières en métal + Câbles assortiment</td><td style="text-align:center;padding:7px 6px;">2 lots</td><td style="text-align:right;padding:7px 6px;">15,00 €</td><td style="text-align:right;padding:7px 6px;">30,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">36,00 €</td></tr>
+          </tbody>
+          <tfoot>
+            <tr style="border-top:2px solid var(--primary);">
+              <td colspan="3" style="padding:12px 10px;font-weight:700;color:var(--text);">TOTAL TVA (20%)</td>
+              <td style="text-align:right;padding:12px 6px;font-weight:700;">218,40 €</td>
+              <td></td>
+            </tr>
+            <tr style="background:var(--primary-10,rgba(0,212,160,.08));">
+              <td colspan="3" style="padding:12px 10px;font-weight:800;color:var(--primary);font-size:1rem;">TOTAL TTC</td>
+              <td colspan="2" style="text-align:right;padding:12px 10px;font-weight:800;color:var(--primary);font-size:1.1rem;">1 310,42 €</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB COÛT RÉEL -->
+    <div id="budget-reel" style="display:none;">
+      <p style="font-size:.82rem;color:var(--text-muted);margin-bottom:16px;">Coût réel — prise en compte du matériel déjà possédé par l'équipe.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:4px;">Coût total si tout acheté</div>
+          <div style="font-size:1.15rem;font-weight:700;color:var(--text);">1 092,02 € <span style="font-size:.7rem;font-weight:400;">HT</span></div>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--primary);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:.7rem;color:var(--primary);margin-bottom:4px;">Coût réel à payer</div>
+          <div style="font-size:1.15rem;font-weight:700;color:var(--primary);">590,42 € <span style="font-size:.7rem;font-weight:400;">TTC</span></div>
+        </div>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:.7rem;color:var(--text-muted);margin-bottom:4px;">Économie réalisée</div>
+          <div style="font-size:1.15rem;font-weight:700;color:#22c55e;">600,00 € <span style="font-size:.7rem;font-weight:400;">HT</span></div>
+        </div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:.82rem;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:8px 10px;color:var(--text-sub);font-weight:600;">Composant</th>
+              <th style="text-align:center;padding:8px 6px;color:var(--text-sub);font-weight:600;">Déjà possédé</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--text-sub);font-weight:600;">P.U. HT</th>
+              <th style="text-align:right;padding:8px 6px;color:var(--text-sub);font-weight:600;">Coût réel TTC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="4" style="padding:10px 10px 4px;font-size:.7rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.1em;">Matériaux Bois</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Sciage Douglas 2m × 145×45 mm</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">15,50 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">167,40 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Sciage Douglas 2m × 100×100 mm</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">23,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">110,40 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Planches Douglas raboté à 20 mm</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">23,80 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">154,22 €</td></tr>
+            <tr><td colspan="4" style="padding:10px 10px 4px;font-size:.7rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.1em;">Composants Électroniques &amp; Énergie</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Raspberry Pi 3B</td><td style="text-align:center;padding:7px 6px;"><span style="color:#22c55e;font-size:.75rem;font-weight:600;">OUI</span></td><td style="text-align:right;padding:7px 6px;">35,00 €</td><td style="text-align:right;padding:7px 6px;color:#22c55e;">0,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Batterie GEL 100 Ah 12V</td><td style="text-align:center;padding:7px 6px;"><span style="color:#22c55e;font-size:.75rem;font-weight:600;">OUI</span></td><td style="text-align:right;padding:7px 6px;">110,00 €</td><td style="text-align:right;padding:7px 6px;color:#22c55e;">0,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Panneau solaire 500 Wc monocristallin</td><td style="text-align:center;padding:7px 6px;"><span style="color:#22c55e;font-size:.75rem;font-weight:600;">OUI</span></td><td style="text-align:right;padding:7px 6px;">200,00 €</td><td style="text-align:right;padding:7px 6px;color:#22c55e;">0,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Contrôleur MPPT Victron 150|35</td><td style="text-align:center;padding:7px 6px;"><span style="color:#22c55e;font-size:.75rem;font-weight:600;">OUI</span></td><td style="text-align:right;padding:7px 6px;">170,00 €</td><td style="text-align:right;padding:7px 6px;color:#22c55e;">0,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Capteur PIR HC-SR501</td><td style="text-align:center;padding:7px 6px;"><span style="color:#22c55e;font-size:.75rem;font-weight:600;">OUI</span></td><td style="text-align:right;padding:7px 6px;">5,00 €</td><td style="text-align:right;padding:7px 6px;color:#22c55e;">0,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Écran tactile 7" IPS</td><td style="text-align:center;padding:7px 6px;"><span style="color:#22c55e;font-size:.75rem;font-weight:600;">OUI</span></td><td style="text-align:right;padding:7px 6px;">60,00 €</td><td style="text-align:right;padding:7px 6px;color:#22c55e;">0,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Câbles (lot assortiment)</td><td style="text-align:center;padding:7px 6px;"><span style="color:#22c55e;font-size:.75rem;font-weight:600;">OUI</span></td><td style="text-align:right;padding:7px 6px;">20,00 €</td><td style="text-align:right;padding:7px 6px;color:#22c55e;">0,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Prises USB-C (×2) + USB-A (×2)</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">15,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">18,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Charnières en métal (lot)</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">10,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">12,00 €</td></tr>
+            <tr><td colspan="4" style="padding:10px 10px 4px;font-size:.7rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.1em;">Câblage, Connectique &amp; Fixations</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Convertisseur DC-DC 12V→5V 3A</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">12,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">14,40 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Convertisseur DC-DC 12V→5V 4A</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">14,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">16,80 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Équerres inox + vis inox</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">18,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">21,60 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Platines acier galvanisé + boulons inox</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">22,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">26,40 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Bornes de connexion, cosses et câbles</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">15,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">18,00 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Câble souple 6mm² batterie→MPPT</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">18,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">21,60 €</td></tr>
+            <tr style="border-bottom:1px solid var(--border-subtle,#1e2d45)"><td style="padding:7px 10px;">Connecteurs MC4 (paire ×5)</td><td style="text-align:center;padding:7px 6px;"><span style="color:#ef4444;font-size:.75rem;font-weight:600;">NON</span></td><td style="text-align:right;padding:7px 6px;">8,00 €</td><td style="text-align:right;padding:7px 6px;color:var(--primary);">9,60 €</td></tr>
+          </tbody>
+          <tfoot>
+            <tr style="border-top:2px solid var(--primary);background:var(--primary-10,rgba(0,212,160,.08));">
+              <td colspan="3" style="padding:12px 10px;font-weight:800;color:var(--primary);font-size:1rem;">TOTAL RÉEL TTC</td>
+              <td style="text-align:right;padding:12px 10px;font-weight:800;color:var(--primary);font-size:1.1rem;">590,42 €</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p style="font-size:.75rem;color:var(--text-muted);margin-top:12px;"><i class="fa-solid fa-circle-info"></i> Économie de <strong style="color:#22c55e;">600 € HT</strong> grâce au matériel déjà disponible dans l'établissement.</p>
+    </div>
+  </div>
+</div>
+<script>
+function switchTab(tab){
+  var isNeuf = tab==='neuf';
+  document.getElementById('budget-neuf').style.display = isNeuf?'block':'none';
+  document.getElementById('budget-reel').style.display = isNeuf?'none':'block';
+  var tNeuf = document.getElementById('tab-neuf');
+  var tReel = document.getElementById('tab-reel');
+  tNeuf.style.background = isNeuf?'var(--primary)':'transparent';
+  tNeuf.style.color = isNeuf?'#000':'var(--text-sub)';
+  tNeuf.style.borderColor = 'var(--primary)';
+  tReel.style.background = isNeuf?'transparent':'var(--primary)';
+  tReel.style.color = isNeuf?'var(--text-sub)':'#000';
+  tReel.style.borderColor = isNeuf?'var(--border)':'var(--primary)';
+}
+</script>
 </body>
 </html>
